@@ -9,7 +9,8 @@ namespace VierGewinnt
     {
         public int SpaltenX;
         public int ZeilenY;
-
+        public int posX;
+        public int posY;
 
         public Spielfeld(int spaltenX, int zeilenY)
         {
@@ -21,9 +22,21 @@ namespace VierGewinnt
 
         }
 
-        public void feldBesetzen()
+        public void feldBesetzen(int x)
         {
+            posX = x;
+            posY = 0;
+        }
 
+        public bool IstFeldBesetzt(int x, int y)
+        {
+           if(x == posX && y == posY)
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace VierGewinnt.Model
 {
-    class Spieler
+    public class Spieler
     {
         public bool player1 = false;
         public bool player2 = false;
