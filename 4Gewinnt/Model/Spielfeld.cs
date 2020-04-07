@@ -5,27 +5,36 @@ using VierGewinnt.Model;
 
 namespace VierGewinnt
 {
-    class Spielfeld
+    public class Spielfeld
     {
         public int SpaltenX;
         public int ZeilenY;
         public int posX;
         public int posY;
 
+        Spieler player = new Spieler("Spieler1", "Spieler2");
+
         public Spielfeld(int spaltenX, int zeilenY)
         {
             SpaltenX = spaltenX;
             ZeilenY = zeilenY;
             int[,] feld = new int[SpaltenX, ZeilenY];
-            Spieler player = new Spieler();
-            player.player1 = true;
-
+            
+            player.player1 = true;            
         }
 
-        public void feldBesetzen(int x)
+        public void feldBesetzen(int x, int y)
         {
+            if (player.player1 == true)
+            {
+                player.setSpielstein(x, "blau");
+            } else
+            {
+                player.setSpielstein(x, "rot");
+            }
+            
             posX = x;
-            posY = 0;
+            posY = y;
         }
 
         public bool IstFeldBesetzt(int x, int y)

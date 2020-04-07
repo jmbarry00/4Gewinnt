@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _4Gewinnt.Model;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,17 +7,25 @@ namespace VierGewinnt.Model
 {
     public class Spieler
     {
+        public string nameP1;
+        public string nameP2;
         public bool player1 = false;
         public bool player2 = false;
 
-        public string getNameP1()
+        public Spieler(String Name1, String Name2)
         {
-            return "Spieler1";
+            nameP1 = getNameP1(Name1);
+            nameP2 = getNameP1(Name2);
         }
 
-        public string getNameP2()
+        public string getNameP1(String n)
         {
-            return "Spieler2";
+            return n;
+        }
+
+        public string getNameP2(String n)
+        {
+            return n;
         }
 
         public void switchPlayer()
@@ -31,6 +40,11 @@ namespace VierGewinnt.Model
                 player1 = true;
                 player2 = false;
             }
+        }
+
+        public void setSpielstein(int Spalte, string Farbe)
+        {
+            Spielstein spielstein = new Spielstein(Spalte, Farbe);
         }
 
     }

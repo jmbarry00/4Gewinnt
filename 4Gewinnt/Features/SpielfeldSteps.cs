@@ -15,7 +15,7 @@ namespace VierGewinnt.Features.Example
         [Given(@"I have entered 4 into the x-position(spalte) setter")]
         public void GivenIHaveEnteredPosition()
         {
-            feld.feldBesetzen(4);
+            //feld.feldBesetzen(4);
         }
 
         [When(@"I call the function IstBesetzt on this position")]
