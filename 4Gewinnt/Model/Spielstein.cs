@@ -8,10 +8,12 @@ namespace _4Gewinnt.Model
     public class Spielstein
     {
         int spalte;
-        string farbe;
-        public Spielstein(int Spalte, string Farbe)
+        int zeile;
+        String farbe;
+        public Spielstein(int Spalte, int Zeile, string Farbe)
         {
             spalte = Spalte;
+            zeile = Zeile;
             farbe = Farbe;
         }
     }

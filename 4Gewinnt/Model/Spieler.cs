@@ -7,15 +7,16 @@ namespace VierGewinnt.Model
 {
     public class Spieler
     {
-        public string nameP1;
-        public string nameP2;
+        public string name;
+        public string farbe;
         public bool player1 = false;
         public bool player2 = false;
 
-        public Spieler(String Name1, String Name2)
+        public Spieler(String Name, String Farbe)
         {
-            nameP1 = getNameP1(Name1);
-            nameP2 = getNameP1(Name2);
+            name = getNameP1(Name);
+            farbe = getFarbe(Farbe);
+            player1 = true;
         }
 
         public string getNameP1(String n)
@@ -23,9 +24,9 @@ namespace VierGewinnt.Model
             return n;
         }
 
-        public string getNameP2(String n)
+        public string getFarbe(String f)
         {
-            return n;
+            return f;
         }
 
         public void switchPlayer()
@@ -42,9 +43,9 @@ namespace VierGewinnt.Model
             }
         }
 
-        public void setSpielstein(int Spalte, string Farbe)
+        public void setSpielstein(int Spalte, int Zeile, string Farbe)
         {
-            Spielstein spielstein = new Spielstein(Spalte, Farbe);
+            Spielstein spielstein = new Spielstein(Spalte, Zeile, Farbe);
         }
 
     }

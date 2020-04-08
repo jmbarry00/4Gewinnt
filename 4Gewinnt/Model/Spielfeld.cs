@@ -7,32 +7,42 @@ namespace VierGewinnt
 {
     public class Spielfeld
     {
-        public int SpaltenX;
-        public int ZeilenY;
-        public int posX;
-        public int posY;
+        private int SpaltenX;
+        private int ZeilenY;
+        private int[,] feld;
+        private int posX;
+        private int posY;
 
-        Spieler player = new Spieler("Spieler1", "Spieler2");
+        Spieler player = new Spieler("Spieler1", "blau");
 
         public Spielfeld(int spaltenX, int zeilenY)
         {
             SpaltenX = spaltenX;
             ZeilenY = zeilenY;
-            int[,] feld = new int[SpaltenX, ZeilenY];
-            
-            player.player1 = true;            
+            feld = new int[SpaltenX, ZeilenY];
         }
 
         public void feldBesetzen(int x, int y)
         {
+            string farbe;
+            y = 0;
+
+            while(IstFeldBesetzt(x,y) == true)
+            {
+                y++;
+            }
+
             if (player.player1 == true)
             {
-                player.setSpielstein(x, "blau");
+                farbe = "blau";
+                player.setSpielstein(x, y, farbe);
             } else
             {
-                player.setSpielstein(x, "rot");
+                farbe = "rot";
+                player.setSpielstein(x, y, farbe);
             }
-            
+
+            player.switchPlayer();
             posX = x;
             posY = y;
         }
