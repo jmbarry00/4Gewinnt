@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace VierGewinnt.Model
+namespace _4Gewinnt.Model
 {
     public class Spieler
     {

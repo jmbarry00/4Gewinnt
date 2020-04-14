@@ -12,6 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <SpecFlowObsoleteCodeBehindFiles Remove="Features\Spieler - Kopieren.feature.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Controller\" />
     <Folder Include="View\" />
   </ItemGroup>
@@ -23,6 +27,22 @@
     <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.1.97" />
     <PackageReference Include="SpecFlow.xUnit" Version="3.1.97" />
     <PackageReference Include="SpecRun.Runner" Version="3.2.22" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Features\Spieler2.feature.cs">
+      <DependentUpon>Spieler2.feature</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <SpecFlowFeatureFiles Update="Features\Spieler2.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>Spieler2.feature.cs</LastGenOutput>
+    </SpecFlowFeatureFiles>
   </ItemGroup>
 
 

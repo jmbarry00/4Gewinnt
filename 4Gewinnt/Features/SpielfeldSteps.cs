@@ -1,8 +1,7 @@
-﻿using FluentAssertions;
+﻿using _4Gewinnt.Model;
+using FluentAssertions;
 using System;
 using TechTalk.SpecFlow;
-using VierGewinnt;
-using VierGewinnt.Model;
 
 namespace _4Gewinnt.Features
 {

@@ -1,9 +1,10 @@
-﻿using System;
+﻿using _4Gewinnt.Model;
+using System;
 using System.Collections.Generic;
 using System.Text;
-using VierGewinnt.Model;
 
-namespace VierGewinnt
+
+namespace _4Gewinnt
 {
     public class Spielfeld
     {
@@ -13,19 +14,20 @@ namespace VierGewinnt
         private int posX;
         private int posY;
 
-        Spieler player = new Spieler("Spieler1", "blau");
+        Spieler player;
 
         public Spielfeld(int spaltenX, int zeilenY)
         {
             SpaltenX = spaltenX;
             ZeilenY = zeilenY;
             feld = new int[SpaltenX, ZeilenY];
+            player = new Spieler("Spieler1", "blau");
         }
 
-        public void FeldBesetzen(int x, int y)
+        public void FeldBesetzen(int x)
         {
             string farbe;
-            y = 0;
+            int y = 0;
 
             while(IstFeldBesetzt(x,y) == true)
             {
