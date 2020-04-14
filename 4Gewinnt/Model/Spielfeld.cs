@@ -7,8 +7,8 @@ namespace VierGewinnt
 {
     public class Spielfeld
     {
-        private int SpaltenX;
-        private int ZeilenY;
+        public int SpaltenX;
+        public int ZeilenY;
         private int[,] feld;
         private int posX;
         private int posY;
@@ -22,7 +22,7 @@ namespace VierGewinnt
             feld = new int[SpaltenX, ZeilenY];
         }
 
-        public void feldBesetzen(int x, int y)
+        public void FeldBesetzen(int x, int y)
         {
             string farbe;
             y = 0;
@@ -35,14 +35,14 @@ namespace VierGewinnt
             if (player.player1 == true)
             {
                 farbe = "blau";
-                player.setSpielstein(x, y, farbe);
+                player.SetSpielstein(x, y, farbe);
             } else
             {
                 farbe = "rot";
-                player.setSpielstein(x, y, farbe);
+                player.SetSpielstein(x, y, farbe);
             }
 
-            player.switchPlayer();
+            player.SwitchPlayer();
             posX = x;
             posY = y;
         }
@@ -56,6 +56,11 @@ namespace VierGewinnt
             {
                 return false;
             }
+        }
+
+        public void HatGewonnen(int spieler)
+        {
+            Console.WriteLine("Spieler"+spieler+"hat gewonnen");
         }
     }
 }

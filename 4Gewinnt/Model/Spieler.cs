@@ -11,30 +11,33 @@ namespace VierGewinnt.Model
         public string farbe;
         public bool player1 = false;
         public bool player2 = false;
+        public int inARowP1 = 0;
+        public int inARowP2 = 0;
 
         public Spieler(String Name, String Farbe)
         {
-            name = getNameP1(Name);
-            farbe = getFarbe(Farbe);
+            name = GetNameP1(Name);
+            farbe = GetFarbe(Farbe);
             player1 = true;
         }
 
-        public string getNameP1(String n)
+        public string GetNameP1(String n)
         {
             return n;
         }
 
-        public string getFarbe(String f)
+        public string GetFarbe(String f)
         {
             return f;
         }
 
-        public void switchPlayer()
+        public void SwitchPlayer()
         {
             if (player1 == true)
             {
                 player1 = false;
                 player2 = true;
+
             }
             else
             {
@@ -43,7 +46,7 @@ namespace VierGewinnt.Model
             }
         }
 
-        public void setSpielstein(int Spalte, int Zeile, string Farbe)
+        public void SetSpielstein(int Spalte, int Zeile, string Farbe)
         {
             Spielstein spielstein = new Spielstein(Spalte, Zeile, Farbe);
         }

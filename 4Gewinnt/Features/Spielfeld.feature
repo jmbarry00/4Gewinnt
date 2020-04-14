@@ -5,7 +5,6 @@
 Scenario: game start
 	When I create a Spielfeld with 6 columns and 5 rows,
 	Then Spielfeld has 6 columns and 5 rows
-	And Spieler gets created
 
 Scenario: 4 in a row
 	Given 3 in a row of Spieler 2
