@@ -3,7 +3,7 @@ using FluentAssertions;
 using System;
 using TechTalk.SpecFlow;
 
-namespace _4Gewinnt
+namespace _4Gewinnt.Features
 {
     [Binding]
     public class SpielerSteps
