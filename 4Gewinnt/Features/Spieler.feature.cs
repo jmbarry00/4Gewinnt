@@ -19,32 +19,27 @@ namespace _4Gewinnt.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.1.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class SpielerFeature : object, Xunit.IClassFixture<SpielerFeature.FixtureData>, System.IDisposable
+    [TechTalk.SpecRun.FeatureAttribute("Spieler", SourceFile="Features\\Spieler.feature", SourceLine=0)]
+    public partial class SpielerFeature
     {
         
-        private static TechTalk.SpecFlow.ITestRunner testRunner;
+        private TechTalk.SpecFlow.ITestRunner testRunner;
         
         private string[] _featureTags = ((string[])(null));
-        
-        private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
 #line 1 "Spieler.feature"
 #line hidden
         
-        public SpielerFeature(SpielerFeature.FixtureData fixtureData, _4Gewinnt_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
-        {
-            this._testOutputHelper = testOutputHelper;
-            this.TestInitialize();
-        }
-        
-        public static void FeatureSetup()
+        [TechTalk.SpecRun.FeatureInitialize()]
+        public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Spieler", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        public static void FeatureTearDown()
+        [TechTalk.SpecRun.FeatureCleanup()]
+        public virtual void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
@@ -54,6 +49,7 @@ namespace _4Gewinnt.Features
         {
         }
         
+        [TechTalk.SpecRun.ScenarioCleanup()]
         public virtual void TestTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -62,7 +58,6 @@ namespace _4Gewinnt.Features
         public virtual void ScenarioInitialize(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioInitialize(scenarioInfo);
-            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<Xunit.Abstractions.ITestOutputHelper>(_testOutputHelper);
         }
         
         public virtual void ScenarioStart()
@@ -75,15 +70,8 @@ namespace _4Gewinnt.Features
             testRunner.CollectScenarioErrors();
         }
         
-        void System.IDisposable.Dispose()
-        {
-            this.TestTearDown();
-        }
-        
-        [Xunit.SkippableFactAttribute(DisplayName="Spieler 1, choose color and set Spielstein")]
-        [Xunit.TraitAttribute("FeatureTitle", "Spieler")]
-        [Xunit.TraitAttribute("Description", "Spieler 1, choose color and set Spielstein")]
-        [Xunit.TraitAttribute("Category", "mytag")]
+        [TechTalk.SpecRun.ScenarioAttribute("Spieler 1, choose color and set Spielstein", new string[] {
+                "mytag"}, SourceLine=3)]
         public virtual void Spieler1ChooseColorAndSetSpielstein()
         {
             string[] tagsOfScenario = new string[] {
@@ -123,20 +111,10 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.1.0.0")]
-        [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-        public class FixtureData : System.IDisposable
+        [TechTalk.SpecRun.TestRunCleanup()]
+        public virtual void TestRunCleanup()
         {
-            
-            public FixtureData()
-            {
-                SpielerFeature.FeatureSetup();
-            }
-            
-            void System.IDisposable.Dispose()
-            {
-                SpielerFeature.FeatureTearDown();
-            }
+            TechTalk.SpecFlow.TestRunnerManager.GetTestRunner().OnTestRunEnd();
         }
     }
 }

@@ -25,8 +25,7 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
     <PackageReference Include="SpecFlow" Version="3.1.97" />
     <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.1.97" />
-    <PackageReference Include="SpecFlow.xUnit" Version="3.1.97" />
-    <PackageReference Include="SpecRun.Runner" Version="3.2.22" />
+    <PackageReference Include="SpecRun.SpecFlow" Version="3.2.22" />
   </ItemGroup>
 
   <ItemGroup>

@@ -19,32 +19,27 @@ namespace _4Gewinnt.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.1.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class SpielfeldFeature : object, Xunit.IClassFixture<SpielfeldFeature.FixtureData>, System.IDisposable
+    [TechTalk.SpecRun.FeatureAttribute("Spielfeld", Description="\tEin Spielfeld mit X Spalten und Y Zeilen", SourceFile="Features\\Spielfeld.feature", SourceLine=0)]
+    public partial class SpielfeldFeature
     {
         
-        private static TechTalk.SpecFlow.ITestRunner testRunner;
+        private TechTalk.SpecFlow.ITestRunner testRunner;
         
         private string[] _featureTags = ((string[])(null));
-        
-        private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
 #line 1 "Spielfeld.feature"
 #line hidden
         
-        public SpielfeldFeature(SpielfeldFeature.FixtureData fixtureData, _4Gewinnt_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
-        {
-            this._testOutputHelper = testOutputHelper;
-            this.TestInitialize();
-        }
-        
-        public static void FeatureSetup()
+        [TechTalk.SpecRun.FeatureInitialize()]
+        public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Spielfeld", "\tEin Spielfeld mit X Spalten und Y Zeilen", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        public static void FeatureTearDown()
+        [TechTalk.SpecRun.FeatureCleanup()]
+        public virtual void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
@@ -54,6 +49,7 @@ namespace _4Gewinnt.Features
         {
         }
         
+        [TechTalk.SpecRun.ScenarioCleanup()]
         public virtual void TestTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -62,7 +58,6 @@ namespace _4Gewinnt.Features
         public virtual void ScenarioInitialize(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioInitialize(scenarioInfo);
-            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<Xunit.Abstractions.ITestOutputHelper>(_testOutputHelper);
         }
         
         public virtual void ScenarioStart()
@@ -75,15 +70,8 @@ namespace _4Gewinnt.Features
             testRunner.CollectScenarioErrors();
         }
         
-        void System.IDisposable.Dispose()
-        {
-            this.TestTearDown();
-        }
-        
-        [Xunit.SkippableFactAttribute(DisplayName="game start")]
-        [Xunit.TraitAttribute("FeatureTitle", "Spielfeld")]
-        [Xunit.TraitAttribute("Description", "game start")]
-        [Xunit.TraitAttribute("Category", "mytag")]
+        [TechTalk.SpecRun.ScenarioAttribute("game start", new string[] {
+                "mytag"}, SourceLine=4)]
         public virtual void GameStart()
         {
             string[] tagsOfScenario = new string[] {
@@ -120,9 +108,7 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="4 in a row")]
-        [Xunit.TraitAttribute("FeatureTitle", "Spielfeld")]
-        [Xunit.TraitAttribute("Description", "4 in a row")]
+        [TechTalk.SpecRun.ScenarioAttribute("4 in a row", SourceLine=8)]
         public virtual void _4InARow()
         {
             string[] tagsOfScenario = ((string[])(null));
@@ -163,20 +149,10 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.1.0.0")]
-        [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-        public class FixtureData : System.IDisposable
+        [TechTalk.SpecRun.TestRunCleanup()]
+        public virtual void TestRunCleanup()
         {
-            
-            public FixtureData()
-            {
-                SpielfeldFeature.FeatureSetup();
-            }
-            
-            void System.IDisposable.Dispose()
-            {
-                SpielfeldFeature.FeatureTearDown();
-            }
+            TechTalk.SpecFlow.TestRunnerManager.GetTestRunner().OnTestRunEnd();
         }
     }
 }
