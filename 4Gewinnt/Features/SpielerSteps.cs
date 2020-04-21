@@ -14,7 +14,7 @@ namespace _4Gewinnt.Features
         [Given(@"It's Spieler (.*) turn")]
         public void GivenItSSpielerTurn(int p0)
         {
-            _spieler.player1.Should().BeTrue();
+            _spieler.player1 = true;
         }
         
         [When(@"he chooses coloumn (.*) on Spielfeld")]
@@ -28,9 +28,25 @@ namespace _4Gewinnt.Features
         {
             _spielstein.zeile.Should().Be(0);
         }
-        
-        
 
+
+        [Given(@"It Spieler (.*) turn")]
+        public void GivenItSpielerTurn(int p0)
+        {
+            _spieler.player1 = true;
+        }
+
+        [When(@"I switch the player")]
+        public void WhenISwitchThePlayer()
+        {
+            _spieler.SwitchPlayer();
+        }
+
+        [Then(@"It should be Player (.*) turn")]
+        public void ThenItShouldBePlayerTurn(int p0)
+        {
+            _spieler.player2.Should().BeTrue();
+        }
 
     }
 }

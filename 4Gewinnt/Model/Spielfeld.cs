@@ -15,7 +15,7 @@ namespace _4Gewinnt
         private int posY;
 
         Spieler player;
-
+        Spielstein spielstein;
         public Spielfeld(int spaltenX, int zeilenY)
         {
             SpaltenX = spaltenX;
@@ -47,6 +47,8 @@ namespace _4Gewinnt
             player.SwitchPlayer();
             posX = x;
             posY = y;
+            spielstein.spalte = x;
+            spielstein.zeile = y;
         }
 
         public bool IstFeldBesetzt(int x, int y)
