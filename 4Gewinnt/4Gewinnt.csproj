@@ -7,9 +7,7 @@
 	<GenerateProgramFile>false</GenerateProgramFile>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="C:\Users\Julien-Malick Barry\.nuget\packages\specrun.runner\3.2.22\build\..\tools\**" />
-  </ItemGroup>
+
 
   <ItemGroup>
     <SpecFlowObsoleteCodeBehindFiles Remove="Features\Spieler - Kopieren.feature.cs" />
