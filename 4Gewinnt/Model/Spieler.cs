@@ -14,16 +14,10 @@ namespace _4Gewinnt.Model
         public int inARowP1 = 0;
         public int inARowP2 = 0;
 
-        public Spieler(String Name, String Farbe)
+        public Spieler()
         {
-            name = GetNameP1(Name);
-            farbe = GetFarbe(Farbe);
-            player1 = true;
-        }
-
-        public string GetNameP1(String n)
-        {
-            return n;
+            farbe = GetFarbe("blau");
+            player1 = true;            
         }
 
         public string GetFarbe(String f)
@@ -37,12 +31,13 @@ namespace _4Gewinnt.Model
             {
                 player1 = false;
                 player2 = true;
-
+                farbe = GetFarbe("rot");
             }
             else
             {
                 player1 = true;
                 player2 = false;
+                farbe = GetFarbe("blau");
             }
         }
 

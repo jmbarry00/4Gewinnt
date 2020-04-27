@@ -10,12 +10,15 @@ namespace _4Gewinnt
     {
         Spielfeld _spielfeld;
         Spieler _spieler;
-        [When(@"I create a Spielfeld with (.*) columns an d (.*) rows,")]
+        
+
+        [When(@"I create a Spielfeld with (.*) columns and (.*) rows,")]
         public void WhenICreateASpielfeldWithColumnsAndRows(int p0, int p1)
         {
             _spielfeld = new Spielfeld(p0, p1);
         }
-        
+
+
         [Then(@"Spielfeld has (.*) columns and (.*) rows")]
         public void ThenSpielfeldHasColumnsAndRows(int p0, int p1)
         {

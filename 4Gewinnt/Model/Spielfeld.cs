@@ -21,7 +21,7 @@ namespace _4Gewinnt
             SpaltenX = spaltenX;
             ZeilenY = zeilenY;
             feld = new int[SpaltenX, ZeilenY];
-            player = new Spieler("Spieler1", "blau");
+            player = new Spieler();
         }
 
         public void FeldBesetzen(int x)

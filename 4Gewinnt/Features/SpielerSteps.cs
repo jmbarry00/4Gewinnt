@@ -8,32 +8,29 @@ namespace _4Gewinnt.Features
     [Binding]
     public class SpielerSteps
     {
-        Spielfeld _spielfeld;
         Spieler _spieler;
-        Spielstein _spielstein;
-        [Given(@"It's Spieler (.*) turn")]
-        public void GivenItSSpielerTurn(int p0)
+        [When(@"I create a Spieler")]
+        public void WhenICreateASpieler()
+        {
+            _spieler = new Spieler();
+        }
+
+        [Then(@"It's Spieler (.*) turn")]
+        public void ThenItSSpielerTurn(int p0)
         {
             _spieler.player1 = true;
         }
-        
-        [When(@"he chooses coloumn (.*) on Spielfeld")]
-        public void WhenHeChoosesAColoumnOnSpielfeld(int p0)
-        {
-            _spielfeld.FeldBesetzen(p0);
-        }
-        
-        [Then(@"the Spielstein should land on the lowest field")]
-        public void ThenTheSpielsteinShouldLandOnTheLowestField()
-        {
-            _spielstein.zeile.Should().Be(0);
-        }
 
+        [Then(@"The color is on blau")]
+        public void ThenTheColorIsOnBlau()
+        {
+            _spieler.farbe.Should().Be("blau");
+        }
 
         [Given(@"It Spieler (.*) turn")]
         public void GivenItSpielerTurn(int p0)
         {
-            _spieler.player1 = true;
+            _spieler = new Spieler();
         }
 
         [When(@"I switch the player")]

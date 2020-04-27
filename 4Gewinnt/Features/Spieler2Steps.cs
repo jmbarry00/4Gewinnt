@@ -14,7 +14,8 @@ namespace _4Gewinnt.Features
         [Given(@"It is Spieler (.*) turn")]
         public void GivenItIsSpielerTurn(int p0)
         {
-            _spieler.player2.Should().BeTrue();
+            _spieler = new Spieler();
+            _spieler.player2 = true;
         }
         
         [When(@"he chooses the coloumn (.*) on Spielfeld")]
@@ -28,5 +29,6 @@ namespace _4Gewinnt.Features
         {
             _spielstein.zeile.Should().Be(1);
         }
+        
     }
 }
