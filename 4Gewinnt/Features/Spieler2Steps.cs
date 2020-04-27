@@ -16,6 +16,7 @@ namespace _4Gewinnt.Features
         {
             _spieler = new Spieler("blau");
             _spielfeld = new Spielfeld(6, 5);
+            _spielstein = new Spielstein(0, 1, "");
             _spieler.player2 = true;
         }
         

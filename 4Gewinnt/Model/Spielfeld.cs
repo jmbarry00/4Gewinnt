@@ -11,11 +11,10 @@ namespace _4Gewinnt
         public int SpaltenX;
         public int ZeilenY;
         private int[,] feld;
-        private int posX;
-        private int posY;
+        public int posX;
+        public int posY;
 
-        Spieler player;
-        Spielstein spielstein;
+
         public Spielfeld(int spaltenX, int zeilenY)
         {
             SpaltenX = spaltenX;
@@ -25,8 +24,10 @@ namespace _4Gewinnt
 
         public void FeldBesetzen(int x)
         {
-            string farbe;
-            int y = 0;
+            string farbe = "";
+            Spieler player = new Spieler(farbe);
+
+            int y = 1;
 
             while(IstFeldBesetzt(x,y) == true)
             {
@@ -46,8 +47,6 @@ namespace _4Gewinnt
             player.SwitchPlayer();
             posX = x;
             posY = y;
-            spielstein.spalte = x;
-            spielstein.zeile = y;
         }
 
         public bool IstFeldBesetzt(int x, int y)
