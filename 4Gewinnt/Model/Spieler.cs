@@ -9,15 +9,14 @@ namespace _4Gewinnt.Model
     {
         public string name;
         public string farbe;
-        public bool player1 = false;
+        public bool player1 = true;
         public bool player2 = false;
         public int inARowP1 = 0;
         public int inARowP2 = 0;
 
-        public Spieler()
+        public Spieler(String Farbe)
         {
-            farbe = GetFarbe("blau");
-            player1 = true;            
+            farbe = Farbe;
         }
 
         public string GetFarbe(String f)
@@ -31,13 +30,11 @@ namespace _4Gewinnt.Model
             {
                 player1 = false;
                 player2 = true;
-                farbe = GetFarbe("rot");
             }
             else
             {
                 player1 = true;
                 player2 = false;
-                farbe = GetFarbe("blau");
             }
         }
 

@@ -7,9 +7,11 @@ Scenario: Spieler 1, choose color and set Spielstein
 	And The color is on blau
 
 Scenario: switchPlayer
-	Given It Spieler 1 turn
+	Given It's Spieler 1 turn
 	When I switch the player
 	Then It should be Player 2 turn
+
+
 	
 
 

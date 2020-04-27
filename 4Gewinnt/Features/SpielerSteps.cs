@@ -12,7 +12,7 @@ namespace _4Gewinnt.Features
         [When(@"I create a Spieler")]
         public void WhenICreateASpieler()
         {
-            _spieler = new Spieler();
+            _spieler = new Spieler("blau");
         }
 
         [Then(@"It's Spieler (.*) turn")]
@@ -27,10 +27,11 @@ namespace _4Gewinnt.Features
             _spieler.farbe.Should().Be("blau");
         }
 
-        [Given(@"It Spieler (.*) turn")]
+        [Given(@"It's Spieler (.*) turn")]
         public void GivenItSpielerTurn(int p0)
         {
-            _spieler = new Spieler();
+            _spieler = new Spieler("blau");
+            _spieler.player1 = true;
         }
 
         [When(@"I switch the player")]

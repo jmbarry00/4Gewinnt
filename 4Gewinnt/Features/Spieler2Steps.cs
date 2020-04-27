@@ -14,7 +14,8 @@ namespace _4Gewinnt.Features
         [Given(@"It is Spieler (.*) turn")]
         public void GivenItIsSpielerTurn(int p0)
         {
-            _spieler = new Spieler();
+            _spieler = new Spieler("blau");
+            _spielfeld = new Spielfeld(6, 5);
             _spieler.player2 = true;
         }
         
@@ -27,7 +28,7 @@ namespace _4Gewinnt.Features
         [Then(@"the Spielstein should land on row (.*)")]
         public void ThenTheSpielsteinShouldLandOnRow(int p0)
         {
-            _spielstein.zeile.Should().Be(1);
+            _spielstein.zeile.Should().Be(p0);
         }
         
     }

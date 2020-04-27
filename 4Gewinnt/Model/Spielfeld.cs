@@ -21,7 +21,6 @@ namespace _4Gewinnt
             SpaltenX = spaltenX;
             ZeilenY = zeilenY;
             feld = new int[SpaltenX, ZeilenY];
-            player = new Spieler();
         }
 
         public void FeldBesetzen(int x)
@@ -38,7 +37,7 @@ namespace _4Gewinnt
             {
                 farbe = "blau";
                 player.SetSpielstein(x, y, farbe);
-            } else
+            } else if (player.player2 == true)
             {
                 farbe = "rot";
                 player.SetSpielstein(x, y, farbe);
