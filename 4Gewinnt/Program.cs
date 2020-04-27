@@ -7,11 +7,11 @@ namespace _4Gewinnt
     {
         static void Main(string[] args)
         {
-            Spielfeld spielfeld = new Spielfeld(5,6);
+            Spielfeld spielfeld = new Spielfeld(5,6);        
+            spielfeld.FeldBesetzen(4);
             int x = spielfeld.posX;
             int y = spielfeld.posY;
             Spielstein spielstein = new Spielstein(x, y, "blau");
-            spielfeld.FeldBesetzen(4);
             Console.WriteLine(spielstein.zeile);
         }
     }

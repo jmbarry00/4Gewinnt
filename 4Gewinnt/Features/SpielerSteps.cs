@@ -9,16 +9,23 @@ namespace _4Gewinnt.Features
     public class SpielerSteps
     {
         Spieler _spieler;
+        Spielfeld _spielfeld;
+        Spielstein _spielstein;
+
         [When(@"I create a Spieler")]
         public void WhenICreateASpieler()
         {
             _spieler = new Spieler("blau");
+            _spielfeld = new Spielfeld(5, 6);
+            int x = _spielfeld.posX;
+            int y = _spielfeld.posY;
+            _spielstein = new Spielstein(x, y, "blau");
         }
 
         [Then(@"It's Spieler (.*) turn")]
         public void ThenItSSpielerTurn(int p0)
         {
-            _spieler.player1 = true;
+            _spieler.player1.Should().BeTrue();
         }
 
         [Then(@"The color is on blau")]
@@ -26,6 +33,19 @@ namespace _4Gewinnt.Features
         {
             _spieler.farbe.Should().Be("blau");
         }
+
+        [When(@"Spieler (.*) chooses the coloumn (.*) on Spielfeld")]
+        public void WhenSpielerChoosesTheColoumnOnSpielfeld(int p0, int p1)
+        {
+            _spielfeld.FeldBesetzen(p0);
+        }
+
+        [Then(@"Spielstein should land on row (.*)")]
+        public void ThenSpielsteinShouldLandOnRow(int p0)
+        {
+            _spielstein.zeile.Should().Be(p0);
+        }
+
 
         [Given(@"It's Spieler (.*) turn")]
         public void GivenItSpielerTurn(int p0)

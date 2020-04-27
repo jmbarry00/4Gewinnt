@@ -27,7 +27,7 @@ namespace _4Gewinnt
             string farbe = "";
             Spieler player = new Spieler(farbe);
 
-            int y = 1;
+            int y = 0;
 
             while(IstFeldBesetzt(x,y) == true)
             {
