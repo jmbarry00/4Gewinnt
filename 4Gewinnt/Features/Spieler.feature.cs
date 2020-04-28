@@ -70,13 +70,13 @@ namespace _4Gewinnt.Features
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Spieler 1, choose color and set Spielstein", new string[] {
+        [TechTalk.SpecRun.ScenarioAttribute("Spieler 1, set color and set Spielstein", new string[] {
                 "mytag"}, SourceLine=3)]
-        public virtual void Spieler1ChooseColorAndSetSpielstein()
+        public virtual void Spieler1SetColorAndSetSpielstein()
         {
             string[] tagsOfScenario = new string[] {
                     "mytag"};
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Spieler 1, choose color and set Spielstein", null, new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Spieler 1, set color and set Spielstein", null, new string[] {
                         "mytag"});
 #line 4
 this.ScenarioInitialize(scenarioInfo);

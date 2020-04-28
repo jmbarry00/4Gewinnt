@@ -10,10 +10,9 @@ namespace _4Gewinnt
     {
         public int SpaltenX;
         public int ZeilenY;
-        private int[,] feld;
+        public int[,] feld;
         public int posX;
         public int posY;
-
 
         public Spielfeld(int spaltenX, int zeilenY)
         {
@@ -45,13 +44,12 @@ namespace _4Gewinnt
             }
         
             player.SwitchPlayer();
-            posX = x;
-            posY = y;
+            feld[x, y] = 1;
         }
 
         public bool IstFeldBesetzt(int x, int y)
         {
-           if(x == posX && y == posY)
+           if(feld[x, y] == 1)
             {
                 return true;
             } else

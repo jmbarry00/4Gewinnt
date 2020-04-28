@@ -9,7 +9,6 @@ namespace _4Gewinnt
     public class SpielfeldSteps
     {
         Spielfeld _spielfeld;
-        Spieler _spieler;
         
 
         [When(@"I create a Spielfeld with (.*) columns and (.*) rows,")]

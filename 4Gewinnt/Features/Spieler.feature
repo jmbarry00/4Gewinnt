@@ -1,7 +1,7 @@
 ﻿Feature: Spieler
 
 @mytag
-Scenario: Spieler 1, choose color and set Spielstein
+Scenario: Spieler 1, set color and set Spielstein
 	When I create a Spieler
 	Then It's Spieler 1 turn
 	And The color is on blau

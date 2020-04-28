@@ -16,10 +16,8 @@ namespace _4Gewinnt.Features
         public void WhenICreateASpieler()
         {
             _spieler = new Spieler("blau");
-            _spielfeld = new Spielfeld(5, 6);
-            int x = _spielfeld.posX;
-            int y = _spielfeld.posY;
-            _spielstein = new Spielstein(x, y, "blau");
+            _spielfeld = new Spielfeld(7, 6);
+            _spieler.player1 = true;
         }
 
         [Then(@"It's Spieler (.*) turn")]
@@ -37,13 +35,13 @@ namespace _4Gewinnt.Features
         [When(@"Spieler (.*) chooses the coloumn (.*) on Spielfeld")]
         public void WhenSpielerChoosesTheColoumnOnSpielfeld(int p0, int p1)
         {
-            _spielfeld.FeldBesetzen(p0);
+            _spielfeld.FeldBesetzen(p1);
         }
 
         [Then(@"Spielstein should land on row (.*)")]
         public void ThenSpielsteinShouldLandOnRow(int p0)
         {
-            _spielstein.zeile.Should().Be(p0);
+            _spielfeld.feld[4, p0].Should().Be(1);
         }
 
 
