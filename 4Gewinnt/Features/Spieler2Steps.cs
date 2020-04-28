@@ -25,6 +25,8 @@ namespace _4Gewinnt.Features
         [Given(@"field (.*) on column (.*) is occupied")]
         public void GivenFieldOnColumnIsOccupied(int p0, int p1)
         {
+            _spielfeld.posX = p1;
+            _spielfeld.posY = p0;
             _spielfeld.IstFeldBesetzt(p1, p0).Should().BeTrue();
         }
 
@@ -32,13 +34,14 @@ namespace _4Gewinnt.Features
         [When(@"he chooses the coloumn (.*) on Spielfeld")]
         public void WhenHeChoosesTheColoumnOnSpielfeld(int p0)
         {
+            _spielfeld.IstFeldBesetzt(4, 0).Should().BeTrue();
             _spielfeld.FeldBesetzen(p0);
         }
         
         [Then(@"the Spielstein should land on row (.*)")]
         public void ThenTheSpielsteinShouldLandOnRow(int p0)
         {
-            _spielstein.zeile.Should().Be(p0);
+            _spielfeld.posY.Should().Be(p0);
         }
         
     }

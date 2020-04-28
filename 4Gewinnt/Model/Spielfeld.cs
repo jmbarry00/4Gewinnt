@@ -43,7 +43,7 @@ namespace _4Gewinnt
                 farbe = "rot";
                 player.SetSpielstein(x, y, farbe);
             }
-
+        
             player.SwitchPlayer();
             posX = x;
             posY = y;
