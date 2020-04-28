@@ -10,7 +10,6 @@ namespace _4Gewinnt.Features
     {
         Spieler _spieler;
         Spielfeld _spielfeld;
-        Spielstein _spielstein;
 
         [When(@"I create a Spieler")]
         public void WhenICreateASpieler()
