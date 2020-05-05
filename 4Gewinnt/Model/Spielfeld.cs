@@ -70,8 +70,12 @@ namespace _4Gewinnt
                         {
                             HatGewonnen(1);
                             spieler1Won = true;
-                            break;
+                            return;
                         }
+                    }
+                    else
+                    {
+                        spalteP1 = 0;
                     }
                 }
             }
@@ -88,8 +92,12 @@ namespace _4Gewinnt
                         {
                             HatGewonnen(1);
                             spieler1Won = true;
-                            break;
+                            return;
                         }
+                    }
+                    else
+                    {
+                        zeileP1 = 0;
                     }
                 }
             }
@@ -107,8 +115,12 @@ namespace _4Gewinnt
                         {
                             HatGewonnen(2);
                             spieler2Won = true;
-                            break;
+                            return;
                         }
+                    }
+                    else
+                    {
+                        spalteP2 = 0;
                     }
                 }
             }
@@ -125,11 +137,15 @@ namespace _4Gewinnt
                         {
                             HatGewonnen(2);
                             spieler2Won = true;
-                            break;
+                            return;
                         }
+                    } else
+                    {
+                        zeileP2 = 0;
                     }
                 }
             }
+
         }
 
         public bool IstFeldBesetzt(int x, int y)
