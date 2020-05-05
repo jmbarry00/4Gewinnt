@@ -15,8 +15,10 @@ namespace _4Gewinnt
         public int posY;
         int spalteP1 = 0;
         int zeileP1 = 0;
+        int diagonalP1 = 0;
         int spalteP2 = 0;
         int zeileP2 = 0;
+        int diagonalP2 = 0;
         public bool spieler1Won = false;
         public bool spieler2Won = false;
 
@@ -102,6 +104,30 @@ namespace _4Gewinnt
                 }
             }
 
+            //Gewinnberechnung diagonal Spieler 1
+            for (int z = 0; z < ZeilenY; z++)
+            {
+                for (int s = 0; s < SpaltenX; s++)
+                {
+                    if (feld[s, z] == 1)
+                    {
+                        diagonalP1++;
+                        z++;
+                        if (diagonalP1 == 4)
+                        {
+                            HatGewonnen(1);
+                            spieler1Won = true;
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        diagonalP1 = 0;
+                        z++;
+                    }
+                }
+            }
+
 
             //Gewinnberechnung waagrecht Spieler 2
             for (int z = 0; z < ZeilenY; z++)
@@ -142,6 +168,30 @@ namespace _4Gewinnt
                     } else
                     {
                         zeileP2 = 0;
+                    }
+                }
+            }
+
+            //Gewinnberechnung diagonal Spieler 2
+            for (int z = 0; z < ZeilenY; z++)
+            {
+                for (int s = 0; s < SpaltenX; s++)
+                {
+                    if (feld[s, z] == 2)
+                    {
+                        diagonalP2++;
+                        z++;
+                        if (diagonalP2 == 4)
+                        {
+                            HatGewonnen(2);
+                            spieler2Won = true;
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        diagonalP2 = 0;
+                        z++;
                     }
                 }
             }

@@ -22,9 +22,13 @@ namespace _4Gewinnt.Features
         [When(@"(.*) Spielsteine of Spieler (.*) are side by side")]
         public void WhenSpielsteineOfSpielerAreSideBySide(int p0, int p1)
         {
+            //diagonal
             _spielfeld.feld[0, 0] = 1;
-            _spielfeld.feld[1, 0] = 1;
-            _spielfeld.feld[2, 0] = 1;
+            _spielfeld.feld[1, 1] = 1;
+            _spielfeld.feld[2, 2] = 1;
+            _spielfeld.feld[3, 0] = 1;
+            _spielfeld.feld[3, 1] = 2;
+            _spielfeld.feld[3, 2] = 2;
             _spielfeld.FeldBesetzen(3);
         }
 
