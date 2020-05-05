@@ -43,17 +43,18 @@ namespace _4Gewinnt.Features
             _spielfeld.feld[4, p0].Should().Be(1);
         }
 
-
-        [Given(@"It's Spieler (.*) turn")]
-        public void GivenItSpielerTurn(int p0)
+        [Given(@"Spieler (.*) turn")]
+        public void GivenSpielerTurn(int p0)
         {
             _spieler = new Spieler("blau");
             _spieler.player1 = true;
         }
 
+
         [When(@"I switch the player")]
         public void WhenISwitchThePlayer()
         {
+            _spieler.player1.Should().BeTrue();
             _spieler.SwitchPlayer();
         }
 

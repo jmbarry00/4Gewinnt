@@ -59,11 +59,11 @@ namespace _4Gewinnt
         private void GewinnBerechnung()
         {            
             //Gewinnberechnung waagrecht Spieler 1
-            for (int i = 0; i <= ZeilenY; i++)
+            for (int z = 0; z < ZeilenY; z++)
             {
-                for (int n = 0; n <= SpaltenX; n++)
+                for (int s = 0; s < SpaltenX; s++)
                 {
-                    if (feld[n, i] == 1)
+                    if (feld[s, z] == 1)
                     {
                         spalteP1++;
                         if (spalteP1 == 4)
@@ -81,9 +81,9 @@ namespace _4Gewinnt
             }
 
             //Gewinnberechnung senkrecht Spieler 1
-            for (int s = 0; s <= SpaltenX; s++)
+            for (int s = 0; s < SpaltenX; s++)
             {
-                for (int z = 0; z <= ZeilenY; z++)
+                for (int z = 0; z < ZeilenY; z++)
                 {
                     if (feld[s, z] == 1)
                     {
@@ -104,11 +104,11 @@ namespace _4Gewinnt
 
 
             //Gewinnberechnung waagrecht Spieler 2
-            for (int i = 0; i <= ZeilenY; i++)
+            for (int z = 0; z < ZeilenY; z++)
             {
-                for (int n = 0; n <= SpaltenX; n++)
+                for (int s = 0; s < SpaltenX; s++)
                 {
-                    if (feld[n, i] == 2)
+                    if (feld[s, z] == 2)
                     {
                         spalteP2++;
                         if (spalteP2 == 4)
@@ -126,9 +126,9 @@ namespace _4Gewinnt
             }
 
             //Gewinnberechnung senkrecht Spieler 2
-            for (int s = 0; s <= SpaltenX; s++)
+            for (int s = 0; s < SpaltenX; s++)
             {
-                for (int z = 0; z <= ZeilenY; z++)
+                for (int z = 0; z < ZeilenY; z++)
                 {
                     if (feld[s, z] == 2)
                     {
