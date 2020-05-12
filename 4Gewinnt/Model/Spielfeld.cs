@@ -1,4 +1,5 @@
-﻿using _4Gewinnt.Model;
+﻿using _4Gewinnt.Features;
+using _4Gewinnt.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -21,6 +22,7 @@ namespace _4Gewinnt
         int diagonalP2 = 0;
         public bool spieler1Won = false;
         public bool spieler2Won = false;
+        public bool spielerSteps = false;
 
         public Spielfeld(int spaltenX, int zeilenY)
         {
@@ -53,7 +55,11 @@ namespace _4Gewinnt
                 feld[x, y] = 2;
             }
 
-            GewinnBerechnung();
+            if (spielerSteps == false)
+            {
+                GewinnBerechnung();
+            }
+            
 
             player.SwitchPlayer();
         }

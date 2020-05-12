@@ -34,12 +34,14 @@ namespace _4Gewinnt.Features
         [When(@"Spieler (.*) chooses the coloumn (.*) on Spielfeld")]
         public void WhenSpielerChoosesTheColoumnOnSpielfeld(int p0, int p1)
         {
+            _spielfeld.spielerSteps = true;
             _spielfeld.FeldBesetzen(p1);
         }
 
         [Then(@"Spielstein should land on row (.*)")]
         public void ThenSpielsteinShouldLandOnRow(int p0)
         {
+
             _spielfeld.feld[4, p0].Should().Be(1);
         }
 
