@@ -21,7 +21,7 @@ namespace _4Gewinnt.Features
         [Given(@"field (.*) on column (.*) is occupied")]
         public void GivenFieldOnColumnIsOccupied(int p0, int p1)
         {
-            _spielfeld.feld[p1, p0] = 1;
+             _spielfeld.feld[p1, p0] = 1;
             _spielfeld.IstFeldBesetzt(p1, p0).Should().BeTrue();
         }
 

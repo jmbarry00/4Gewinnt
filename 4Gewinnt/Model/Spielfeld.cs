@@ -53,12 +53,10 @@ namespace _4Gewinnt
                 farbe = "rot";
                 player.SetSpielstein(x, y, farbe);
                 feld[x, y] = 2;
-            }
-
-            if (spielerSteps == false)
-            {
-                GewinnBerechnung();
-            }
+            }            
+            
+            GewinnBerechnung();
+            
             
 
             player.SwitchPlayer();
@@ -115,24 +113,17 @@ namespace _4Gewinnt
             {
                 for (int s = 0; s < SpaltenX; s++)
                 {
-                    if (feld[s, z] == 1)
-                    {
-                        diagonalP1++;
-                        z++;
-                        if (diagonalP1 == 4)
-                        {
+                    if ((feld[s, z] == 1) && (feld[s+1, z+1] == 1) && (feld[s + 2, z + 2] == 1)  && (feld[s+3, z+3] == 1))
+                        {                        
                             HatGewonnen(1);
                             spieler1Won = true;
                             return;
                         }
-                    }
-                    else
-                    {
-                        diagonalP1 = 0;
-                        z++;
-                    }
+                    
                 }
             }
+
+
 
 
             //Gewinnberechnung waagrecht Spieler 2
@@ -183,22 +174,13 @@ namespace _4Gewinnt
             {
                 for (int s = 0; s < SpaltenX; s++)
                 {
-                    if (feld[s, z] == 2)
+                    if ((feld[s, z] == 2) && (feld[s + 1, z + 1] == 2) && (feld[s + 2, z + 2] == 2) && (feld[s + 3, z + 3] == 2))
                     {
-                        diagonalP2++;
-                        z++;
-                        if (diagonalP2 == 4)
-                        {
-                            HatGewonnen(2);
-                            spieler2Won = true;
-                            return;
-                        }
+                        HatGewonnen(2);
+                        spieler1Won = true;
+                        return;
                     }
-                    else
-                    {
-                        diagonalP2 = 0;
-                        z++;
-                    }
+
                 }
             }
 
