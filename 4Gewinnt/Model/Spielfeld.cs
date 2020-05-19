@@ -16,13 +16,13 @@ namespace _4Gewinnt
         public int posY;
         int spalteP1 = 0;
         int zeileP1 = 0;
-        int diagonalP1 = 0;
         int spalteP2 = 0;
         int zeileP2 = 0;
-        int diagonalP2 = 0;
+
         public bool spieler1Won = false;
         public bool spieler2Won = false;
         public bool spielerSteps = false;
+        Spiel spiel;
 
         public Spielfeld(int zeilenY, int spaltenX)
         {            
@@ -69,7 +69,7 @@ namespace _4Gewinnt
             {
                 for (int s = 0; s < SpaltenX; s++)
                 {
-                    if (feld[s, z] == 1)
+                    if (feld[z, s] == 1)
                     {
                         spalteP1++;
                         if (spalteP1 == 4)
@@ -91,7 +91,7 @@ namespace _4Gewinnt
             {
                 for (int z = 0; z < ZeilenY; z++)
                 {
-                    if (feld[s, z] == 1)
+                    if (feld[z, s] == 1)
                     {
                         zeileP1++;
                         if (zeileP1 == 4)
@@ -113,7 +113,7 @@ namespace _4Gewinnt
             {
                 for (int s = 0; s < SpaltenX; s++)
                 {
-                    if ((feld[s, z] == 1) && (feld[s+1, z+1] == 1) && (feld[s + 2, z + 2] == 1)  && (feld[s+3, z+3] == 1))
+                    if ((feld[z, s] == 1) && (feld[z+1,s+1] == 1) && (feld[z + 2, s+ 2] == 1)  && (feld[z+3, s+3] == 1))
                         {                        
                             HatGewonnen(1);
                             spieler1Won = true;
@@ -131,7 +131,7 @@ namespace _4Gewinnt
             {
                 for (int s = 0; s < SpaltenX; s++)
                 {
-                    if (feld[s, z] == 2)
+                    if (feld[z, s] == 2)
                     {
                         spalteP2++;
                         if (spalteP2 == 4)
@@ -153,7 +153,7 @@ namespace _4Gewinnt
             {
                 for (int z = 0; z < ZeilenY; z++)
                 {
-                    if (feld[s, z] == 2)
+                    if (feld[z, s] == 2)
                     {
                         zeileP2++;
                         if (zeileP2 == 4)
@@ -174,7 +174,7 @@ namespace _4Gewinnt
             {
                 for (int s = 0; s < SpaltenX; s++)
                 {
-                    if ((feld[s, z] == 2) && (feld[s + 1, z + 1] == 2) && (feld[s + 2, z + 2] == 2) && (feld[s + 3, z + 3] == 2))
+                    if ((feld[z, s] == 2) && (feld[s + 1, z + 1] == 2) && (feld[s + 2, z + 2] == 2) && (feld[s + 3, z + 3] == 2))
                     {
                         HatGewonnen(2);
                         spieler1Won = true;

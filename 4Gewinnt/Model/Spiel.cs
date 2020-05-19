@@ -4,14 +4,17 @@ using System.Text;
 
 namespace _4Gewinnt.Model
 {
-    class Spiel
+    public class Spiel
     {
+        public Spieler player1;
+        public Spieler player2;
+        public Spielstein spielstein;
 
-        public Spiel(int Spalte, int Zeile, string Farbe)
+        public Spiel(Spieler Player1, Spieler Player2)
         {
-            Spieler player1 = new Spieler("blau");
-            Spieler player2 = new Spieler("rot");
-            Spielstein spielstein = new Spielstein(Spalte, Zeile, Farbe);
+            player1 = Player1 = new Spieler("blau");
+            player2 = Player2 = new Spieler("rot");
+            //spielstein = new Spielstein(Spalte, Zeile, Farbe);
         }
     }
 }
