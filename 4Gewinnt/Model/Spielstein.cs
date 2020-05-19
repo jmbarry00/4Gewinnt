@@ -15,5 +15,7 @@ namespace _4Gewinnt.Model
             zeile = Zeile;
             farbe = Farbe;
         }
+
+        
     }
 }

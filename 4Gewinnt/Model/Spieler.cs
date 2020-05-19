@@ -19,28 +19,11 @@ namespace _4Gewinnt.Model
             farbe = Farbe;
         }
 
-        public string GetFarbe(String f)
-        {
-            return f;
-        }
 
         public void SwitchPlayer()
         {
-            if (player1 == true)
-            {
-                player1 = false;
-                player2 = true;
-            }
-            else
-            {
-                player1 = true;
-                player2 = false;
-            }
-        }
-
-        public void SetSpielstein(int Spalte, int Zeile, string Farbe)
-        {
-            Spielstein spielstein = new Spielstein(Spalte, Zeile, Farbe);
+            player1 = (player1 == true) ? false : true;
+            player2 = (player2 == true) ? false : true;
         }
 
     }

@@ -7,12 +7,6 @@ namespace _4Gewinnt
     {
         static void Main(string[] args)
         {
-            Spielfeld spielfeld = new Spielfeld(5,6);        
-            spielfeld.FeldBesetzen(4);
-            int x = spielfeld.posX;
-            int y = spielfeld.posY;
-            Spielstein spielstein = new Spielstein(x, y, "blau");
-            Console.WriteLine(spielstein.zeile);
         }
     }
 }

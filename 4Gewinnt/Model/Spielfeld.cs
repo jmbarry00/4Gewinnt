@@ -8,9 +8,9 @@ using System.Text;
 namespace _4Gewinnt
 {
     public class Spielfeld
-    {
-        public int SpaltenX;
+    {        
         public int ZeilenY;
+        public int SpaltenX;
         public int[,] feld;
         public int posX;
         public int posY;
@@ -24,11 +24,11 @@ namespace _4Gewinnt
         public bool spieler2Won = false;
         public bool spielerSteps = false;
 
-        public Spielfeld(int spaltenX, int zeilenY)
-        {
-            SpaltenX = spaltenX;
+        public Spielfeld(int zeilenY, int spaltenX)
+        {            
             ZeilenY = zeilenY;
-            feld = new int[SpaltenX, ZeilenY];
+            SpaltenX = spaltenX;
+            feld = new int[ZeilenY, SpaltenX];
         }
 
         public void FeldBesetzen(int x)
@@ -38,20 +38,20 @@ namespace _4Gewinnt
 
             int y = 0;
 
-            while(IstFeldBesetzt(x,y) == true)
+            while(IstFeldBesetzt(y,x) == true)
             {
                 y++;
             }
 
             if (player.player1 == true)
-            {
+            {                
                 farbe = "blau";
-                player.SetSpielstein(x, y, farbe);
+                //player.SetSpielstein(x, y, farbe);
                 feld[x, y] = 1;
             } else if (player.player2 == true)
             {
                 farbe = "rot";
-                player.SetSpielstein(x, y, farbe);
+                //player.SetSpielstein(x, y, farbe);
                 feld[x, y] = 2;
             }            
             
