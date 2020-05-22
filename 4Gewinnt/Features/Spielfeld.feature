@@ -1,5 +1,5 @@
 ﻿Feature: Spielfeld
-	Ein Spielfeld mit X Spalten und Y Zeilen
+	Ein Spielfeld mit Y Zeilenund X Spalten
 
 @mytag
 Scenario: game start

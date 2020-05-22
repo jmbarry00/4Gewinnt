@@ -14,7 +14,7 @@ namespace _4Gewinnt
         [When(@"I create a Spielfeld with (.*) columns and (.*) rows,")]
         public void WhenICreateASpielfeldWithColumnsAndRows(int p0, int p1)
         {
-            _spielfeld = new Spielfeld(p0, p1);
+            _spielfeld = new Spielfeld(p1, p0);
         }
 
 

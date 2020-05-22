@@ -18,14 +18,16 @@ namespace _4Gewinnt
         int zeileP1 = 0;
         int spalteP2 = 0;
         int zeileP2 = 0;
+        public Spiel spiel = new Spiel();
 
         public bool spieler1Won = false;
         public bool spieler2Won = false;
         public bool spielerSteps = false;
-        Spiel spiel;
+        
 
         public Spielfeld(int zeilenY, int spaltenX)
-        {            
+        {
+            
             ZeilenY = zeilenY;
             SpaltenX = spaltenX;
             feld = new int[ZeilenY, SpaltenX];
@@ -34,8 +36,7 @@ namespace _4Gewinnt
         public void FeldBesetzen(int x)
         {
             string farbe = "";
-            Spieler player = new Spieler(farbe);
-
+            
             int y = 0;
 
             while(IstFeldBesetzt(y,x) == true)
@@ -43,23 +44,24 @@ namespace _4Gewinnt
                 y++;
             }
 
-            if (player.player1 == true)
+            if (spiel.player.player1 == true)
             {                
                 farbe = "blau";
-                //player.SetSpielstein(x, y, farbe);
-                feld[x, y] = 1;
-            } else if (player.player2 == true)
+                Spielstein stein = new Spielstein(y, x, farbe);
+                feld[y, x] = 1;
+            } else if (spiel.player.player2 == true)
             {
+
                 farbe = "rot";
-                //player.SetSpielstein(x, y, farbe);
-                feld[x, y] = 2;
+                Spielstein stein = new Spielstein(y, x, farbe);
+                feld[y, x] = 2;
             }            
             
             GewinnBerechnung();
             
             
 
-            player.SwitchPlayer();
+            spiel.player.SwitchPlayer();
         }
 
         private void GewinnBerechnung()
@@ -113,7 +115,7 @@ namespace _4Gewinnt
             {
                 for (int s = 0; s < SpaltenX; s++)
                 {
-                    if ((feld[z, s] == 1) && (feld[z+1,s+1] == 1) && (feld[z + 2, s+ 2] == 1)  && (feld[z+3, s+3] == 1) && s < SpaltenX - 3 && z < ZeilenY - 3)
+                    if ((s < SpaltenX - 3) && (z < ZeilenY - 3) && (feld[z, s] == 1) && (feld[z+1,s+1] == 1) && (feld[z + 2, s+ 2] == 1)  && (feld[z+3, s+3] == 1))
                         {   
                             HatGewonnen(1);
                             spieler1Won = true;
@@ -128,7 +130,7 @@ namespace _4Gewinnt
             {
                 for (int s = 0; s < SpaltenX; s++)
                 {
-                    if ((feld[z, s] == 1) && (feld[z + 1, s - 1] == 1) && (feld[z + 2, s -2] == 1) && (feld[z + 3, s - 3] == 1) && s > 3 && z > 3)
+                    if ((s > 3) && (z < 3) && (feld[z, s] == 1) && (feld[z + 1, s - 1] == 1) && (feld[z + 2, s -2] == 1) && (feld[z + 3, s - 3] == 1))
                     {
                         HatGewonnen(1);
                         spieler1Won = true;
@@ -189,7 +191,7 @@ namespace _4Gewinnt
             {
                 for (int s = 0; s < SpaltenX; s++)
                 {
-                    if ((feld[z, s] == 2) && (feld[s + 1, z + 1] == 2) && (feld[s + 2, z + 2] == 2) && (feld[s + 3, z + 3] == 2) && s < SpaltenX - 3 && z < ZeilenY - 3)
+                    if ((s < SpaltenX - 3) && (z < ZeilenY - 3) && (feld[z, s] == 2) && (feld[s + 1, z + 1] == 2) && (feld[s + 2, z + 2] == 2) && (feld[s + 3, z + 3] == 2))
                     {
                         HatGewonnen(2);
                         spieler1Won = true;
@@ -204,21 +206,20 @@ namespace _4Gewinnt
             {
                 for (int s = 0; s < SpaltenX; s++)
                 {
-                    if ((feld[z, s] == 2) && (feld[z + 1, s - 1] == 2) && (feld[z + 2, s - 2] == 2) && (feld[z + 3, s - 3] == 2) && s > 3 && z > 3)
+                    if ((s > 3) && (z < 3) && (feld[z, s] == 2) && (feld[z + 1, s - 1] == 2) && (feld[z + 2, s - 2] == 2) && (feld[z + 3, s - 3] == 2))
                     {
                         HatGewonnen(1);
                         spieler1Won = true;
                         return;
                     }
-
                 }
             }
 
         }
 
-        public bool IstFeldBesetzt(int x, int y)
+        public bool IstFeldBesetzt(int y, int x)
         {
-           if(feld[x, y] == 1 || feld[x, y] == 2)
+           if(feld[y, x] == 1 || feld[y, x] == 2)
             {
                 return true;
             } else

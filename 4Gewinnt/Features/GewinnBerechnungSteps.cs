@@ -13,8 +13,8 @@ namespace _4Gewinnt.Features
         [Given(@"It's Spieler(.*) turn")]
         public void GivenItSSpielerTurn(int p0)
         {
-            _spieler = new Spieler("blau");
-            _spielfeld = new Spielfeld(7, 6);
+            _spieler = new Spieler();
+            _spielfeld = new Spielfeld(6, 7);
             _spieler.player1 = true;
         }
 
@@ -26,9 +26,9 @@ namespace _4Gewinnt.Features
             _spielfeld.feld[0, 0] = 1;
             _spielfeld.feld[1, 1] = 1;
             _spielfeld.feld[2, 2] = 1;
-            _spielfeld.feld[3, 0] = 1;
-            _spielfeld.feld[3, 1] = 2;
-            _spielfeld.feld[3, 2] = 2;
+            _spielfeld.feld[0, 3] = 1;
+            _spielfeld.feld[1, 3] = 2;
+            _spielfeld.feld[2, 3] = 2;
             _spielfeld.FeldBesetzen(3);
         }
 

@@ -19,7 +19,7 @@ namespace _4Gewinnt.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.1.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Spielfeld", Description="\tEin Spielfeld mit X Spalten und Y Zeilen", SourceFile="Features\\Spielfeld.feature", SourceLine=0)]
+    [TechTalk.SpecRun.FeatureAttribute("Spielfeld", Description="\tEin Spielfeld mit Y Zeilenund X Spalten", SourceFile="Features\\Spielfeld.feature", SourceLine=0)]
     public partial class SpielfeldFeature
     {
         
@@ -34,7 +34,7 @@ namespace _4Gewinnt.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Spielfeld", "\tEin Spielfeld mit X Spalten und Y Zeilen", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Spielfeld", "\tEin Spielfeld mit Y Zeilenund X Spalten", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
