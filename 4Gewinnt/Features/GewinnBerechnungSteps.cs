@@ -42,29 +42,53 @@ namespace _4Gewinnt.Features
         [Given(@"All fields are occupied except one")]
         public void GivenAllFieldsAreOccupiedExceptOne()
         {
+            _spielfeld = new Spielfeld(6, 7);
+            _spieler = new Spieler();
             for (int y = 0; y < 3; y++)
             {
-                for (int x = 0; x < 7 && x != 3; x++)
+                for (int x = 0; x < 7; x++)
                 {
-                    _spielfeld.feld[y, x] = 1;
+                    if (x != 0 && x != 3 && x != 6)
+                    {
+                        _spielfeld.feld[y, x] = 1;
+                    }                    
                 }
             }
 
             _spielfeld.feld[3, 3] = 1;
             _spielfeld.feld[4, 3] = 1;
-            _spielfeld.feld[5, 3] = 1;
+
+            _spielfeld.feld[3, 6] = 1;
+            _spielfeld.feld[4, 6] = 1;
+            _spielfeld.feld[5, 6] = 1;
+
+            _spielfeld.feld[3, 0] = 1;
+            _spielfeld.feld[4, 0] = 1;
+            _spielfeld.feld[5, 0] = 1;
 
             for (int y = 3; y < 6; y++)
             {
-                for (int x = 0; x < 7 && x != 3; x++)
+                for (int x = 0; x < 7; x++)
                 {
-                    _spielfeld.feld[y, x] = 2;
+                    if (x != 0 && x != 3 && x != 6)
+                    {
+                        _spielfeld.feld[y, x] = 2;
+                    }
                 }
             }
 
 
             _spielfeld.feld[0, 3] = 2;
             _spielfeld.feld[1, 3] = 2;
+            _spielfeld.feld[2, 3] = 2;
+
+            _spielfeld.feld[0, 0] = 2;
+            _spielfeld.feld[1, 0] = 2;
+            _spielfeld.feld[2, 0] = 2;
+
+            _spielfeld.feld[0, 6] = 2;
+            _spielfeld.feld[1, 6] = 2;
+            _spielfeld.feld[2, 6] = 2;
 
         }
 
