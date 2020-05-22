@@ -25,12 +25,6 @@ namespace _4Gewinnt.Features
             _spieler.player1.Should().BeTrue();
         }
 
-        [Then(@"The color is on blau")]
-        public void ThenTheColorIsOnBlau()
-        {
-            //_spieler.farbe.Should().Be("blau");
-        }
-
         [When(@"Spieler (.*) chooses the coloumn (.*) on Spielfeld")]
         public void WhenSpielerChoosesTheColoumnOnSpielfeld(int p0, int p1)
         {

@@ -6,3 +6,6 @@ Scenario: Spieler 1 hat gewonnen, wenn vier blaue Steine waagrecht, senkrecht od
 	When 4 Spielsteine of Spieler 1 are side by side
 	Then Spieler 1 hat gewonnen
 
+Scenario: Unentschieden
+	Given All fields are occupied except one
+	When next Player sets Spielstein without winning

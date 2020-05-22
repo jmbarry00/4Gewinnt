@@ -4,7 +4,6 @@
 Scenario: Spieler 1, set color and set Spielstein
 	When I create a Spieler
 	Then It's Spieler 1 turn
-	And The color is on blau
 	When Spieler 1 chooses the coloumn 4 on Spielfeld
 	Then Spielstein should land on row 0
 

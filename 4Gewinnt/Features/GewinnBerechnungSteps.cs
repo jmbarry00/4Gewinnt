@@ -38,5 +38,43 @@ namespace _4Gewinnt.Features
         {
             _spielfeld.spieler1Won.Should().BeTrue();
         }
+
+        [Given(@"All fields are occupied except one")]
+        public void GivenAllFieldsAreOccupiedExceptOne()
+        {
+            for (int y = 0; y < 3; y++)
+            {
+                for (int x = 0; x < 7 && x != 3; x++)
+                {
+                    _spielfeld.feld[y, x] = 1;
+                }
+            }
+
+            _spielfeld.feld[3, 3] = 1;
+            _spielfeld.feld[4, 3] = 1;
+            _spielfeld.feld[5, 3] = 1;
+
+            for (int y = 3; y < 6; y++)
+            {
+                for (int x = 0; x < 7 && x != 3; x++)
+                {
+                    _spielfeld.feld[y, x] = 2;
+                }
+            }
+
+
+            _spielfeld.feld[0, 3] = 2;
+            _spielfeld.feld[1, 3] = 2;
+
+        }
+
+        [When(@"next Player sets Spielstein without winning")]
+        public void WhenNextPlayerSetsSpielsteinWithoutWinning()
+        {
+            _spieler.player1 = true;
+            _spielfeld.FeldBesetzen(3);
+            _spielfeld.unentschieden.Should().BeTrue();
+        }
+
     }
 }
