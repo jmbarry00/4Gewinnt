@@ -23,8 +23,8 @@ namespace _4Gewinnt
         public bool spieler1Won = false;
         public bool spieler2Won = false;
         public bool unentschieden = false;
-        public bool spielerSteps = false;
-        
+        public bool outOfBounds = false;
+
 
         public Spielfeld(int zeilenY, int spaltenX)
         {
@@ -42,27 +42,41 @@ namespace _4Gewinnt
 
             while(IstFeldBesetzt(y,x) == true)
             {
-                y++;
+                if (y != 5)
+                {
+                    y++;
+                } else
+                {
+                    outOfBounds = true;
+                    return;
+                }                   
+                
             }
-
-            if (spiel.player.player1 == true)
-            {                
-                farbe = "blau";
-                Spielstein stein = new Spielstein(y, x, farbe);
-                feld[y, x] = 1;
-            } else if (spiel.player.player2 == true)
+            if (outOfBounds == false)
             {
+                if (spiel.player.player1 == true)
+                {
+                    farbe = "blau";
+                    Spielstein stein = new Spielstein(y, x, farbe);
+                    feld[y, x] = 1;
+                    GewinnBerechnung();
+                    spiel.player.SwitchPlayer();
+                }
+                else if (spiel.player.player2 == true)
+                {
 
-                farbe = "rot";
-                Spielstein stein = new Spielstein(y, x, farbe);
-                feld[y, x] = 2;
-            }            
-            
-            GewinnBerechnung();
-            
-            
+                    farbe = "rot";
+                    Spielstein stein = new Spielstein(y, x, farbe);
+                    feld[y, x] = 2;
+                    GewinnBerechnung();
+                    spiel.player.SwitchPlayer();
 
-            spiel.player.SwitchPlayer();
+                }
+            } else
+            {
+                Console.WriteLine("Diese Spalte ist ausgefüllt, bitte wähle eine andere!");
+            }  
+            
         }
 
         private void GewinnBerechnung()

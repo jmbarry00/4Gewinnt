@@ -29,7 +29,6 @@ namespace _4Gewinnt.Features
         [When(@"he chooses the coloumn (.*) on Spielfeld")]
         public void WhenHeChoosesTheColoumnOnSpielfeld(int p0)
         {
-            _spielfeld.spielerSteps = true;
             _spielfeld.FeldBesetzen(p0);
         }
         
