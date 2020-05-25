@@ -196,7 +196,7 @@ namespace _4Gewinnt
             {
                 for (int s = 0; s < SpaltenX; s++)
                 {
-                    if ((s < SpaltenX - 3) && (z < ZeilenY - 3) && (feld[z, s] == 2) && (feld[s + 1, z + 1] == 2) && (feld[s + 2, z + 2] == 2) && (feld[s + 3, z + 3] == 2))
+                    if ((s < SpaltenX - 3) && (z < ZeilenY - 3) && (feld[z, s] == 2) && (feld[z + 1, s + 1] == 2) && (feld[z + 2, s + 2] == 2) && (feld[z + 3, s + 3] == 2))
                     {
                         HatGewonnen(2);
                         spieler2Won = true;
