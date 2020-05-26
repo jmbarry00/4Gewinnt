@@ -140,7 +140,7 @@ namespace _4Gewinnt
             {
                 for (int s = 0; s < SpaltenX; s++)
                 {
-                    if ((s > 3) && (z < ZeilenY - 3) && (feld[z, s] == 1) && (feld[z + 1, s - 1] == 1) && (feld[z + 2, s -2] == 1) && (feld[z + 3, s - 3] == 1))
+                    if ((s > 2) && (z < ZeilenY - 3) && (feld[z, s] == 1) && (feld[z + 1, s - 1] == 1) && (feld[z + 2, s -2] == 1) && (feld[z + 3, s - 3] == 1))
                     {
                         HatGewonnen(1);
                         spieler1Won = true;
@@ -218,7 +218,7 @@ namespace _4Gewinnt
             {
                 for (int s = 0; s < SpaltenX; s++)
                 {
-                    if ((s > 3) && (z < ZeilenY - 3) && (feld[z, s] == 2) && (feld[z + 1, s - 1] == 2) && (feld[z + 2, s - 2] == 2) && (feld[z + 3, s - 3] == 2))
+                    if ((s > 2) && (z < ZeilenY - 3) && (feld[z, s] == 2) && (feld[z + 1, s - 1] == 2) && (feld[z + 2, s - 2] == 2) && (feld[z + 3, s - 3] == 2))
                     {
                         HatGewonnen(1);
                         spieler2Won = true;

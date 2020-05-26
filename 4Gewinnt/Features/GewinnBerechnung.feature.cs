@@ -19,7 +19,8 @@ namespace _4Gewinnt.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.1.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("GewinnBerechnung", SourceFile="Features\\GewinnBerechnung.feature", SourceLine=0)]
+    [TechTalk.SpecRun.FeatureAttribute("GewinnBerechnung", Description="\t\tWenn senkrecht, waagrecht oder diagonal in beide Richtungen \r\n\t\tvier Steine ein" +
+        "es Spielers nebeneinander liegen, hat derjenige Spieler gewonnen.", SourceFile="Features\\GewinnBerechnung.feature", SourceLine=0)]
     public partial class GewinnBerechnungFeature
     {
         
@@ -34,7 +35,8 @@ namespace _4Gewinnt.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "GewinnBerechnung", null, ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "GewinnBerechnung", "\t\tWenn senkrecht, waagrecht oder diagonal in beide Richtungen \r\n\t\tvier Steine ein" +
+                    "es Spielers nebeneinander liegen, hat derjenige Spieler gewonnen.", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -70,17 +72,15 @@ namespace _4Gewinnt.Features
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Spieler 1 hat gewonnen, wenn vier blaue Steine waagrecht, senkrecht oder diagonal" +
-            " nebeneinander liegen", new string[] {
-                "mytag"}, SourceLine=3)]
-        public virtual void Spieler1HatGewonnenWennVierBlaueSteineWaagrechtSenkrechtOderDiagonalNebeneinanderLiegen()
+        [TechTalk.SpecRun.ScenarioAttribute("Spieler 1 hat gewonnen, wenn vier Steine waagrecht nebeneinander liegen", new string[] {
+                "mytag"}, SourceLine=5)]
+        public virtual void Spieler1HatGewonnenWennVierSteineWaagrechtNebeneinanderLiegen()
         {
             string[] tagsOfScenario = new string[] {
                     "mytag"};
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Spieler 1 hat gewonnen, wenn vier blaue Steine waagrecht, senkrecht oder diagonal" +
-                    " nebeneinander liegen", null, new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Spieler 1 hat gewonnen, wenn vier Steine waagrecht nebeneinander liegen", null, new string[] {
                         "mytag"});
-#line 4
+#line 6
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -100,25 +100,25 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 5
- testRunner.Given("It\'s Spieler1 turn", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-#line 6
- testRunner.When("4 Spielsteine of Spieler 1 are side by side", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
 #line 7
- testRunner.Then("Spieler 1 hat gewonnen", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Given("three waagrecht", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 8
+ testRunner.When("player one sets the fourth", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 9
+ testRunner.Then("player one wins", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Unentschieden", SourceLine=8)]
-        public virtual void Unentschieden()
+        [TechTalk.SpecRun.ScenarioAttribute("Spieler 2 hat gewonnen, wenn vier Steine senkrecht nebeneinander liegen", SourceLine=10)]
+        public virtual void Spieler2HatGewonnenWennVierSteineSenkrechtNebeneinanderLiegen()
         {
             string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Unentschieden", null, ((string[])(null)));
-#line 9
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Spieler 2 hat gewonnen, wenn vier Steine senkrecht nebeneinander liegen", null, ((string[])(null)));
+#line 11
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -138,10 +138,124 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 10
+#line 12
+ testRunner.Given("three senkrecht", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 13
+ testRunner.When("player two sets the fourth", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 14
+ testRunner.Then("player two wins", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Spieler 1 hat gewonnen, wenn vier vorwärts diagonal nebeneinander liegen", SourceLine=15)]
+        public virtual void Spieler1HatGewonnenWennVierVorwartsDiagonalNebeneinanderLiegen()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Spieler 1 hat gewonnen, wenn vier vorwärts diagonal nebeneinander liegen", null, ((string[])(null)));
+#line 16
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 17
+ testRunner.Given("It\'s Spieler1 turn", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 18
+ testRunner.When("4 Spielsteine of Spieler 1 are side by side", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 19
+ testRunner.Then("Spieler one wins the game", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Spieler 2 hat gewonnen, wenn vier Steine rückwärts diagonal nebeneinander liegen", SourceLine=20)]
+        public virtual void Spieler2HatGewonnenWennVierSteineRuckwartsDiagonalNebeneinanderLiegen()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Spieler 2 hat gewonnen, wenn vier Steine rückwärts diagonal nebeneinander liegen", null, ((string[])(null)));
+#line 21
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 22
+ testRunner.Given("three diagonal backwards", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 23
+ testRunner.When("player two sets the fourth Spielstein", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 24
+ testRunner.Then("player two wins the game", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Unentschieden", SourceLine=25)]
+        public virtual void Unentschieden()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Unentschieden", null, ((string[])(null)));
+#line 26
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 27
  testRunner.Given("All fields are occupied except one", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 11
+#line 28
  testRunner.When("next Player sets Spielstein without winning", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             }

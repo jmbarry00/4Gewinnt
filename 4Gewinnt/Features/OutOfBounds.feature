@@ -8,5 +8,5 @@ Scenario: Player chooses full column
 
 Scenario: Program doesnt check out of bounds
 	Given Spielsteine at the Corner
-	When player 1 chooses column 6
+	When player 1 set Spielstein on column 6
 	Then It should be player2 turn

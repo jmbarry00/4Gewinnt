@@ -10,6 +10,54 @@ namespace _4Gewinnt.Features
     {
         Spieler _spieler;
         Spielfeld _spielfeld;
+        [Given(@"three waagrecht")]
+        public void GivenThreeWaagrecht()
+        {
+            _spieler = new Spieler();
+            _spielfeld = new Spielfeld(6, 7);
+            _spieler.player1 = true;
+            _spielfeld.feld[0, 0] = 1;
+            _spielfeld.feld[0, 1] = 1;
+            _spielfeld.feld[0, 2] = 1;
+
+        }
+
+        [When(@"player one sets the fourth")]
+        public void WhenPlayerOneSetsTheFourth()
+        {
+            _spielfeld.FeldBesetzen(3, _spieler);
+        }
+
+        [Then(@"player one wins")]
+        public void ThenPlayerOneWins()
+        {
+            _spielfeld.spieler1Won.Should().BeTrue();
+        }
+
+        [Given(@"three senkrecht")]
+        public void GivenThreeSenkrecht()
+        {
+            _spieler = new Spieler();
+            _spielfeld = new Spielfeld(6, 7);
+            _spieler.SwitchPlayer();
+            _spielfeld.feld[0, 0] = 2;
+            _spielfeld.feld[1, 0] = 2;
+            _spielfeld.feld[2, 0] = 2;
+        }
+
+        [When(@"player two sets the fourth")]
+        public void WhenPlayerTwoSetsTheFourth()
+        {
+            _spielfeld.FeldBesetzen(0, _spieler);
+        }
+
+        [Then(@"player two wins")]
+        public void ThenPlayerTwoWins()
+        {
+            _spielfeld.spieler2Won.Should().BeTrue();
+        }
+
+
         [Given(@"It's Spieler(.*) turn")]
         public void GivenItSSpielerTurn(int p0)
         {
@@ -32,12 +80,39 @@ namespace _4Gewinnt.Features
             _spielfeld.FeldBesetzen(3,_spieler);
         }
 
-
-        [Then(@"Spieler (.*) hat gewonnen")]
-        public void ThenSpielerHatGewonnen(int p0)
+        [Then(@"Spieler one wins the game")]
+        public void ThenSpielerOneWinsTheGame()
         {
             _spielfeld.spieler1Won.Should().BeTrue();
         }
+
+
+        [Given(@"three diagonal backwards")]
+        public void GivenThreeDiagonalBackwards()
+        {
+            _spieler = new Spieler();
+            _spielfeld = new Spielfeld(6, 7);
+            _spieler.SwitchPlayer();
+            _spielfeld.feld[0, 3] = 2;
+            _spielfeld.feld[1, 2] = 2;
+            _spielfeld.feld[2, 1] = 2;
+            _spielfeld.feld[0, 0] = 2;
+            _spielfeld.feld[1, 0] = 1;
+            _spielfeld.feld[2, 0] = 1;
+        }
+
+        [When(@"player two sets the fourth Spielstein")]
+        public void WhenPlayerTwoSetsTheFourthSpielstein()
+        {
+            _spielfeld.FeldBesetzen(0, _spieler);
+        }
+
+        [Then(@"player two wins the game")]
+        public void ThenPlayerTwoWinsTheGame()
+        {
+            _spielfeld.spieler2Won.Should().BeTrue();
+        }
+
 
         [Given(@"All fields are occupied except one")]
         public void GivenAllFieldsAreOccupiedExceptOne()

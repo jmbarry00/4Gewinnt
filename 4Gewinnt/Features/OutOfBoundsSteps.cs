@@ -39,5 +39,24 @@ namespace _4Gewinnt
             _spielfeld.outOfBounds.Should().BeTrue();
         }
 
+        [Given(@"Spielsteine at the Corner")]
+        public void GivenSpielsteineAtTheCorner()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [When(@"player (.*) set Spielstein on column (.*)")]
+        public void WhenPlayerSetSpielsteinOnColumn(int p0, int p1)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+        [Then(@"It should be player(.*) turn")]
+        public void ThenItShouldBePlayerTurn(int p0)
+        {
+            ScenarioContext.Current.Pending();
+        }
+
+
     }
 }

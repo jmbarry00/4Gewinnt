@@ -140,7 +140,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("Spielsteine at the Corner", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 11
- testRunner.When("player 1 chooses column 6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("player 1 set Spielstein on column 6", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 12
  testRunner.Then("It should be player2 turn", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
