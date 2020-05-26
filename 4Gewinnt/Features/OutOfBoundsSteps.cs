@@ -54,9 +54,9 @@ namespace _4Gewinnt
             _spielfeld.feld[1, 5] = 2;
             _spielfeld.feld[0, 4] = 1;
         }
-        
-        [When(@"player (.*) set Spielstein on column (.*)")]
-        public void WhenPlayerSetSpielsteinOnColumn(int p0, int p1)
+
+        [When(@"player (.*) sets Spielstein on column (.*)")]
+        public void WhenPlayerSetsSpielsteinOnColumn(int p0, int p1)
         {
             _spielfeld.FeldBesetzen(p1, _spieler);
         }
@@ -67,6 +67,26 @@ namespace _4Gewinnt
             _spieler.player2.Should().BeTrue();
         }
 
+        
+
+        [Given(@"It's player (.*) turn")]
+        public void GivenItSPlayerTurn(int p0)
+        {
+            _spieler = new Spieler();
+            _spielfeld = new Spielfeld(6, 7);
+        }
+
+        [When(@"player (.*) sets Spielstein on column (.*) of six")]
+        public void WhenPlayerSetsSpielsteinOnColumnOfSix(int p0, int p1)
+        {
+            _spielfeld.FeldBesetzen(7,_spieler);
+        }
+
+        [Then(@"outOfBounds should be true")]
+        public void ThenOutOfBoundsShouldBeTrue()
+        {
+            _spielfeld.outOfBounds.Should().BeTrue();
+        }
 
     }
 }

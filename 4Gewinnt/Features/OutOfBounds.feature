@@ -8,5 +8,10 @@ Scenario: Player chooses full column
 
 Scenario: Program doesnt check out of bounds
 	Given Spielsteine at the Corner
-	When player 1 set Spielstein on column 6
+	When player 1 sets Spielstein on column 6
 	Then It should be player2 turn
+
+Scenario: Player cannot set Spielstein out of Bounds (MaxY+1)
+	Given It's player 1 turn
+	When player 1 sets Spielstein on column 7 of six
+	Then outOfBounds should be true

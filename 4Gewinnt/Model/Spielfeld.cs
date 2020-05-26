@@ -37,17 +37,24 @@ namespace _4Gewinnt
         {
             int y = 0;
 
-            while(IstFeldBesetzt(y,x) == true)
+            if (x < SpaltenX)
             {
-                if (y != ZeilenY - 1)
+                while (IstFeldBesetzt(y, x) == true)
                 {
-                    y++;
-                } else
-                {
-                    outOfBounds = true;
-                    return;
-                }                   
-                
+                    if (y != ZeilenY - 1)
+                    {
+                        y++;
+                    }
+                    else
+                    {
+                        outOfBounds = true;
+                        return;
+                    }
+
+                }
+            } else
+            {
+                outOfBounds = true;
             }
 
             if (outOfBounds == false)
