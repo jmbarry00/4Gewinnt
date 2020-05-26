@@ -15,8 +15,9 @@ namespace _4Gewinnt
         [Given(@"Column (.*) is all occupied")]
         public void GivenColumnIsAllOccupied(int p0)
         {
-            _spiel = new Spiel(6, 7);
+            //_spiel = new Spiel(6, 7);
             _spieler = new Spieler();
+            _spielfeld = new Spielfeld(6, 7);
 
             _spielfeld.feld[0, p0] = 2;
             _spielfeld.feld[1, p0] = 1;
@@ -39,22 +40,31 @@ namespace _4Gewinnt
             _spielfeld.outOfBounds.Should().BeTrue();
         }
 
-        [Given(@"Spielsteine at the Corner")]
+                [Given(@"Spielsteine at the Corner")]
         public void GivenSpielsteineAtTheCorner()
         {
-            ScenarioContext.Current.Pending();
-        }
+            _spiel = new Spiel(6, 7);
+            _spieler = new Spieler();
+            _spielfeld = new Spielfeld(6, 7);
 
+            _spielfeld.feld[0, 6] = 2;
+            _spielfeld.feld[0, 5] = 1;
+            _spielfeld.feld[1, 6] = 2;
+            _spielfeld.feld[2, 6] = 1;
+            _spielfeld.feld[1, 5] = 2;
+            _spielfeld.feld[0, 4] = 1;
+        }
+        
         [When(@"player (.*) set Spielstein on column (.*)")]
         public void WhenPlayerSetSpielsteinOnColumn(int p0, int p1)
         {
-            ScenarioContext.Current.Pending();
+            _spielfeld.FeldBesetzen(p1, _spieler);
         }
-
+        
         [Then(@"It should be player(.*) turn")]
         public void ThenItShouldBePlayerTurn(int p0)
         {
-            ScenarioContext.Current.Pending();
+            _spieler.player2.Should().BeTrue();
         }
 
 
