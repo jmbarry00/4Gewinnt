@@ -8,13 +8,14 @@ namespace _4Gewinnt
     [Binding]
     public class OutOfBoundsSteps
     {
+        Spiel _spiel;
         Spieler _spieler;
         Spielfeld _spielfeld;
 
         [Given(@"Column (.*) is all occupied")]
         public void GivenColumnIsAllOccupied(int p0)
         {
-            _spielfeld = new Spielfeld(6, 7);
+            _spiel = new Spiel(6, 7);
             _spieler = new Spieler();
 
             _spielfeld.feld[0, p0] = 2;
@@ -29,7 +30,7 @@ namespace _4Gewinnt
         public void WhenPlayerChoosesColumn(int p0, int p1)
         {
             _spieler.player2 = true;
-            _spielfeld.FeldBesetzen(p1);
+            _spielfeld.FeldBesetzen(p1, _spieler);
         }
 
         [Then(@"out of bounds should be stopped")]

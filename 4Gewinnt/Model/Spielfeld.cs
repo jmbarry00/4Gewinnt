@@ -18,7 +18,6 @@ namespace _4Gewinnt
         int zeileP1 = 0;
         int spalteP2 = 0;
         int zeileP2 = 0;
-        public Spiel spiel = new Spiel();
 
         public bool spieler1Won = false;
         public bool spieler2Won = false;
@@ -34,15 +33,13 @@ namespace _4Gewinnt
             feld = new int[ZeilenY, SpaltenX];
         }
 
-        public void FeldBesetzen(int x)
+        public void FeldBesetzen(int x, Spieler spieler)
         {
-            string farbe = "";
-            
             int y = 0;
 
             while(IstFeldBesetzt(y,x) == true)
             {
-                if (y != 5)
+                if (y != ZeilenY - 1)
                 {
                     y++;
                 } else
@@ -52,24 +49,20 @@ namespace _4Gewinnt
                 }                   
                 
             }
+
             if (outOfBounds == false)
             {
-                if (spiel.player.player1 == true)
+                if (spieler.player1 == true)
                 {
-                    farbe = "blau";
-                    Spielstein stein = new Spielstein(y, x, farbe);
                     feld[y, x] = 1;
                     GewinnBerechnung();
-                    spiel.player.SwitchPlayer();
+                    spieler.SwitchPlayer();
                 }
-                else if (spiel.player.player2 == true)
+                else if (spieler.player2 == true)
                 {
-
-                    farbe = "rot";
-                    Spielstein stein = new Spielstein(y, x, farbe);
                     feld[y, x] = 2;
                     GewinnBerechnung();
-                    spiel.player.SwitchPlayer();
+                    spieler.SwitchPlayer();
 
                 }
             } else
@@ -147,7 +140,7 @@ namespace _4Gewinnt
             {
                 for (int s = 0; s < SpaltenX; s++)
                 {
-                    if ((s > 3) && (z < 3) && (feld[z, s] == 1) && (feld[z + 1, s - 1] == 1) && (feld[z + 2, s -2] == 1) && (feld[z + 3, s - 3] == 1))
+                    if ((s > 3) && (z < ZeilenY - 3) && (feld[z, s] == 1) && (feld[z + 1, s - 1] == 1) && (feld[z + 2, s -2] == 1) && (feld[z + 3, s - 3] == 1))
                     {
                         HatGewonnen(1);
                         spieler1Won = true;
@@ -225,7 +218,7 @@ namespace _4Gewinnt
             {
                 for (int s = 0; s < SpaltenX; s++)
                 {
-                    if ((s > 3) && (z < 3) && (feld[z, s] == 2) && (feld[z + 1, s - 1] == 2) && (feld[z + 2, s - 2] == 2) && (feld[z + 3, s - 3] == 2))
+                    if ((s > 3) && (z < ZeilenY - 3) && (feld[z, s] == 2) && (feld[z + 1, s - 1] == 2) && (feld[z + 2, s - 2] == 2) && (feld[z + 3, s - 3] == 2))
                     {
                         HatGewonnen(1);
                         spieler2Won = true;

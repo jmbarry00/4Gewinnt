@@ -28,7 +28,7 @@ namespace _4Gewinnt.Features
         [When(@"Spieler (.*) chooses the coloumn (.*) on Spielfeld")]
         public void WhenSpielerChoosesTheColoumnOnSpielfeld(int p0, int p1)
         {
-            _spielfeld.FeldBesetzen(p1);
+            _spielfeld.FeldBesetzen(p1, _spieler);
         }
 
         [Then(@"Spielstein should land on row (.*)")]

@@ -7,5 +7,3 @@ Scenario: Spieler 2, choose color and set Spielstein
 	When he chooses the coloumn 4 on Spielfeld
 	Then the Spielstein should land on row 1
 	
-
-

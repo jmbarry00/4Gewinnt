@@ -29,7 +29,7 @@ namespace _4Gewinnt.Features
             _spielfeld.feld[0, 3] = 1;
             _spielfeld.feld[1, 3] = 2;
             _spielfeld.feld[2, 3] = 2;
-            _spielfeld.FeldBesetzen(3);
+            _spielfeld.FeldBesetzen(3,_spieler);
         }
 
 
@@ -96,7 +96,7 @@ namespace _4Gewinnt.Features
         public void WhenNextPlayerSetsSpielsteinWithoutWinning()
         {
             _spieler.player1 = true;
-            _spielfeld.FeldBesetzen(3);
+            _spielfeld.FeldBesetzen(3, _spieler);
             _spielfeld.unentschieden.Should().BeTrue();
         }
 
