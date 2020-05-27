@@ -23,6 +23,7 @@ namespace _4Gewinnt
         public bool spieler2Won = false;
         public bool unentschieden = false;
         public bool outOfBounds = false;
+        public bool spalteVoll = false;
 
 
         public Spielfeld(int zeilenY, int spaltenX)
@@ -41,13 +42,14 @@ namespace _4Gewinnt
             {
                 while (IstFeldBesetzt(y, x) == true)
                 {
-                    if (y != ZeilenY - 1)
+                    if (y < ZeilenY - 1)
                     {
                         y++;
                     }
                     else
                     {
-                        outOfBounds = true;
+                        spalteVoll = true;
+                        SpalteVoll();
                         return;
                     }
 
@@ -55,31 +57,39 @@ namespace _4Gewinnt
             } else
             {
                 outOfBounds = true;
+                OutOfBounds();
+                return;
             }
 
-            if (outOfBounds == false)
+            
+            if (spieler.player1 == true)
             {
-                if (spieler.player1 == true)
-                {
-                    feld[y, x] = 1;
-                    GewinnBerechnung();
-                    spieler.SwitchPlayer();
-                }
-                else if (spieler.player2 == true)
-                {
-                    feld[y, x] = 2;
-                    GewinnBerechnung();
-                    spieler.SwitchPlayer();
+                feld[y, x] = 1;
+                GewinnBerechnung();
+                spieler.SwitchPlayer();
+            }
+            else if (spieler.player2 == true)
+            {
+                feld[y, x] = 2;
+                GewinnBerechnung();
+                spieler.SwitchPlayer();
 
-                }
-            } else
-            {
-                Console.WriteLine("Diese Spalte ist ausgefüllt, bitte wähle eine andere!");
-            }  
+            }                      
+                
             
         }
 
-        private void GewinnBerechnung()
+        private void OutOfBounds()
+        {          
+           Console.WriteLine("Diese Spalte gibt es nicht, bitte wähle eine Spalte auf dem Feld!");           
+        }
+
+        private void SpalteVoll()
+        {
+            Console.WriteLine("Diese Spalte ist ausgefüllt, bitte wähle eine andere!");
+        }
+
+            private void GewinnBerechnung()
         {            
             //Gewinnberechnung waagrecht Spieler 1
             for (int z = 0; z < ZeilenY; z++)

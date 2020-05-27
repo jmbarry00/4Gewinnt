@@ -37,7 +37,7 @@ namespace _4Gewinnt
         [Then(@"out of bounds should be stopped")]
         public void ThenOutOfBoundsShouldBeStopped()
         {
-            _spielfeld.outOfBounds.Should().BeTrue();
+            _spielfeld.spalteVoll.Should().BeTrue();
         }
 
                 [Given(@"Spielsteine at the Corner")]
