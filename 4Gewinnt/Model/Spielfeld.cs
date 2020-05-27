@@ -49,15 +49,13 @@ namespace _4Gewinnt
                     else
                     {
                         spalteVoll = true;
-                        SpalteVoll();
                         return;
                     }
-
+                    
                 }
             } else
             {
                 outOfBounds = true;
-                OutOfBounds();
                 return;
             }
 
@@ -79,15 +77,6 @@ namespace _4Gewinnt
             
         }
 
-        private void OutOfBounds()
-        {          
-           Console.WriteLine("Diese Spalte gibt es nicht, bitte wähle eine Spalte auf dem Feld!");           
-        }
-
-        private void SpalteVoll()
-        {
-            Console.WriteLine("Diese Spalte ist ausgefüllt, bitte wähle eine andere!");
-        }
 
             private void GewinnBerechnung()
         {            
@@ -102,7 +91,6 @@ namespace _4Gewinnt
                         spalteP1++;
                         if (spalteP1 == 4)
                         {
-                            HatGewonnen(1);
                             spieler1Won = true;
                             return;
                         }
@@ -125,7 +113,6 @@ namespace _4Gewinnt
                         zeileP1++;
                         if (zeileP1 == 4)
                         {
-                            HatGewonnen(1);
                             spieler1Won = true;
                             return;
                         }
@@ -144,7 +131,6 @@ namespace _4Gewinnt
                 {
                     if ((s < SpaltenX - 3) && (z < ZeilenY - 3) && (feld[z, s] == 1) && (feld[z+1,s+1] == 1) && (feld[z + 2, s+ 2] == 1)  && (feld[z+3, s+3] == 1))
                         {   
-                            HatGewonnen(1);
                             spieler1Won = true;
                             return;
                         }
@@ -159,7 +145,6 @@ namespace _4Gewinnt
                 {
                     if ((s > 2) && (z < ZeilenY - 3) && (feld[z, s] == 1) && (feld[z + 1, s - 1] == 1) && (feld[z + 2, s -2] == 1) && (feld[z + 3, s - 3] == 1))
                     {
-                        HatGewonnen(1);
                         spieler1Won = true;
                         return;
                     }
@@ -181,7 +166,6 @@ namespace _4Gewinnt
                         spalteP2++;
                         if (spalteP2 == 4)
                         {
-                            HatGewonnen(2);
                             spieler2Won = true;
                             return;
                         }
@@ -204,7 +188,6 @@ namespace _4Gewinnt
                         zeileP2++;
                         if (zeileP2 == 4)
                         {
-                            HatGewonnen(2);
                             spieler2Won = true;
                             return;
                         }
@@ -222,7 +205,6 @@ namespace _4Gewinnt
                 {
                     if ((s < SpaltenX - 3) && (z < ZeilenY - 3) && (feld[z, s] == 2) && (feld[z + 1, s + 1] == 2) && (feld[z + 2, s + 2] == 2) && (feld[z + 3, s + 3] == 2))
                     {
-                        HatGewonnen(2);
                         spieler2Won = true;
                         return;
                     }
@@ -237,18 +219,23 @@ namespace _4Gewinnt
                 {
                     if ((s > 2) && (z < ZeilenY - 3) && (feld[z, s] == 2) && (feld[z + 1, s - 1] == 2) && (feld[z + 2, s - 2] == 2) && (feld[z + 3, s - 3] == 2))
                     {
-                        HatGewonnen(1);
                         spieler2Won = true;
                         return;
                     }
                 }
             }
 
-            if (spieler1Won == false && spieler2Won == false)
+            for (int z = 0; z < ZeilenY; z++)
             {
-                Console.WriteLine("Unentschieden");
-                unentschieden = true;
+                for (int s = 0; s < SpaltenX; s++)
+                {
+                    if (IstFeldBesetzt(z,s) == false)
+                    {
+                        return;
+                    }
+                }
             }
+            unentschieden = true;
 
         }
 
@@ -263,9 +250,5 @@ namespace _4Gewinnt
             }
         }
 
-        public void HatGewonnen(int spieler)
-        {
-            Console.WriteLine("Spieler"+spieler+"hat gewonnen");
-        }
     }
 }

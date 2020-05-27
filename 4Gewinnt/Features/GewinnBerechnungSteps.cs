@@ -110,6 +110,7 @@ namespace _4Gewinnt.Features
         [Then(@"player two wins the game")]
         public void ThenPlayerTwoWinsTheGame()
         {
+            _spielfeld.unentschieden.Should().BeFalse();
             _spielfeld.spieler2Won.Should().BeTrue();
         }
 
