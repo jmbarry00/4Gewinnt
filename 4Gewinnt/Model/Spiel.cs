@@ -16,13 +16,13 @@ namespace _4Gewinnt.Model
         {
             Y = y;
             X = x;
+            spieler = new Spieler();
         }
 
         public void spielStarten()
         {
             spieler.player1 = true;
-            spielfeld.ZeilenY = Y;
-            spielfeld.SpaltenX = X;
+            spielfeld = new Spielfeld(Y, X);
 
         }
     }
