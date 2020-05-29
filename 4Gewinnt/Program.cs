@@ -7,7 +7,7 @@ namespace _4Gewinnt
     class Program
     {
         static void Main(string[] args)
-        {
+        {            
             GameTUI game = new GameTUI(6, 7);
         }
     }

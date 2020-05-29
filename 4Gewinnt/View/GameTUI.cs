@@ -7,19 +7,29 @@ namespace _4Gewinnt.View
 {
     class GameTUI
     {
-        int X;
+
         int Y;
+        int X;
+        Spielfeld spielfeld;
+        Spieler spieler;
+        string gewaehlteSpalte;
         public GameTUI(int y, int x)
         {
-            X = x;
+
             Y = y;
-            Spiel spiel = new Spiel(X, Y);
+            X = x;
+
+            spielfeld = new Spielfeld(Y, X);
+            spieler = new Spieler();
             SpielfeldZeichnen();
+            FeldBesetzen();
         }
 
         private void SpielfeldZeichnen()
         {
-            Spielfeld spielfeld = new Spielfeld(Y, X);
+            Spieler spieler = new Spieler();
+
+            //spielfeld.feld.GetValue(1);
             for (int row = 0; row < Y+1; row++)
             {
                 for (int col = 0; col < X; col++)
@@ -45,9 +55,15 @@ namespace _4Gewinnt.View
             {
                 Console.Write("- - ");
             }
-            Console.Write("-\n");
+            Console.Write("-\n\n");
         }
 
+        private void FeldBesetzen()
+        {
+            Console.WriteLine("Wähle eine Spalte: ");
+            gewaehlteSpalte = Console.ReadLine();
+            spielfeld.FeldBesetzen(Convert.ToInt32(gewaehlteSpalte), spieler);
+        }
         
     }
 }
