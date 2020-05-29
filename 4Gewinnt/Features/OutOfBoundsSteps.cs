@@ -15,9 +15,9 @@ namespace _4Gewinnt
         [Given(@"Column (.*) is all occupied")]
         public void GivenColumnIsAllOccupied(int p0)
         {
-            //_spiel = new Spiel(6, 7);
+            _spiel = new Spiel(6, 7);
             _spieler = new Spieler();
-            _spielfeld = new Spielfeld(6, 7);
+            _spiel.spielStarten();
 
             _spielfeld.feld[0, p0] = 2;
             _spielfeld.feld[1, p0] = 1;

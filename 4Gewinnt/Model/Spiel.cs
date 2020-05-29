@@ -6,20 +6,24 @@ namespace _4Gewinnt.Model
 {
     public class Spiel
     {
+        Spieler spieler;
+        Spielfeld spielfeld;
+        int Y;
+        int X;
 
 
         public Spiel(int y, int x)
         {
-            Spieler player = new Spieler();
-            Spielfeld spielfeld = new Spielfeld(y,x);
+            Y = y;
+            X = x;
         }
 
-        public void spielStarten(Spieler spieler, Spielfeld spielfeld, int x, int y)
+        public void spielStarten()
         {
             spieler.player1 = true;
-            spieler = new Spieler();
-            spielfeld = new Spielfeld(x, y);
-            
+            spielfeld.ZeilenY = Y;
+            spielfeld.SpaltenX = X;
+
         }
     }
 }
