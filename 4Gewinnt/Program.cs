@@ -1,4 +1,5 @@
 ﻿using _4Gewinnt.Model;
+using _4Gewinnt.View;
 using System;
 
 namespace _4Gewinnt
@@ -7,6 +8,8 @@ namespace _4Gewinnt
     {
         static void Main(string[] args)
         {
+            GameTUI game = new GameTUI();
+            game.SpielfeldZeîchnen(6,7);
         }
     }
 }
