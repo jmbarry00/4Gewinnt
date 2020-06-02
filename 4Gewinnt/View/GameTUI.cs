@@ -12,6 +12,7 @@ namespace _4Gewinnt.View
         int X;
         Spielfeld spielfeld;
         Spieler spieler;
+        Spiel spiel;
         string gewaehlteSpalte;
         public GameTUI(int y, int x)
         {
@@ -19,17 +20,12 @@ namespace _4Gewinnt.View
             Y = y;
             X = x;
 
-            spielfeld = new Spielfeld(Y, X);
-            spieler = new Spieler();
-            SpielfeldZeichnen();
-            FeldBesetzen();
+            spiel = new Spiel(Y, X);
+            spiel.spielStarten();
         }
 
         private void SpielfeldZeichnen()
         {
-            Spieler spieler = new Spieler();
-
-            //spielfeld.feld.GetValue(1);
             for (int row = 0; row < Y+1; row++)
             {
                 for (int col = 0; col < X; col++)
@@ -58,8 +54,11 @@ namespace _4Gewinnt.View
             Console.Write("-\n\n");
         }
 
+
+        //wo aufrufen?
         private void FeldBesetzen()
         {
+            SpielfeldZeichnen();
             Console.WriteLine("Wähle eine Spalte: ");
             gewaehlteSpalte = Console.ReadLine();
             spielfeld.FeldBesetzen(Convert.ToInt32(gewaehlteSpalte), spieler);

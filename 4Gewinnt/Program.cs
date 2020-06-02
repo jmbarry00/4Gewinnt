@@ -9,6 +9,7 @@ namespace _4Gewinnt
         static void Main(string[] args)
         {            
             GameTUI game = new GameTUI(6, 7);
+
         }
     }
 }
