@@ -6,8 +6,8 @@ namespace _4Gewinnt.Model
 {
     public class Spiel
     {
-        Spieler spieler;
-        Spielfeld spielfeld;
+        public Spieler spieler;
+        public Spielfeld spielfeld;
         int Y;
         int X;
 
@@ -23,7 +23,6 @@ namespace _4Gewinnt.Model
         {
             spieler.player1 = true;
             spielfeld = new Spielfeld(Y, X);
-
         }
     }
 }
