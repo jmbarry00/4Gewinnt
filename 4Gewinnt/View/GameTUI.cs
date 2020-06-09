@@ -22,12 +22,13 @@ namespace _4Gewinnt.View
             spiel = new Spiel(Y, X);            
             spiel.spielStarten();
             spielfeld = spiel.spielfeld;
-            FeldBesetzen(spielfeld);
+            spieler = spiel.spieler;
+            FeldBesetzen(spielfeld, spieler);
         }
 
         private void SpielfeldZeichnen()
         {
-            for (int row = 0; row < Y; row++)
+            for (int row = Y-1; row >= 0; row--)
             {
                 for (int col = 0; col < X; col++)
                 {
@@ -36,7 +37,7 @@ namespace _4Gewinnt.View
                 Console.Write("-\n");
                 for (int col = 0; col < X; col++)
                 {
-                    if (row == 0)
+                    if (row == Y-1)
                     {
                         Console.Write("| " + col + " ");
                     } else
@@ -57,12 +58,19 @@ namespace _4Gewinnt.View
 
 
       
-        private void FeldBesetzen(Spielfeld spielfeld)
+        private void FeldBesetzen(Spielfeld spielfeld, Spieler spieler)
         {
             while (spielfeld.spieler1Won != true || spielfeld.spieler2Won != true || spielfeld.unentschieden != true)
             {
                 SpielfeldZeichnen();
-                Console.WriteLine("Wähle eine Spalte: ");
+                if(spieler.player1 == true)
+                {
+                    Console.WriteLine("Spieler 1, wähle eine Spalte: ");
+                } else
+                {
+                    Console.WriteLine("Spieler 2, wähle eine Spalte: ");
+                }
+                
                 gewaehlteSpalte = Console.ReadLine();
                 spielfeld.FeldBesetzen(Convert.ToInt32(gewaehlteSpalte), spieler);
             }            
