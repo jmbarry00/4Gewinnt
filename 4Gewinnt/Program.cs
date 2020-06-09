@@ -7,8 +7,12 @@ namespace _4Gewinnt
     class Program
     {
         static void Main(string[] args)
-        {            
-            GameTUI game = new GameTUI(9, 10);
+        {
+            Console.WriteLine("Wähle Anzahl Spalten für Spielfeld: ");
+            string anzahlSpalte = Console.ReadLine();
+            Console.WriteLine("Wähle Anzahl Zeilen für Spielfeld: ");
+            string anzahlZeilen = Console.ReadLine();
+            GameTUI game = new GameTUI(Convert.ToInt32(anzahlZeilen)+1, Convert.ToInt32(anzahlSpalte));
 
         }
     }

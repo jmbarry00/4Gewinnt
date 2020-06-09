@@ -42,7 +42,12 @@ namespace _4Gewinnt.View
                         Console.Write("| " + col + " ");
                     } else
                     {
-                        Console.Write("| " + spielfeld.feld[row, col] + " ");
+                        string value = Convert.ToString(spielfeld.feld[row, col]);
+                        if (spielfeld.feld[row, col] == 0)
+                        {
+                            value = " ";
+                        }
+                        Console.Write("| " + value + " ");
                     }
                     
                 }
@@ -56,8 +61,12 @@ namespace _4Gewinnt.View
             Console.Write("-\n\n");
         }
 
+        //public bool spieler1Won = false;
+        //public bool spieler2Won = false;
+        //public bool unentschieden = false;
+        //public bool outOfBounds = false;
+        //public bool spalteVoll = false;
 
-      
         private void FeldBesetzen(Spielfeld spielfeld, Spieler spieler)
         {
             while (spielfeld.spieler1Won != true || spielfeld.spieler2Won != true || spielfeld.unentschieden != true)
@@ -73,7 +82,34 @@ namespace _4Gewinnt.View
                 
                 gewaehlteSpalte = Console.ReadLine();
                 spielfeld.FeldBesetzen(Convert.ToInt32(gewaehlteSpalte), spieler);
-            }            
+                
+                if (spielfeld.outOfBounds == true)
+                {
+                    Console.WriteLine("Diese Spalte gibt es nicht!");
+                    spieler.SwitchPlayer();
+                }
+                if (spielfeld.spalteVoll == true)
+                {
+                    Console.WriteLine("Diese Spalte ist schon voll!");
+                    spieler.SwitchPlayer();
+                }
+
+            }
+            if (spielfeld.spieler1Won == true)
+            {
+                Console.WriteLine("Spieler 1 hat gewonnen!");
+                return;
+            }
+            if (spielfeld.spieler2Won == true)
+            {
+                Console.WriteLine("Spieler 2 hat gewonnen!");
+                return;
+            }
+            if (spielfeld.unentschieden == true)
+            {
+                Console.WriteLine("unentschieden!");
+                return;
+            }
         }
         
     }
