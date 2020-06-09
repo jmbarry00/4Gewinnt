@@ -42,7 +42,7 @@ namespace _4Gewinnt
             {
                 while (IstFeldBesetzt(y, x) == true)
                 {
-                    if (y < ZeilenY - 1)
+                    if (y < ZeilenY - 2)
                     {
                         y++;
                     }

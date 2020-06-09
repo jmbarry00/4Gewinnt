@@ -69,9 +69,9 @@ namespace _4Gewinnt.View
 
         private void FeldBesetzen(Spielfeld spielfeld, Spieler spieler)
         {
-            while (spielfeld.spieler1Won != true || spielfeld.spieler2Won != true || spielfeld.unentschieden != true)
+            SpielfeldZeichnen();
+            while (spielfeld.spieler1Won != true && spielfeld.spieler2Won != true && spielfeld.unentschieden != true)
             {
-                SpielfeldZeichnen();
                 if(spieler.player1 == true)
                 {
                     Console.WriteLine("Spieler 1, wähle eine Spalte: ");
@@ -86,14 +86,15 @@ namespace _4Gewinnt.View
                 if (spielfeld.outOfBounds == true)
                 {
                     Console.WriteLine("Diese Spalte gibt es nicht!");
-                    spieler.SwitchPlayer();
+                    spielfeld.outOfBounds = false;
                 }
                 if (spielfeld.spalteVoll == true)
                 {
                     Console.WriteLine("Diese Spalte ist schon voll!");
-                    spieler.SwitchPlayer();
+                    spielfeld.spalteVoll = false;
                 }
 
+                SpielfeldZeichnen();
             }
             if (spielfeld.spieler1Won == true)
             {
