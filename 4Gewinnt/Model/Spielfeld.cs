@@ -27,8 +27,7 @@ namespace _4Gewinnt
 
 
         public Spielfeld(int zeilenY, int spaltenX)
-        {
-            
+        {            
             ZeilenY = zeilenY;
             SpaltenX = spaltenX;
             feld = new int[ZeilenY, SpaltenX];
@@ -42,7 +41,7 @@ namespace _4Gewinnt
             {
                 while (IstFeldBesetzt(y, x) == true)
                 {
-                    if (y < ZeilenY - 2)
+                    if (y < ZeilenY - 1)
                     {
                         y++;
                     }
@@ -79,7 +78,7 @@ namespace _4Gewinnt
 
 
             private void GewinnBerechnung()
-        {            
+        {
             //Gewinnberechnung waagrecht Spieler 1
             for (int z = 0; z < ZeilenY; z++)
             {

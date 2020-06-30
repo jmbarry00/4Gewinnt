@@ -8,12 +8,9 @@ namespace _4Gewinnt
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Wähle Anzahl Spalten für Spielfeld: ");
-            string anzahlSpalte = Console.ReadLine();
-            Console.WriteLine("Wähle Anzahl Zeilen für Spielfeld: ");
-            string anzahlZeilen = Console.ReadLine();
-            GameTUI game = new GameTUI(Convert.ToInt32(anzahlZeilen)+1, Convert.ToInt32(anzahlSpalte));
-
+            
+            GameTUI game = new GameTUI();
+            
         }
     }
 }
