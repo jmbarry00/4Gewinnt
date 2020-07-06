@@ -25,7 +25,7 @@ namespace _4Gewinnt
         public bool outOfBounds = false;
         public bool spalteVoll = false;
 
-
+        //Konstruktor für das Spielfeld
         public Spielfeld(int zeilenY, int spaltenX)
         {            
             ZeilenY = zeilenY;
@@ -33,14 +33,18 @@ namespace _4Gewinnt
             feld = new int[ZeilenY, SpaltenX];
         }
 
+        //Hier wird in gewählter Spalte x das nächste freie Feld auf 1 gesetzt
         public void FeldBesetzen(int x, Spieler spieler)
         {
             int y = 0;
 
+            //gewählte Spalte darf nicht höher als Anzahl Spalten sein
             if (x < SpaltenX)
             {
+                //bei besetzem Feld das nächst freie wählen
                 while (IstFeldBesetzt(y, x) == true)
                 {
+                    //darf nicht weiter als Anzahl Zeilen gehen
                     if (y < ZeilenY - 1)
                     {
                         y++;
@@ -58,13 +62,15 @@ namespace _4Gewinnt
                 return;
             }
 
-            
+            //wenn Spieler 1 an der Reihe, dann Feld auf 1 setzen, schauen ob es Gewinner gibt und Spieler wechseln
             if (spieler.player1 == true)
             {
                 feld[y, x] = 1;
                 GewinnBerechnung();
                 spieler.SwitchPlayer();
             }
+
+            //wenn Spieler 2 an der Reihe, dann Feld auf 2 setzen, schauen ob es Gewinner gibt und Spieler wechseln
             else if (spieler.player2 == true)
             {
                 feld[y, x] = 2;
@@ -76,7 +82,7 @@ namespace _4Gewinnt
             
         }
 
-
+        //Nach jedem Zug wird geprüft, ob ein Sieger vorhanden ist
             private void GewinnBerechnung()
         {
             //Gewinnberechnung waagrecht Spieler 1

@@ -19,6 +19,7 @@ namespace _4Gewinnt.Model
             spieler = new Spieler();
         }
 
+        //Beim Start fängt Spieler 1 an und ein Feld wird erstellt
         public void spielStarten()
         {
             spieler.player1 = true;

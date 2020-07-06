@@ -18,6 +18,8 @@ namespace _4Gewinnt.View
         string neustart;
         public int anzSpalten = 0;
         public int anzZeilen = 0;
+
+        //Game Konstruktor: User-Input Anzahl Zeilen und Spalten, X und Y setzen und Spiel starten
         public GameTUI()
         {
             AnzZeilenSpalten();
@@ -68,14 +70,10 @@ namespace _4Gewinnt.View
             Console.Write("-\n\n");
         }
 
-        //public bool spieler1Won = false;
-        //public bool spieler2Won = false;
-        //public bool unentschieden = false;
-        //public bool outOfBounds = false;
-        //public bool spalteVoll = false;
+        //User-Input: Anzahl Zeilen und Spalten
         private void AnzZeilenSpalten()
         {            
-
+            //min 5 Spalten
             while (anzSpalten < 5)
             {
 
@@ -91,6 +89,7 @@ namespace _4Gewinnt.View
                 }
             }
 
+            //min 5 Zeilen
             while (anzZeilen < 5)
             {
                 Console.WriteLine("Wähle Anzahl Zeilen für Spielfeld(min 5): ");
@@ -107,7 +106,7 @@ namespace _4Gewinnt.View
             }
         }
 
-
+        
         private void FeldBesetzen(Spielfeld spielfeld, Spieler spieler)
         {
             int gewSpalte = 0;
@@ -124,6 +123,7 @@ namespace _4Gewinnt.View
                     Console.WriteLine("Spieler 2, wähle eine Spalte: ");
                 }
 
+                //User-Input: Spalte wählen
                 gewaehlteSpalte = Console.ReadLine();
                 try
                 {
@@ -134,8 +134,8 @@ namespace _4Gewinnt.View
                     Console.WriteLine(e.Message);
                 }
                 spielfeld.FeldBesetzen(gewSpalte, spieler);
-                SpielfeldZeichnen();
-
+                
+                //Warnung bei Out of Bounds und vollen Spalten
                 if (spielfeld.outOfBounds == true)
                 {
                     Console.WriteLine("Diese Spalte gibt es nicht!");
@@ -147,8 +147,10 @@ namespace _4Gewinnt.View
                     spielfeld.spalteVoll = false;
                 }
 
+                //Spieler 1 gewinnt -> message und neustart Abfrage (noch in arbeit)
                 if (spielfeld.spieler1Won == true)
                 {
+                    SpielfeldZeichnen();
                     Console.WriteLine("Spieler 1 hat gewonnen!");
                     Console.WriteLine("Spiel neustarten? y/n:");
 
@@ -173,7 +175,7 @@ namespace _4Gewinnt.View
                                 }
                             }
                             spielfeld.spieler1Won = false;
-                            spieler.player1 = true;
+                            spieler.SwitchPlayer();
                         }
                         else if (neustart == "n")
                         {
@@ -187,8 +189,10 @@ namespace _4Gewinnt.View
 
                 }
 
+                //Spieler 2 gewinnt -> message und neustart Abfrage (noch in arbeit)
                 if (spielfeld.spieler2Won == true)
                 {
+                    SpielfeldZeichnen();
                     Console.WriteLine("Spieler 2 hat gewonnen!");
                     Console.WriteLine("Spiel neustarten? y/n:");
 
@@ -213,7 +217,6 @@ namespace _4Gewinnt.View
                                 }
                             }
                             spielfeld.spieler2Won = false;
-                            spieler.player1 = true;
                         }
                         else if (neustart == "n")
                         {
@@ -225,8 +228,11 @@ namespace _4Gewinnt.View
                         }
                     }
                 }
+
+                //unentschieden -> message und neustart Abfrage (noch in arbeit)
                 if (spielfeld.unentschieden == true)
                 {
+                    SpielfeldZeichnen();
                     Console.WriteLine("unentschieden!");
                     Console.WriteLine("Spiel neustarten? y/n:");
 
@@ -252,6 +258,7 @@ namespace _4Gewinnt.View
                             }
                             spielfeld.unentschieden = false;
                             spieler.player1 = true;
+                            spieler.player2 = false;
                         }
                         else if (neustart == "n")
                         {
@@ -263,6 +270,7 @@ namespace _4Gewinnt.View
                         }
                     }
                 }
+                SpielfeldZeichnen();
             }
                 
                 
