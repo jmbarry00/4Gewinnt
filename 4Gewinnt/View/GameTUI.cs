@@ -151,7 +151,7 @@ namespace _4Gewinnt.View
                     spielfeld.spalteVoll = false;
                 }
 
-                //Spieler 1 gewinnt -> message und neustart Abfrage (noch in arbeit)
+                //Spieler 1 gewinnt -> message und neustart Abfrage
                 if (spielfeld.spieler1Won == true)
                 {
                     SpielfeldZeichnen();
@@ -194,7 +194,7 @@ namespace _4Gewinnt.View
                     neustart = null;
                 }
 
-                //Spieler 2 gewinnt -> message und neustart Abfrage (noch in arbeit)
+                //Spieler 2 gewinnt -> message und neustart Abfrage
                 if (spielfeld.spieler2Won == true)
                 {
                     SpielfeldZeichnen();
@@ -236,7 +236,7 @@ namespace _4Gewinnt.View
                     neustart = null;
                 }
 
-                //unentschieden -> message und neustart Abfrage (noch in arbeit)
+                //unentschieden -> message und neustart Abfrage 
                 if (spielfeld.unentschieden == true)
                 {
                     SpielfeldZeichnen();
