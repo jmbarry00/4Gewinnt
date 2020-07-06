@@ -41,15 +41,18 @@ namespace _4Gewinnt.View
             {
                 for (int col = 0; col < X; col++)
                 {
+                    //Linie zeichnen
                     Console.Write("- - ");
                 }
                 Console.Write("-\n");
                 for (int col = 0; col < X; col++)
                 {
+                    //erste Reihe Beschriftung
                     if (row == Y)
                     {
                         Console.Write("| " + col + " ");
                     } else
+                    //die anderen Felder werden mit den Werten von feld[,] verknüpft
                     {
                         string value = Convert.ToString(spielfeld.feld[row, col]);
                         if (spielfeld.feld[row, col] == 0)
@@ -65,6 +68,7 @@ namespace _4Gewinnt.View
             }
             for (int col = 0; col < X; col++)
             {
+                //Linie zeichnen
                 Console.Write("- - ");
             }
             Console.Write("-\n\n");
@@ -176,6 +180,7 @@ namespace _4Gewinnt.View
                             }
                             spielfeld.spieler1Won = false;
                             spieler.SwitchPlayer();
+                            
                         }
                         else if (neustart == "n")
                         {
@@ -186,7 +191,7 @@ namespace _4Gewinnt.View
                             Console.WriteLine("Falscher Wert!");
                         }
                     }
-
+                    neustart = null;
                 }
 
                 //Spieler 2 gewinnt -> message und neustart Abfrage (noch in arbeit)
@@ -217,6 +222,7 @@ namespace _4Gewinnt.View
                                 }
                             }
                             spielfeld.spieler2Won = false;
+                            
                         }
                         else if (neustart == "n")
                         {
@@ -227,6 +233,7 @@ namespace _4Gewinnt.View
                             Console.WriteLine("Falscher Wert!");
                         }
                     }
+                    neustart = null;
                 }
 
                 //unentschieden -> message und neustart Abfrage (noch in arbeit)
@@ -259,6 +266,7 @@ namespace _4Gewinnt.View
                             spielfeld.unentschieden = false;
                             spieler.player1 = true;
                             spieler.player2 = false;
+                            
                         }
                         else if (neustart == "n")
                         {
@@ -269,6 +277,7 @@ namespace _4Gewinnt.View
                             Console.WriteLine("Falscher Wert!");
                         }
                     }
+                    neustart = null;
                 }
                 SpielfeldZeichnen();
             }
