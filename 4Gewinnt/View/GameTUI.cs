@@ -137,7 +137,14 @@ namespace _4Gewinnt.View
                 {
                     Console.WriteLine(e.Message);
                 }
-                spielfeld.FeldBesetzen(gewSpalte, spieler);
+                if (gewSpalte >= 0)
+                {
+                    spielfeld.FeldBesetzen(gewSpalte, spieler);
+                } else
+                {
+                    spielfeld.outOfBounds = true;
+                }
+                
                 
                 //Warnung bei Out of Bounds und vollen Spalten
                 if (spielfeld.outOfBounds == true)
