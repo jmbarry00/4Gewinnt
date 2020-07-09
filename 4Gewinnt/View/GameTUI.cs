@@ -1,4 +1,5 @@
-﻿using _4Gewinnt.Model;
+﻿using _4Gewinnt.Controller;
+using _4Gewinnt.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,6 +15,7 @@ namespace _4Gewinnt.View
         Spielfeld spielfeld;
         Spieler spieler;
         Spiel spiel;
+        public GameController game;
         string gewaehlteSpalte;
         string neustart;
         public int anzSpalten = 0;
@@ -22,20 +24,17 @@ namespace _4Gewinnt.View
         //Game Konstruktor: User-Input Anzahl Zeilen und Spalten, X und Y setzen und Spiel starten
         public GameTUI()
         {
-            AnzZeilenSpalten();
-            int y = anzZeilen;
-            int x = anzSpalten;
-            Y = y;
-            X = x;
 
-            spiel = new Spiel(Y, X);            
-            spiel.spielStarten();
-            spielfeld = spiel.spielfeld;
-            spieler = spiel.spieler;
-            FeldBesetzen(spielfeld, spieler);
+            Y = game.Y;
+            X = game.X;
+
+            spielfeld = game.spielfeld;
+            spieler = game.spieler;
+
+            game.FeldBesetzen(spielfeld, spieler);
         }
 
-        private void SpielfeldZeichnen()
+        public void SpielfeldZeichnen()
         {
             for (int row = Y; row >= 0; row--)
             {
@@ -74,175 +73,7 @@ namespace _4Gewinnt.View
             Console.Write("-\n\n");
         }
 
-        //User-Input: Anzahl Zeilen und Spalten
-        private void AnzZeilenSpalten()
-        {            
-            //min 5 Spalten
-            while (anzSpalten < 5)
-            {
-
-                Console.WriteLine("Wähle Anzahl Spalten für Spielfeld(min 5): ");
-                string anzahlSpalte = Console.ReadLine();
-                try
-                {
-                    anzSpalten = Int32.Parse(anzahlSpalte);
-                }
-                catch (FormatException e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-            }
-
-            //min 5 Zeilen
-            while (anzZeilen < 5)
-            {
-                Console.WriteLine("Wähle Anzahl Zeilen für Spielfeld(min 5): ");
-                string anzahlZeilen = Console.ReadLine();
-                try
-                {
-                    anzZeilen = Int32.Parse(anzahlZeilen);
-                }
-
-                catch (FormatException e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-            }
-        }
-
-        private void Neustart()
-        {
-            SpielfeldZeichnen();
-            if (spielfeld.spieler1Won)
-            {
-                Console.WriteLine("Spieler 1 hat gewonnen!");
-            }
-            else if (spielfeld.spieler2Won)
-            {
-                Console.WriteLine("Spieler 2 hat gewonnen!");
-            } else
-            {
-                Console.WriteLine("unentschieden!");
-            }
-            
-            Console.WriteLine("Spiel neustarten? y/n:");
-
-            while (neustart != "y" && neustart != "n")
-            {
-                try
-                {
-                    neustart = Console.ReadLine();
-                }
-                catch (FormatException e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-
-                if (neustart == "y")
-                {
-                    for (int row = Y - 1; row >= 0; row--)
-                    {
-                        for (int col = 0; col < X; col++)
-                        {
-                            spielfeld.feld[row, col] = 0;
-                        }
-                    }
-                    if (spielfeld.spieler1Won)
-                    {
-                        spielfeld.spieler1Won = false;
-                    }
-                    else if (spielfeld.spieler2Won)
-                    {
-                        spielfeld.spieler2Won = false;
-                    }
-                    else
-                    {
-                        spielfeld.unentschieden = false;
-                    }
-                    
-                    spieler.SwitchPlayer();
-
-                }
-                else if (neustart == "n")
-                {
-                    Environment.Exit(0);
-                }
-                else
-                {
-                    Console.WriteLine("Falscher Wert!");
-                }
-            }
-            neustart = null;
-        }
-
-        private int SpalteWaehlen()
-        {
-            int gewSpalte = 0;
-            if (spieler.player1 == true)
-            {
-                Console.WriteLine("Spieler 1, wähle eine Spalte: ");
-            }
-            else
-            {
-                Console.WriteLine("Spieler 2, wähle eine Spalte: ");
-            }
-
-            //User-Input: Spalte wählen
-            gewaehlteSpalte = Console.ReadLine();
-            try
-            {
-                gewSpalte = Int32.Parse(gewaehlteSpalte);
-            }
-            catch (FormatException e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
-            return gewSpalte;
-        }
-
-        private void FeldBesetzen(Spielfeld spielfeld, Spieler spieler)
-        {
-            int gewSpalte = 0;
-            SpielfeldZeichnen();
-
-            while (true)
-            {
-                gewSpalte = SpalteWaehlen();
-
-                if (gewSpalte >= 0)
-                {
-                    spielfeld.FeldBesetzen(gewSpalte, spieler);
-                } else
-                {
-                    spielfeld.outOfBounds = true;
-                }
-                
-                
-                //Warnung bei Out of Bounds und vollen Spalten
-                if (spielfeld.outOfBounds == true)
-                {
-                    Console.WriteLine("Diese Spalte gibt es nicht!");
-                    spielfeld.outOfBounds = false;
-                }
-                if (spielfeld.spalteVoll == true)
-                {
-                    Console.WriteLine("Diese Spalte ist schon voll!");
-                    spielfeld.spalteVoll = false;
-                }
-
-                //jemand gewinnt o. unentschieden -> message und neustart Abfrage
-                if (spielfeld.spieler1Won || spielfeld.spieler2Won || spielfeld.unentschieden)
-                {
-                    Neustart();
-                }
-
-                SpielfeldZeichnen();
-            }
-                
-                
-            }
-
+        
             
         }
         

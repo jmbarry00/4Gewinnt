@@ -1,14 +1,10 @@
-﻿using _4Gewinnt.Features;
-using _4Gewinnt.Model;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using _4Gewinnt.Model;
 
 
 namespace _4Gewinnt
 {
     public class Spielfeld
-    {        
+    {
         public int ZeilenY;
         public int SpaltenX;
         public int[,] feld;
@@ -27,7 +23,7 @@ namespace _4Gewinnt
 
         //Konstruktor für das Spielfeld
         public Spielfeld(int zeilenY, int spaltenX)
-        {            
+        {
             ZeilenY = zeilenY;
             SpaltenX = spaltenX;
             feld = new int[ZeilenY, SpaltenX];
@@ -54,9 +50,10 @@ namespace _4Gewinnt
                         spalteVoll = true;
                         return;
                     }
-                    
+
                 }
-            } else
+            }
+            else
             {
                 outOfBounds = true;
                 return;
@@ -77,13 +74,13 @@ namespace _4Gewinnt
                 GewinnBerechnung();
                 spieler.SwitchPlayer();
 
-            }                      
-                
-            
+            }
+
+
         }
 
         //Nach jedem Zug wird geprüft, ob ein Sieger vorhanden ist
-            private void GewinnBerechnung()
+        private void GewinnBerechnung()
         {
             //Gewinnberechnung waagrecht Spieler 1
             for (int z = 0; z < ZeilenY; z++)
@@ -134,12 +131,12 @@ namespace _4Gewinnt
             {
                 for (int s = 0; s < SpaltenX; s++)
                 {
-                    if ((s < SpaltenX - 3) && (z < ZeilenY - 3) && (feld[z, s] == 1) && (feld[z+1,s+1] == 1) && (feld[z + 2, s+ 2] == 1)  && (feld[z+3, s+3] == 1))
-                        {   
-                            spieler1Won = true;
-                            return;
-                        }
-                    
+                    if ((s < SpaltenX - 3) && (z < ZeilenY - 3) && (feld[z, s] == 1) && (feld[z + 1, s + 1] == 1) && (feld[z + 2, s + 2] == 1) && (feld[z + 3, s + 3] == 1))
+                    {
+                        spieler1Won = true;
+                        return;
+                    }
+
                 }
             }
 
@@ -148,7 +145,7 @@ namespace _4Gewinnt
             {
                 for (int s = 0; s < SpaltenX; s++)
                 {
-                    if ((s > 2) && (z < ZeilenY - 3) && (feld[z, s] == 1) && (feld[z + 1, s - 1] == 1) && (feld[z + 2, s -2] == 1) && (feld[z + 3, s - 3] == 1))
+                    if ((s > 2) && (z < ZeilenY - 3) && (feld[z, s] == 1) && (feld[z + 1, s - 1] == 1) && (feld[z + 2, s - 2] == 1) && (feld[z + 3, s - 3] == 1))
                     {
                         spieler1Won = true;
                         return;
@@ -196,7 +193,8 @@ namespace _4Gewinnt
                             spieler2Won = true;
                             return;
                         }
-                    } else
+                    }
+                    else
                     {
                         zeileP2 = 0;
                     }
@@ -234,7 +232,7 @@ namespace _4Gewinnt
             {
                 for (int s = 0; s < SpaltenX; s++)
                 {
-                    if (IstFeldBesetzt(z,s) == false)
+                    if (IstFeldBesetzt(z, s) == false)
                     {
                         return;
                     }
@@ -246,10 +244,11 @@ namespace _4Gewinnt
 
         public bool IstFeldBesetzt(int y, int x)
         {
-           if(feld[y, x] == 1 || feld[y, x] == 2)
+            if (feld[y, x] == 1 || feld[y, x] == 2)
             {
                 return true;
-            } else
+            }
+            else
             {
                 return false;
             }
