@@ -1,9 +1,12 @@
-﻿namespace _4Gewinnt.Model
+﻿using _4Gewinnt.View;
+
+namespace _4Gewinnt.Model
 {
     public class Spiel
     {
         public Spieler spieler;
         public Spielfeld spielfeld;
+        public GameTUI tui;
         int Y;
         int X;
 
@@ -20,6 +23,7 @@
         {
             spieler.player1 = true;
             spielfeld = new Spielfeld(Y, X);
+            tui = new GameTUI();
         }
     }
 }

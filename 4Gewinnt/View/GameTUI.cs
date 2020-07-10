@@ -1,38 +1,14 @@
-﻿using _4Gewinnt.Controller;
-using _4Gewinnt.Model;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using static System.Net.Mime.MediaTypeNames;
+﻿using System;
 
 namespace _4Gewinnt.View
 {
-    class GameTUI
+    public class GameTUI
     {
 
-        int Y;
-        int X;
-        Spielfeld spielfeld;
-        Spieler spieler;
-        Spiel spiel;
-        public GameController game;
-        string gewaehlteSpalte;
-        string neustart;
-        public int anzSpalten = 0;
-        public int anzZeilen = 0;
+        public int Y;
+        public int X;
+        public Spielfeld spielfeld;
 
-        //Game Konstruktor: User-Input Anzahl Zeilen und Spalten, X und Y setzen und Spiel starten
-        public GameTUI()
-        {
-
-            Y = game.Y;
-            X = game.X;
-
-            spielfeld = game.spielfeld;
-            spieler = game.spieler;
-
-            game.FeldBesetzen(spielfeld, spieler);
-        }
 
         public void SpielfeldZeichnen()
         {
@@ -50,7 +26,8 @@ namespace _4Gewinnt.View
                     if (row == Y)
                     {
                         Console.Write("| " + col + " ");
-                    } else
+                    }
+                    else
                     //die anderen Felder werden mit den Werten von feld[,] verknüpft
                     {
                         string value = Convert.ToString(spielfeld.feld[row, col]);
@@ -60,7 +37,7 @@ namespace _4Gewinnt.View
                         }
                         Console.Write("| " + value + " ");
                     }
-                    
+
                 }
                 Console.Write("|");
                 Console.Write("\n");
@@ -73,9 +50,6 @@ namespace _4Gewinnt.View
             Console.Write("-\n\n");
         }
 
-        
-            
-        }
-        
-    
+    }
+
 }

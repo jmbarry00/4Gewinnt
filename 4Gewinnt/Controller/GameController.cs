@@ -6,7 +6,7 @@ using System.Text;
 
 namespace _4Gewinnt.Controller
 {
-    class GameController
+    public class GameController
     {
         public int Y;
         public int X;
@@ -20,6 +20,7 @@ namespace _4Gewinnt.Controller
         public int anzSpalten = 0;
         public int anzZeilen = 0;
 
+        //Game Konstruktor: User-Input Anzahl Zeilen und Spalten, X und Y setzen und Spiel starten
         public GameController()
         {
             AnzZeilenSpalten();
@@ -31,8 +32,11 @@ namespace _4Gewinnt.Controller
             spiel.spielStarten();
             spielfeld = spiel.spielfeld;
             spieler = spiel.spieler;
-            tui = new GameTUI();
-
+            tui = spiel.tui;
+            tui.spielfeld = spielfeld;
+            tui.Y = Y;
+            tui.X = X;
+            FeldBesetzen(spielfeld, spieler);
         }
 
         //User-Input: Anzahl Zeilen und Spalten
