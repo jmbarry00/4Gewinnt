@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using _4Gewinnt.View;
 
 namespace _4Gewinnt.Model
 {
@@ -8,6 +6,7 @@ namespace _4Gewinnt.Model
     {
         public Spieler spieler;
         public Spielfeld spielfeld;
+        public GameTUI tui;
         int Y;
         int X;
 
@@ -24,6 +23,7 @@ namespace _4Gewinnt.Model
         {
             spieler.player1 = true;
             spielfeld = new Spielfeld(Y, X);
+            tui = new GameTUI();
         }
     }
 }

@@ -110,97 +110,7 @@ namespace _4Gewinnt.View
             }
         }
 
-        private void Neustart()
-        {
-            SpielfeldZeichnen();
-            if (spielfeld.spieler1Won)
-            {
-                Console.WriteLine("Spieler 1 hat gewonnen!");
-            }
-            else if (spielfeld.spieler2Won)
-            {
-                Console.WriteLine("Spieler 2 hat gewonnen!");
-            } else
-            {
-                Console.WriteLine("unentschieden!");
-            }
-            
-            Console.WriteLine("Spiel neustarten? y/n:");
-
-            while (neustart != "y" && neustart != "n")
-            {
-                try
-                {
-                    neustart = Console.ReadLine();
-                }
-                catch (FormatException e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-
-                if (neustart == "y")
-                {
-                    for (int row = Y - 1; row >= 0; row--)
-                    {
-                        for (int col = 0; col < X; col++)
-                        {
-                            spielfeld.feld[row, col] = 0;
-                        }
-                    }
-                    if (spielfeld.spieler1Won)
-                    {
-                        spielfeld.spieler1Won = false;
-                    }
-                    else if (spielfeld.spieler2Won)
-                    {
-                        spielfeld.spieler2Won = false;
-                    }
-                    else
-                    {
-                        spielfeld.unentschieden = false;
-                    }
-                    
-                    spieler.SwitchPlayer();
-
-                }
-                else if (neustart == "n")
-                {
-                    Environment.Exit(0);
-                }
-                else
-                {
-                    Console.WriteLine("Falscher Wert!");
-                }
-            }
-            neustart = null;
-        }
-
-        private int SpalteWaehlen()
-        {
-            int gewSpalte = 0;
-            if (spieler.player1 == true)
-            {
-                Console.WriteLine("Spieler 1, wähle eine Spalte: ");
-            }
-            else
-            {
-                Console.WriteLine("Spieler 2, wähle eine Spalte: ");
-            }
-
-            //User-Input: Spalte wählen
-            gewaehlteSpalte = Console.ReadLine();
-            try
-            {
-                gewSpalte = Int32.Parse(gewaehlteSpalte);
-            }
-            catch (FormatException e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
-            return gewSpalte;
-        }
-
+        
         private void FeldBesetzen(Spielfeld spielfeld, Spieler spieler)
         {
             int gewSpalte = 0;
@@ -208,8 +118,25 @@ namespace _4Gewinnt.View
 
             while (true)
             {
-                gewSpalte = SpalteWaehlen();
+                if (spieler.player1 == true)
+                {
+                    Console.WriteLine("Spieler 1, wähle eine Spalte: ");
+                }
+                else
+                {
+                    Console.WriteLine("Spieler 2, wähle eine Spalte: ");
+                }
 
+                //User-Input: Spalte wählen
+                gewaehlteSpalte = Console.ReadLine();
+                try
+                {
+                    gewSpalte = Int32.Parse(gewaehlteSpalte);
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
                 if (gewSpalte >= 0)
                 {
                     spielfeld.FeldBesetzen(gewSpalte, spieler);
@@ -231,18 +158,139 @@ namespace _4Gewinnt.View
                     spielfeld.spalteVoll = false;
                 }
 
-                //jemand gewinnt o. unentschieden -> message und neustart Abfrage
-                if (spielfeld.spieler1Won || spielfeld.spieler2Won || spielfeld.unentschieden)
+                //Spieler 1 gewinnt -> message und neustart Abfrage
+                if (spielfeld.spieler1Won == true)
                 {
-                    Neustart();
+                    SpielfeldZeichnen();
+                    Console.WriteLine("Spieler 1 hat gewonnen!");
+                    Console.WriteLine("Spiel neustarten? y/n:");
+
+                    while (neustart != "y" && neustart != "n")
+                    {
+                        try
+                        {
+                            neustart = Console.ReadLine();
+                        }
+                        catch (FormatException e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+
+                        if (neustart == "y")
+                        {
+                            for (int row = Y - 1; row >= 0; row--)
+                            {
+                                for (int col = 0; col < X; col++)
+                                {
+                                    spielfeld.feld[row, col] = 0;
+                                }
+                            }
+                            spielfeld.spieler1Won = false;
+                            spieler.SwitchPlayer();
+                            
+                        }
+                        else if (neustart == "n")
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Falscher Wert!");
+                        }
+                    }
+                    neustart = null;
                 }
 
+                //Spieler 2 gewinnt -> message und neustart Abfrage
+                if (spielfeld.spieler2Won == true)
+                {
+                    SpielfeldZeichnen();
+                    Console.WriteLine("Spieler 2 hat gewonnen!");
+                    Console.WriteLine("Spiel neustarten? y/n:");
+
+                    while (neustart != "y" && neustart != "n")
+                    {
+                        try
+                        {
+                            neustart = Console.ReadLine();
+                        }
+                        catch (FormatException e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+
+                        if (neustart == "y")
+                        {
+                            for (int row = Y - 1; row >= 0; row--)
+                            {
+                                for (int col = 0; col < X; col++)
+                                {
+                                    spielfeld.feld[row, col] = 0;
+                                }
+                            }
+                            spielfeld.spieler2Won = false;
+                            
+                        }
+                        else if (neustart == "n")
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Falscher Wert!");
+                        }
+                    }
+                    neustart = null;
+                }
+
+                //unentschieden -> message und neustart Abfrage 
+                if (spielfeld.unentschieden == true)
+                {
+                    SpielfeldZeichnen();
+                    Console.WriteLine("unentschieden!");
+                    Console.WriteLine("Spiel neustarten? y/n:");
+
+                    while (neustart != "y" && neustart != "n")
+                    {
+                        try
+                        {
+                            neustart = Console.ReadLine();
+                        }
+                        catch (FormatException e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+
+                        if (neustart == "y")
+                        {
+                            for (int row = Y - 1; row >= 0; row--)
+                            {
+                                for (int col = 0; col < X; col++)
+                                {
+                                    spielfeld.feld[row, col] = 0;
+                                }
+                            }
+                            spielfeld.unentschieden = false;
+                            spieler.player1 = true;
+                            spieler.player2 = false;
+                            
+                        }
+                        else if (neustart == "n")
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Falscher Wert!");
+                        }
+                    }
+                    neustart = null;
+                }
                 SpielfeldZeichnen();
             }
                 
                 
             }
-
             
         }
         
