@@ -26,8 +26,7 @@ namespace _4Gewinnt.Controller
 
         public void AnzZeilenSpalten(int anzZeilen, int anzSpalten)
         {
-            spiel = new Spiel(5, 5);
-            // spiel = new Spiel(anzZeilen, anzSpalten);
+            spiel = new Spiel(anzZeilen, anzSpalten);
             spiel.spielStarten();
             spieler = spiel.spieler;
             spielfeld = spiel.spielfeld;
@@ -114,7 +113,6 @@ namespace _4Gewinnt.Controller
             this.player2 = player2;
             this.outOfBounds = outOfBounds;
             this.spalteVoll = spalteVoll;
-
         }
 
 
@@ -124,7 +122,6 @@ namespace _4Gewinnt.Controller
         {
             spielfeld.FeldBesetzen(gewSpalte, spieler);
             ControllerGetModelData();
-
         }
         
 
