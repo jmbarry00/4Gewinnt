@@ -1,215 +1,132 @@
-﻿using _4Gewinnt.Model;
+﻿using System;
+using _4Gewinnt.Model;
 using _4Gewinnt.View;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace _4Gewinnt.Controller
 {
     public class GameController
     {
-        public int Y;
-        public int X;
+        GameTUI tui;
+        public Spiel spiel;
         public Spielfeld spielfeld;
         public Spieler spieler;
-        public Spiel spiel;
-        public GameController game;
-        public GameTUI tui;
-        string gewaehlteSpalte;
-        string neustart;
-        public int anzSpalten = 0;
-        public int anzZeilen = 0;
+        int[,] feld;
+        bool spieler1Won;
+        bool spieler2Won;
+        bool unentschieden;
+        bool player1;
+        bool player2;
+        bool outOfBounds;
+        bool spalteVoll;
 
-        //Game Konstruktor: User-Input Anzahl Zeilen und Spalten, X und Y setzen und Spiel starten
         public GameController()
         {
-            AnzZeilenSpalten();
-            int y = anzZeilen;
-            int x = anzSpalten;
-            Y = y;
-            X = x;
-            spiel = new Spiel(Y, X);
+            this.tui = new GameTUI(this);
+        }
+
+        public void AnzZeilenSpalten(int anzZeilen, int anzSpalten)
+        {
+            spiel = new Spiel(5, 5);
+            // spiel = new Spiel(anzZeilen, anzSpalten);
             spiel.spielStarten();
-            spielfeld = spiel.spielfeld;
             spieler = spiel.spieler;
-            tui = spiel.tui;
-            tui.spielfeld = spielfeld;
-            tui.Y = Y;
-            tui.X = X;
-            FeldBesetzen(spielfeld, spieler);
+            spielfeld = spiel.spielfeld;
+            feld = spielfeld.feld;
+            player1 = spieler.player1;
+            player2 = spieler.player2;
         }
 
-        //User-Input: Anzahl Zeilen und Spalten
-        private void AnzZeilenSpalten()
+        
+        private void ControllerGetModelData()
         {
-            //min 5 Spalten
-            while (anzSpalten < 5)
-            {
-
-                Console.WriteLine("Wähle Anzahl Spalten für Spielfeld(min 5): ");
-                string anzahlSpalte = Console.ReadLine();
-                try
-                {
-                    anzSpalten = Int32.Parse(anzahlSpalte);
-                }
-                catch (FormatException e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-            }
-
-            //min 5 Zeilen
-            while (anzZeilen < 5)
-            {
-                Console.WriteLine("Wähle Anzahl Zeilen für Spielfeld(min 5): ");
-                string anzahlZeilen = Console.ReadLine();
-                try
-                {
-                    anzZeilen = Int32.Parse(anzahlZeilen);
-                }
-
-                catch (FormatException e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-            }
+            feld = spielfeld.feld;
+            spieler1Won = spielfeld.spieler1Won;
+            spieler2Won = spielfeld.spieler2Won;
+            unentschieden = spielfeld.unentschieden;
+            player1 = spieler.player1;
+            player2 = spieler.player2;
+            outOfBounds = spielfeld.outOfBounds;
+            spalteVoll = spielfeld.spalteVoll;
         }
 
-        private void Neustart()
+        public void updateModelData()
         {
-            tui.SpielfeldZeichnen();
-            if (spielfeld.spieler1Won)
-            {
-                Console.WriteLine("Spieler 1 hat gewonnen!");
-            }
-            else if (spielfeld.spieler2Won)
-            {
-                Console.WriteLine("Spieler 2 hat gewonnen!");
-            }
-            else
-            {
-                Console.WriteLine("unentschieden!");
-            }
-
-            Console.WriteLine("Spiel neustarten? y/n:");
-
-            while (neustart != "y" && neustart != "n")
-            {
-                try
-                {
-                    neustart = Console.ReadLine();
-                }
-                catch (FormatException e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-
-                if (neustart == "y")
-                {
-                    for (int row = Y - 1; row >= 0; row--)
-                    {
-                        for (int col = 0; col < X; col++)
-                        {
-                            spielfeld.feld[row, col] = 0;
-                        }
-                    }
-                    if (spielfeld.spieler1Won)
-                    {
-                        spielfeld.spieler1Won = false;
-                    }
-                    else if (spielfeld.spieler2Won)
-                    {
-                        spielfeld.spieler2Won = false;
-                    }
-                    else
-                    {
-                        spielfeld.unentschieden = false;
-                    }
-
-                    spieler.SwitchPlayer();
-
-                }
-                else if (neustart == "n")
-                {
-                    Environment.Exit(0);
-                }
-                else
-                {
-                    Console.WriteLine("Falscher Wert!");
-                }
-            }
-            neustart = null;
+            spielfeld.feld = feld;
+            spielfeld.spieler1Won = spieler1Won;
+            spielfeld.spieler2Won = spieler2Won;
+            spielfeld.unentschieden = unentschieden;
+            spieler.player1 = player1;
+            spieler.player2 = player2;
+            spielfeld.outOfBounds = outOfBounds;
+            spielfeld.spalteVoll = spalteVoll;
         }
 
-        private int SpalteWaehlen()
+
+        public int[,] getFeld()
         {
-            int gewSpalte = 0;
-            if (spieler.player1 == true)
-            {
-                Console.WriteLine("Spieler 1, wähle eine Spalte: ");
-            }
-            else
-            {
-                Console.WriteLine("Spieler 2, wähle eine Spalte: ");
-            }
-
-            //User-Input: Spalte wählen
-            gewaehlteSpalte = Console.ReadLine();
-            try
-            {
-                gewSpalte = Int32.Parse(gewaehlteSpalte);
-            }
-            catch (FormatException e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
-            return gewSpalte;
+            return feld;
         }
 
-        public void FeldBesetzen(Spielfeld spielfeld, Spieler spieler)
+        public bool getPlayer1()
         {
-            int gewSpalte = 0;
-            tui.SpielfeldZeichnen();
+            return player1;
+        }
 
-            while (true)
-            {
-                gewSpalte = SpalteWaehlen();
+        public bool getPlayer2()
+        {
+            return player2;
+        }
 
-                //wenn gewählte Spalte positiv, dann Feld besetzen
-                if (gewSpalte >= 0)
-                {
-                    spielfeld.FeldBesetzen(gewSpalte, spieler);
-                }
-                else
-                {
-                    spielfeld.outOfBounds = true;
-                }
+        public bool getOutOfBounds()
+        {
+            return outOfBounds;
+        }
 
+        public bool getSpalteVoll()
+        {
+            return spalteVoll;
+        }
 
-                //Warnung bei Out of Bounds und vollen Spalten
-                if (spielfeld.outOfBounds == true)
-                {
-                    Console.WriteLine("Diese Spalte gibt es nicht!");
-                    spielfeld.outOfBounds = false;
-                }
-                if (spielfeld.spalteVoll == true)
-                {
-                    Console.WriteLine("Diese Spalte ist schon voll!");
-                    spielfeld.spalteVoll = false;
-                }
+        public bool getUnentschieden()
+        {
+            return unentschieden;
+        }
 
-                //jemand gewinnt o. unentschieden -> message und neustart Abfrage
-                if (spielfeld.spieler1Won || spielfeld.spieler2Won || spielfeld.unentschieden)
-                {
-                    Neustart();
-                }
+        public bool getSpieler1Won()
+        {
+            return spieler1Won;
+        }
 
-                tui.SpielfeldZeichnen();
-            }
+        public bool getSpieler2Won()
+        {
+            return spieler2Won;
+        }
 
+        
+
+        public void setViewData(int[,] feld, bool spieler1Won, bool spieler2Won, bool unentschieden, bool player1, bool player2, bool outOfBounds, bool spalteVoll)
+        {
+            this.feld = feld;
+            this.spieler1Won = spieler1Won;
+            this.spieler2Won = spieler2Won;
+            this.unentschieden = unentschieden;
+            this.player1 = player1;
+            this.player2 = player2;
+            this.outOfBounds = outOfBounds;
+            this.spalteVoll = spalteVoll;
 
         }
+
+
+
+        
+        public void Spielen(int gewSpalte)
+        {
+            spielfeld.FeldBesetzen(gewSpalte, spieler);
+            ControllerGetModelData();
+
+        }
+        
 
     }
 }

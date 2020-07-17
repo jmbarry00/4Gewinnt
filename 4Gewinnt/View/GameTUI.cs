@@ -1,4 +1,5 @@
-﻿using _4Gewinnt.Model;
+﻿using _4Gewinnt.Controller;
+using _4Gewinnt.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,31 +12,58 @@ namespace _4Gewinnt.View
 
         int Y;
         int X;
+        int anzSpalten = 0;
+        int anzZeilen = 0;
+        GameController Ctr;
         Spielfeld spielfeld;
         Spieler spieler;
-        Spiel spiel;
+        bool player1;
+        bool player2;
+        int[,] feld;
+        
         string gewaehlteSpalte;
         string neustart;
-        public int anzSpalten = 0;
-        public int anzZeilen = 0;
+        
+        bool spieler1Won;
+        bool spieler2Won;
+        bool unentschieden;
+        bool outOfBounds;
+        bool spalteVoll;
+
+
 
         //Game Konstruktor: User-Input Anzahl Zeilen und Spalten, X und Y setzen und Spiel starten
-        public GameTUI()
+        public GameTUI(GameController ctr)
         {
+            this.Ctr = ctr;            
             AnzZeilenSpalten();
-            int y = anzZeilen;
-            int x = anzSpalten;
-            Y = y;
-            X = x;
-
-            spiel = new Spiel(Y, X);            
-            spiel.spielStarten();
-            spielfeld = spiel.spielfeld;
-            spieler = spiel.spieler;
-            FeldBesetzen(spielfeld, spieler);
+            Ctr.AnzZeilenSpalten(anzZeilen, anzSpalten);
+            Y = anzZeilen;
+            X = anzSpalten;
+            spieler = Ctr.spieler;
+            spielfeld = Ctr.spielfeld;
+            Playing();
         }
 
-        private void SpielfeldZeichnen()
+        private void getControllerData()
+        {
+            feld = Ctr.getFeld();
+            spieler1Won = Ctr.getSpieler1Won();
+            spieler2Won = Ctr.getSpieler2Won();
+            unentschieden = Ctr.getUnentschieden();
+            player1 = Ctr.getPlayer1();
+            player2 = Ctr.getPlayer2();
+            outOfBounds = Ctr.getOutOfBounds();
+            spalteVoll = Ctr.getSpalteVoll();
+        }
+
+        private void Playing()
+        {
+            getControllerData();
+            Game(spielfeld, spieler);
+        }
+
+        public void SpielfeldZeichnen()
         {
             for (int row = Y; row >= 0; row--)
             {
@@ -51,17 +79,18 @@ namespace _4Gewinnt.View
                     if (row == Y)
                     {
                         Console.Write("| " + col + " ");
-                    } else
+                    }
+                    else
                     //die anderen Felder werden mit den Werten von feld[,] verknüpft
                     {
-                        string value = Convert.ToString(spielfeld.feld[row, col]);
-                        if (spielfeld.feld[row, col] == 0)
+                        string value = Convert.ToString(feld[row, col]);
+                        if (feld[row, col] == 0)
                         {
                             value = " ";
                         }
                         Console.Write("| " + value + " ");
                     }
-                    
+
                 }
                 Console.Write("|");
                 Console.Write("\n");
@@ -76,7 +105,7 @@ namespace _4Gewinnt.View
 
         //User-Input: Anzahl Zeilen und Spalten
         private void AnzZeilenSpalten()
-        {            
+        {
             //min 5 Spalten
             while (anzSpalten < 5)
             {
@@ -110,189 +139,152 @@ namespace _4Gewinnt.View
             }
         }
 
-        
-        private void FeldBesetzen(Spielfeld spielfeld, Spieler spieler)
+        //User-Input: Neustart ja/nein
+        private void Neustart()
+        {
+            SpielfeldZeichnen();
+            if (spieler1Won)
+            {
+                Console.WriteLine("Spieler 1 hat gewonnen!");
+            }
+            else if (spieler2Won)
+            {
+                Console.WriteLine("Spieler 2 hat gewonnen!");
+            }
+            else
+            {
+                Console.WriteLine("unentschieden!");
+            }
+
+            Console.WriteLine("Spiel neustarten? y/n:");
+
+            while (neustart != "y" && neustart != "n")
+            {
+                try
+                {
+                    neustart = Console.ReadLine();
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
+                if (neustart == "y")
+                {
+                    for (int row = Y - 1; row >= 0; row--)
+                    {
+                        for (int col = 0; col < X; col++)
+                        {
+                            feld[row, col] = 0;
+                        }
+                    }
+                    if (spieler1Won)
+                    {
+                        spieler1Won = false;
+                    }
+                    else if (spieler2Won)
+                    {
+                        spieler2Won = false;
+                    }
+                    else
+                    {
+                        unentschieden = false;
+                    }
+
+                    spieler.SwitchPlayer();
+
+                }
+                else if (neustart == "n")
+                {
+                    Environment.Exit(0);
+                }
+                else
+                {
+                    Console.WriteLine("Falscher Wert!");
+                }
+            }
+            neustart = null;
+            Ctr.setViewData(feld, spieler1Won, spieler2Won, unentschieden, player1, player2, outOfBounds, spalteVoll);
+            Ctr.updateModelData();
+        }
+
+        private int SpalteWaehlen()
+        {
+            int gewSpalte = 0;
+            if (player1 == true)
+            {
+                Console.WriteLine("Spieler 1, wähle eine Spalte: ");
+            }
+            else
+            {
+                Console.WriteLine("Spieler 2, wähle eine Spalte: ");
+            }
+
+            //User-Input: Spalte wählen
+            gewaehlteSpalte = Console.ReadLine();
+            try
+            {
+                gewSpalte = Int32.Parse(gewaehlteSpalte);
+            }
+            catch (FormatException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            return gewSpalte;
+        }
+
+        public void Game(Spielfeld spielfeld, Spieler spieler)
         {
             int gewSpalte = 0;
             SpielfeldZeichnen();
 
             while (true)
             {
-                if (spieler.player1 == true)
+                gewSpalte = SpalteWaehlen();
+
+                if (gewSpalte >= 0)
                 {
-                    Console.WriteLine("Spieler 1, wähle eine Spalte: ");
+                    Ctr.Spielen(gewSpalte);
+                    getControllerData();
                 }
                 else
                 {
-                    Console.WriteLine("Spieler 2, wähle eine Spalte: ");
+                    outOfBounds = true;
                 }
 
-                //User-Input: Spalte wählen
-                gewaehlteSpalte = Console.ReadLine();
-                try
-                {
-                    gewSpalte = Int32.Parse(gewaehlteSpalte);
-                }
-                catch (FormatException e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-                if (gewSpalte >= 0)
-                {
-                    spielfeld.FeldBesetzen(gewSpalte, spieler);
-                } else
-                {
-                    spielfeld.outOfBounds = true;
-                }
-                
-                
+
                 //Warnung bei Out of Bounds und vollen Spalten
-                if (spielfeld.outOfBounds == true)
+                if (outOfBounds == true)
                 {
                     Console.WriteLine("Diese Spalte gibt es nicht!");
-                    spielfeld.outOfBounds = false;
+                    outOfBounds = false;
                 }
-                if (spielfeld.spalteVoll == true)
+                if (spalteVoll == true)
                 {
                     Console.WriteLine("Diese Spalte ist schon voll!");
-                    spielfeld.spalteVoll = false;
+                    spalteVoll = false;
                 }
 
-                //Spieler 1 gewinnt -> message und neustart Abfrage
-                if (spielfeld.spieler1Won == true)
+                Ctr.setViewData(feld, spieler1Won, spieler2Won, unentschieden, player1, player2, outOfBounds, spalteVoll);
+                Ctr.updateModelData();
+                //jemand gewinnt o. unentschieden -> message und neustart Abfrage
+                if (spieler1Won || spieler2Won || unentschieden)
                 {
-                    SpielfeldZeichnen();
-                    Console.WriteLine("Spieler 1 hat gewonnen!");
-                    Console.WriteLine("Spiel neustarten? y/n:");
-
-                    while (neustart != "y" && neustart != "n")
-                    {
-                        try
-                        {
-                            neustart = Console.ReadLine();
-                        }
-                        catch (FormatException e)
-                        {
-                            Console.WriteLine(e.Message);
-                        }
-
-                        if (neustart == "y")
-                        {
-                            for (int row = Y - 1; row >= 0; row--)
-                            {
-                                for (int col = 0; col < X; col++)
-                                {
-                                    spielfeld.feld[row, col] = 0;
-                                }
-                            }
-                            spielfeld.spieler1Won = false;
-                            spieler.SwitchPlayer();
-                            
-                        }
-                        else if (neustart == "n")
-                        {
-                            return;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Falscher Wert!");
-                        }
-                    }
-                    neustart = null;
+                    Neustart();
                 }
 
-                //Spieler 2 gewinnt -> message und neustart Abfrage
-                if (spielfeld.spieler2Won == true)
-                {
-                    SpielfeldZeichnen();
-                    Console.WriteLine("Spieler 2 hat gewonnen!");
-                    Console.WriteLine("Spiel neustarten? y/n:");
-
-                    while (neustart != "y" && neustart != "n")
-                    {
-                        try
-                        {
-                            neustart = Console.ReadLine();
-                        }
-                        catch (FormatException e)
-                        {
-                            Console.WriteLine(e.Message);
-                        }
-
-                        if (neustart == "y")
-                        {
-                            for (int row = Y - 1; row >= 0; row--)
-                            {
-                                for (int col = 0; col < X; col++)
-                                {
-                                    spielfeld.feld[row, col] = 0;
-                                }
-                            }
-                            spielfeld.spieler2Won = false;
-                            
-                        }
-                        else if (neustart == "n")
-                        {
-                            return;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Falscher Wert!");
-                        }
-                    }
-                    neustart = null;
-                }
-
-                //unentschieden -> message und neustart Abfrage 
-                if (spielfeld.unentschieden == true)
-                {
-                    SpielfeldZeichnen();
-                    Console.WriteLine("unentschieden!");
-                    Console.WriteLine("Spiel neustarten? y/n:");
-
-                    while (neustart != "y" && neustart != "n")
-                    {
-                        try
-                        {
-                            neustart = Console.ReadLine();
-                        }
-                        catch (FormatException e)
-                        {
-                            Console.WriteLine(e.Message);
-                        }
-
-                        if (neustart == "y")
-                        {
-                            for (int row = Y - 1; row >= 0; row--)
-                            {
-                                for (int col = 0; col < X; col++)
-                                {
-                                    spielfeld.feld[row, col] = 0;
-                                }
-                            }
-                            spielfeld.unentschieden = false;
-                            spieler.player1 = true;
-                            spieler.player2 = false;
-                            
-                        }
-                        else if (neustart == "n")
-                        {
-                            return;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Falscher Wert!");
-                        }
-                    }
-                    neustart = null;
-                }
                 SpielfeldZeichnen();
             }
-                
-                
-            }
-            
+
+
         }
-        
-    
+    }
+
+
+
+
 }
+
+
+
