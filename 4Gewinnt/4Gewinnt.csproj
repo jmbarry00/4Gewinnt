@@ -1,10 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <RootNamespace>_4Gewinnt</RootNamespace>
 	<GenerateProgramFile>false</GenerateProgramFile>
+	<ApplicationIcon />
+	<StartupObject></StartupObject>
   </PropertyGroup>
 
 

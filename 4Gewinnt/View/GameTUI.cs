@@ -266,8 +266,11 @@ namespace _4Gewinnt.View
                     spalteVoll = false;
                 }
 
+                //update Data of GameTui
                 Ctr.setViewData(feld, spieler1Won, spieler2Won, unentschieden, player1, player2, outOfBounds, spalteVoll);
+                //update Model Data
                 Ctr.updateModelData();
+
                 //jemand gewinnt o. unentschieden -> message und neustart Abfrage
                 if (spieler1Won || spieler2Won || unentschieden)
                 {
