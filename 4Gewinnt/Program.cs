@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace _4Gewinnt
 {
@@ -13,7 +14,20 @@ namespace _4Gewinnt
 
         public static void Main(string[] args)
         {
-            GameController game = new GameController();
+            Parallel.Invoke(() =>
+                {
+                    Application.EnableVisualStyles();
+                    Application.SetCompatibleTextRenderingDefault(false);
+                    Application.Run(new Form1());
+                },
+
+                () =>
+                {
+                    GameController gameTui = new GameController();
+                }
+            );
+            
+            
         }
     }
 }

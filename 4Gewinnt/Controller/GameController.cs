@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 using _4Gewinnt.Model;
 using _4Gewinnt.View;
 
@@ -7,10 +8,13 @@ namespace _4Gewinnt.Controller
     public class GameController
     {
         GameTUI tui;
+        GameGUI gui;
         public Spiel spiel;
         public Spielfeld spielfeld;
         public Spieler spieler;
         int[,] feld;
+        public int anzZeilen;
+        public int anzSpalten;
         bool spieler1Won;
         bool spieler2Won;
         bool unentschieden;
@@ -19,12 +23,50 @@ namespace _4Gewinnt.Controller
         bool outOfBounds;
         bool spalteVoll;
 
+        private static GameController gcTUI;
+        private static GameController gcGUI;
+
         public GameController()
         {
             this.tui = new GameTUI(this);
         }
 
-        public void AnzZeilenSpalten(int anzZeilen, int anzSpalten)
+        /*
+         public GameController()
+        {
+        this.tui = new GameTUI(this);
+        }
+
+        public static GameController getGCTUI()
+        {
+            if (gcTUI == null)
+            {
+                gcTUI = new GameController();
+            }
+            return gcTUI;
+        }
+        */
+        /*
+        public GameController(int Zeilen, int Spalten)
+        {
+            anzZeilen = Zeilen;
+            anzSpalten = Spalten;
+            this.gui = new GameGUI(this);
+            gui.Show();
+        }
+        */
+        /*
+        public static GameController getGCGUI()
+        {
+            if (gcGUI == null)
+            {
+                gcGUI = new GameController();
+            }
+            return gcGUI;
+        }
+        */
+        /*
+        public void AnzZeilenSpaltenTUI(int anzZeilen, int anzSpalten)
         {
             spiel = new Spiel(anzZeilen, anzSpalten);
             spiel.spielStarten();
@@ -34,8 +76,21 @@ namespace _4Gewinnt.Controller
             player1 = spieler.player1;
             player2 = spieler.player2;
         }
+        */
+        /*
+        public void AnzZeilenSpaltenGUI()
+        {
+            spiel = new Spiel(anzZeilen, anzSpalten);
+            spiel.spielStarten();
+            spieler = spiel.spieler;
+            spielfeld = spiel.spielfeld;
+            feld = spielfeld.feld;
+            player1 = spieler.player1;
+            player2 = spieler.player2;
+        }
+        */
 
-        
+
         private void ControllerGetModelData()
         {
             feld = spielfeld.feld;
@@ -59,7 +114,6 @@ namespace _4Gewinnt.Controller
             spielfeld.outOfBounds = outOfBounds;
             spielfeld.spalteVoll = spalteVoll;
         }
-
 
         public int[,] getFeld()
         {

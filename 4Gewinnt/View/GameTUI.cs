@@ -4,6 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using static System.Net.Mime.MediaTypeNames;
+using System.Windows.Forms;
+using Application = System.Windows.Forms.Application;
+using System.Runtime.InteropServices;
 
 namespace _4Gewinnt.View
 {
@@ -20,8 +23,8 @@ namespace _4Gewinnt.View
         bool player1;
         bool player2;
         int[,] feld;
-        
         string gewaehlteSpalte;
+        DialogResult neustartGUI;
         string neustart;
         
         bool spieler1Won;
@@ -35,9 +38,9 @@ namespace _4Gewinnt.View
         //Game Konstruktor: User-Input Anzahl Zeilen und Spalten, X und Y setzen und Spiel starten
         public GameTUI(GameController ctr)
         {
-            this.Ctr = ctr;            
+            this.Ctr = ctr;
             AnzZeilenSpalten();
-            Ctr.AnzZeilenSpalten(anzZeilen, anzSpalten);
+            Ctr.AnzZeilenSpaltenTUI(anzZeilen, anzSpalten);
             Y = anzZeilen;
             X = anzSpalten;
             spieler = Ctr.spieler;

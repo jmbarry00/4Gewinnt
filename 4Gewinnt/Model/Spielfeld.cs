@@ -1,9 +1,9 @@
 ﻿using _4Gewinnt.Model;
-
+using System.Collections.Generic;
 
 namespace _4Gewinnt
 {
-    public class Spielfeld
+    public class Spielfeld : IObservable
     {
         public int ZeilenY;
         public int SpaltenX;
@@ -20,6 +20,8 @@ namespace _4Gewinnt
         public bool unentschieden = false;
         public bool outOfBounds = false;
         public bool spalteVoll = false;
+
+        List<IObserver> observers = new List<IObserver>();
 
         //Konstruktor für das Spielfeld
         public Spielfeld(int zeilenY, int spaltenX)
@@ -254,5 +256,22 @@ namespace _4Gewinnt
             }
         }
 
+        public void add(IObserver observer)
+        {
+            this.observers.Add(observer);
+        }
+
+        public void remove(IObserver observer)
+        {
+            this.observers.Remove(observer);
+        }
+
+        public void notify()
+        {
+            foreach(IObserver observer in this.observers)
+            {
+                observer.update();
+            }
+        }
     }
 }
