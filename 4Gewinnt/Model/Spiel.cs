@@ -1,6 +1,4 @@
-﻿using _4Gewinnt.View;
-
-namespace _4Gewinnt.Model
+﻿namespace _4Gewinnt.Model
 {
     public class Spiel
     {

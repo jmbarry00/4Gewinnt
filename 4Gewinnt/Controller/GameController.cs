@@ -1,9 +1,6 @@
 ﻿using _4Gewinnt.Model;
 using _4Gewinnt.View;
-using System;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace _4Gewinnt.Controller
 {
@@ -58,10 +55,12 @@ namespace _4Gewinnt.Controller
             ControllerGetModelData();
 
             Parallel.Invoke(
-            () => {
+            () =>
+            {
                 tui.Playing();
             },
-            () => {
+            () =>
+            {
                 gui.ShowDialog();
             }
         );

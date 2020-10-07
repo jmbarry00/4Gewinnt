@@ -1,6 +1,5 @@
 ﻿using _4Gewinnt.Model;
 using FluentAssertions;
-using System;
 using TechTalk.SpecFlow;
 
 namespace _4Gewinnt.Features

@@ -1,15 +1,7 @@
 ﻿using _4Gewinnt.Controller;
 using _4Gewinnt.Model;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Drawing.Text;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _4Gewinnt.View
@@ -27,9 +19,12 @@ namespace _4Gewinnt.View
         Panel[,] panel;
         Button[] button;
         int gewSpalte;
-
+        String labelText;
+        String endStatus;
         private Label label1;
-
+        DialogResult neustart;
+        bool lastActionAtGUI = false;
+        public delegate void UpdateTextCallback(string text);
 
         bool spieler1Won;
         bool spieler2Won;
@@ -77,7 +72,7 @@ namespace _4Gewinnt.View
             this.Controls.Add(label1);
             label1.Location = new Point(15, 15);
             label1.Font = new Font("Arial", 15);
-            label1.Text = spielfeld.Text;
+            label1.Text = "Spieler 1, wähle eine Spalte!";
             label1.Width = 300;
             int bottom = 30;
             int panelHeight = 60;
@@ -118,7 +113,7 @@ namespace _4Gewinnt.View
             }
         }
 
-        public void setLabel1Text(string lb1Text)
+        private void setLabel1Text(string lb1Text)
         {
             label1.Text = lb1Text;
         }
@@ -148,29 +143,31 @@ namespace _4Gewinnt.View
                     {
                         panel[z, s].BackColor = Color.Blue;
                     }
-                    else 
+                    else
                     {
                         panel[z, s].BackColor = Color.Transparent;
                     }
                 }
             }
-            
+
         }
 
         //User-Input: Neustart ja/nein
         public void Neustart()
         {
-            String endStatus;
-            spielfeld.notifyDisplays();
+            if (lastActionAtGUI)
+            {
+                Ctr.tui.endOutput();
+                lastActionAtGUI = false;
+            }
+            Spielsteine();
             if (spieler1Won)
             {
                 label1.Text = "Spieler 1 hat gewonnen!";
-                Console.WriteLine("Spieler 1 hat gewonnen!");
             }
             else if (spieler2Won)
             {
                 label1.Text = "Spieler 2 hat gewonnen!";
-                Console.WriteLine("Spieler 2 hat gewonnen!");
             }
             else
             {
@@ -186,7 +183,7 @@ namespace _4Gewinnt.View
                 endStatus = "Victory!";
             }
 
-            DialogResult neustart = MessageBox.Show("Neustart?", endStatus, MessageBoxButtons.YesNo);
+            neustart = MessageBox.Show("Neustart?", endStatus, MessageBoxButtons.YesNo);
 
             if (neustart == DialogResult.Yes)
             {
@@ -215,7 +212,7 @@ namespace _4Gewinnt.View
             }
             else if (neustart == DialogResult.No)
             {
-                this.Hide();
+                Environment.Exit(0);
             }
 
             Ctr.setViewData(feld, spieler1Won, spieler2Won, unentschieden, player1, player2, outOfBounds, spalteVoll);
@@ -227,10 +224,11 @@ namespace _4Gewinnt.View
             Ctr.Spielen(gewSpalte);
             getControllerData();
 
-            if (spalteVoll == true)
+            if (spalteVoll)
             {
-                MessageBox.Show("Diese Spalte ist schon voll!");
+
                 Console.WriteLine("Diese Spalte ist schon voll!");
+                MessageBox.Show("Diese Spalte ist schon voll!");
                 spielfeld.SpalteVoll = false;
             }
 
@@ -239,20 +237,21 @@ namespace _4Gewinnt.View
 
             if (spieler1Won || spieler2Won || unentschieden)
             {
+                lastActionAtGUI = true;
                 Neustart();
             }
 
             spielfeld.notifyDisplays();
 
-            if (player1 == true)
+            if (player1)
             {
-                label1.Text = "Spieler 1: wähle eine Spalte!";
-                Console.WriteLine("Spieler 1: wähle eine Spalte!");
+                label1.Text = "Spieler 1, wähle eine Spalte:";
+                Console.WriteLine("Spieler 1, wähle eine Spalte:");
             }
-            else 
+            else
             {
-                label1.Text = "Spieler 2: wähle eine Spalte!";
-                Console.WriteLine("Spieler 2: wähle eine Spalte!");
+                label1.Text = "Spieler 2, wähle eine Spalte:";
+                Console.WriteLine("Spieler 2, wähle eine Spalte:");
             }
         }
 
@@ -269,14 +268,25 @@ namespace _4Gewinnt.View
             player2 = spieler.Spieler2;
             outOfBounds = spielfeld.OutOfBounds;
             spalteVoll = spielfeld.SpalteVoll;
-            
+            labelText = spielfeld.Text;
+
+            if (spielfeld.gewSpalte >= 0)
+            {
+                Invoke(new UpdateTextCallback(setLabel1Text), labelText);
+            }
+
+            if (spielfeld.Neustart == true)
+            {   
+                spielfeld.Neustart = false;
+                Neustart();
+                spielfeld.notifyDisplays();
+            }
+
         }
 
         public void Spielfeld()
         {
-            
             Spielsteine();
-            this.setLabel1Text("");
         }
     }
 }

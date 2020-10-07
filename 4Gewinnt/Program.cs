@@ -1,10 +1,4 @@
-﻿using _4Gewinnt.Controller;
-using _4Gewinnt.Model;
-using _4Gewinnt.View;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using _4Gewinnt.View;
 using System.Windows.Forms;
 
 namespace _4Gewinnt
@@ -18,19 +12,19 @@ namespace _4Gewinnt
             Parallel.Invoke(() =>
                 {
                     */
-                    Application.EnableVisualStyles();
-                    Application.SetCompatibleTextRenderingDefault(false);
-                    Application.Run(new Form1());
-                    /*
-                },
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Form1());
+            /*
+        },
 
-                () =>
-                {
-                    GameController gameTui = new GameController();
-                }
-            );
-            */
-            
+        () =>
+        {
+            GameController gameTui = new GameController();
+        }
+    );
+    */
+
         }
     }
 }

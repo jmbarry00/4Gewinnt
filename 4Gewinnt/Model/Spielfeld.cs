@@ -1,7 +1,6 @@
 ﻿using _4Gewinnt.Model;
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 
 namespace _4Gewinnt
 {
@@ -12,22 +11,26 @@ namespace _4Gewinnt
         public int[,] feld;
         public int posX;
         public int posY;
-        public int gewaehlteSpalte;
+        public int gewaehlteSpalte = -1;
         int spalteP1 = 0;
         int zeileP1 = 0;
         int spalteP2 = 0;
         int zeileP2 = 0;
-        
+
 
         public bool spieler1Won = false;
         public bool spieler2Won = false;
         public bool unentschieden = false;
         public bool outOfBounds = false;
         public bool spalteVoll = false;
-        public String text = "Wassisch los hier?";
+        String labelText;
+        bool neustart = false;
+        //bool guiNeustart = false;
+        //bool tuiNeustart = false;
 
         List<IObserver> observers = new List<IObserver>();
         List<IDisplay> displays = new List<IDisplay>();
+
         //Konstruktor für das Spielfeld
         public Spielfeld(int zeilenY, int spaltenX)
         {
@@ -283,10 +286,10 @@ namespace _4Gewinnt
 
         public bool Spieler2Won
         {
-            get { return spieler1Won; }
+            get { return spieler2Won; }
             set
             {
-                spieler1Won = value;
+                spieler2Won = value;
                 notify();
             }
         }
@@ -323,14 +326,45 @@ namespace _4Gewinnt
 
         public String Text
         {
-            get { return text; }
+            get { return labelText; }
             set
             {
-                text = value;
+                labelText = value;
                 notify();
             }
         }
 
+        public bool Neustart
+        {
+            get { return neustart; }
+            set
+            {
+                neustart = value;
+                notify();
+            }
+        }
+        /*
+        public bool GUINeustart
+        {
+            get { return guiNeustart; }
+            set
+            {
+                guiNeustart = value;
+                notify();
+            }
+        }
+        
+
+        public bool TUINeustart
+        {
+            get { return tuiNeustart; }
+            set
+            {
+                tuiNeustart = value;
+                notify();
+            }
+        }
+        */
         public int zeilenY
         {
             get { return ZeilenY; }
@@ -351,7 +385,7 @@ namespace _4Gewinnt
             }
         }
 
-        
+
         public int[,] Feld
         {
             get { return feld; }
@@ -379,9 +413,11 @@ namespace _4Gewinnt
 
         public void notify()
         {
-            foreach(IObserver observer in this.observers)
+
+            foreach (IObserver observer in this.observers)
             {
                 observer.update();
+
             }
         }
         public void notifyDisplays()

@@ -1,6 +1,5 @@
 ﻿using _4Gewinnt.Model;
 using FluentAssertions;
-using System;
 using TechTalk.SpecFlow;
 
 namespace _4Gewinnt
@@ -40,7 +39,7 @@ namespace _4Gewinnt
             _spielfeld.spalteVoll.Should().BeTrue();
         }
 
-                [Given(@"Spielsteine at the Corner")]
+        [Given(@"Spielsteine at the Corner")]
         public void GivenSpielsteineAtTheCorner()
         {
             _spiel = new Spiel(6, 7);
@@ -60,14 +59,14 @@ namespace _4Gewinnt
         {
             _spielfeld.FeldBesetzen(p1, _spieler);
         }
-        
+
         [Then(@"It should be player(.*) turn")]
         public void ThenItShouldBePlayerTurn(int p0)
         {
             _spieler.player2.Should().BeTrue();
         }
 
-        
+
 
         [Given(@"It's player (.*) turn")]
         public void GivenItSPlayerTurn(int p0)
@@ -79,7 +78,7 @@ namespace _4Gewinnt
         [When(@"player (.*) sets Spielstein on column (.*) of six")]
         public void WhenPlayerSetsSpielsteinOnColumnOfSix(int p0, int p1)
         {
-            _spielfeld.FeldBesetzen(7,_spieler);
+            _spielfeld.FeldBesetzen(7, _spieler);
         }
 
         [Then(@"outOfBounds should be true")]

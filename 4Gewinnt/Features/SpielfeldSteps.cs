@@ -1,6 +1,4 @@
-﻿using _4Gewinnt.Model;
-using FluentAssertions;
-using System;
+﻿using FluentAssertions;
 using TechTalk.SpecFlow;
 
 namespace _4Gewinnt
@@ -9,7 +7,7 @@ namespace _4Gewinnt
     public class SpielfeldSteps
     {
         Spielfeld _spielfeld;
-        
+
 
         [When(@"I create a Spielfeld with (.*) columns and (.*) rows,")]
         public void WhenICreateASpielfeldWithColumnsAndRows(int p0, int p1)

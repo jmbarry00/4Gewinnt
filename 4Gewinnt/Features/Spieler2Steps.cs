@@ -1,6 +1,5 @@
 ﻿using _4Gewinnt.Model;
 using FluentAssertions;
-using System;
 using TechTalk.SpecFlow;
 
 namespace _4Gewinnt.Features
@@ -21,7 +20,7 @@ namespace _4Gewinnt.Features
         [Given(@"field (.*) on column (.*) is occupied")]
         public void GivenFieldOnColumnIsOccupied(int p0, int p1)
         {
-             _spielfeld.feld[p0, p1] = 1;
+            _spielfeld.feld[p0, p1] = 1;
             _spielfeld.IstFeldBesetzt(p0, p1).Should().BeTrue();
         }
 
@@ -31,12 +30,12 @@ namespace _4Gewinnt.Features
         {
             _spielfeld.FeldBesetzen(p0, _spieler);
         }
-        
+
         [Then(@"the Spielstein should land on row (.*)")]
         public void ThenTheSpielsteinShouldLandOnRow(int p0)
         {
-            _spielfeld.feld[p0,4].Should().Be(1);
+            _spielfeld.feld[p0, 4].Should().Be(1);
         }
-        
+
     }
 }

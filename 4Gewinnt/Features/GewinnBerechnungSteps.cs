@@ -1,6 +1,5 @@
 ﻿using _4Gewinnt.Model;
 using FluentAssertions;
-using System;
 using TechTalk.SpecFlow;
 
 namespace _4Gewinnt.Features
@@ -77,7 +76,7 @@ namespace _4Gewinnt.Features
             _spielfeld.feld[0, 3] = 1;
             _spielfeld.feld[1, 3] = 2;
             _spielfeld.feld[2, 3] = 2;
-            _spielfeld.FeldBesetzen(3,_spieler);
+            _spielfeld.FeldBesetzen(3, _spieler);
         }
 
         [Then(@"Spieler one wins the game")]
@@ -127,7 +126,7 @@ namespace _4Gewinnt.Features
                     if (x != 0 && x != 3 && x != 6)
                     {
                         _spielfeld.feld[y, x] = 1;
-                    }                    
+                    }
                 }
             }
 
