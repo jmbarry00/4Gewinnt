@@ -7,10 +7,11 @@ using static System.Net.Mime.MediaTypeNames;
 using System.Windows.Forms;
 using Application = System.Windows.Forms.Application;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace _4Gewinnt.View
 {
-    class GameTUI
+    public class GameTUI : IObserver, IDisplay
     {
 
         int Y;
@@ -24,8 +25,11 @@ namespace _4Gewinnt.View
         bool player2;
         int[,] feld;
         string gewaehlteSpalte;
+        int gewSpalte;
+        int Spalte = -1;
         DialogResult neustartGUI;
         string neustart;
+        string text;
         
         bool spieler1Won;
         bool spieler2Won;
@@ -34,18 +38,12 @@ namespace _4Gewinnt.View
         bool spalteVoll;
 
 
-
         //Game Konstruktor: User-Input Anzahl Zeilen und Spalten, X und Y setzen und Spiel starten
         public GameTUI(GameController ctr)
         {
             this.Ctr = ctr;
-            AnzZeilenSpalten();
-            Ctr.AnzZeilenSpaltenTUI(anzZeilen, anzSpalten);
-            Y = anzZeilen;
-            X = anzSpalten;
             spieler = Ctr.spieler;
             spielfeld = Ctr.spielfeld;
-            Playing();
         }
 
         private void getControllerData()
@@ -60,7 +58,7 @@ namespace _4Gewinnt.View
             spalteVoll = Ctr.getSpalteVoll();
         }
 
-        private void Playing()
+        public void Playing()
         {
             getControllerData();
             Game(spielfeld, spieler);
@@ -145,14 +143,17 @@ namespace _4Gewinnt.View
         //User-Input: Neustart ja/nein
         private void Neustart()
         {
-            SpielfeldZeichnen();
+            spielfeld.notifyDisplays();
             if (spieler1Won)
             {
                 Console.WriteLine("Spieler 1 hat gewonnen!");
+                spielfeld.Text = "Spieler 1 hat gewonnen!";
+                //Ctr.gui.setLabel1Text("Spieler 1 hat gewonnen!");
             }
             else if (spieler2Won)
             {
                 Console.WriteLine("Spieler 2 hat gewonnen!");
+                //Ctr.gui.label1.Text = "Spieler 2 hat gewonnen!";
             }
             else
             {
@@ -211,40 +212,50 @@ namespace _4Gewinnt.View
             Ctr.updateModelData();
         }
 
-        private int SpalteWaehlen()
+        public int SpalteWaehlen()
         {
-            int gewSpalte = 0;
-            if (player1 == true)
-            {
-                Console.WriteLine("Spieler 1, wähle eine Spalte: ");
-            }
-            else
-            {
-                Console.WriteLine("Spieler 2, wähle eine Spalte: ");
-            }
 
-            //User-Input: Spalte wählen
-            gewaehlteSpalte = Console.ReadLine();
-            try
+            while (true)
             {
-                gewSpalte = Int32.Parse(gewaehlteSpalte);
-            }
-            catch (FormatException e)
-            {
-                Console.WriteLine(e.Message);
-            }
+                if (player1 == true)
+                {
+                    Console.WriteLine("Spieler 1, wähle eine Spalte: ");
+                }
+                else
+                {
+                    Console.WriteLine("Spieler 2, wähle eine Spalte: ");
+                }
 
-            return gewSpalte;
+                //...
+
+                //User-Input: Spalte wählen
+                gewaehlteSpalte = Console.ReadLine();
+
+                try
+                {
+                    Spalte = Int32.Parse(gewaehlteSpalte);
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
+                if (gewaehlteSpalte != "")
+                {
+                    return Spalte;
+                }
+                
+            }
         }
 
         public void Game(Spielfeld spielfeld, Spieler spieler)
         {
-            int gewSpalte = 0;
+            //int gewSpalte = 0;
+            //spielfeld.notifyDisplays();
             SpielfeldZeichnen();
-
             while (true)
             {
-                gewSpalte = SpalteWaehlen();
+                spielfeld.gewSpalte = SpalteWaehlen();
 
                 if (gewSpalte >= 0)
                 {
@@ -280,10 +291,41 @@ namespace _4Gewinnt.View
                     Neustart();
                 }
 
-                SpielfeldZeichnen();
+                spielfeld.notifyDisplays();
             }
 
 
+        }
+
+        public void update()
+        {
+            X = spielfeld.spaltenX;
+            Y = spielfeld.zeilenY;
+            gewSpalte = spielfeld.gewSpalte;
+            feld = spielfeld.Feld;
+            spieler1Won = spielfeld.Spieler1Won;
+            spieler2Won = spielfeld.Spieler2Won;
+            unentschieden = spielfeld.Unentschieden;
+            player1 = spieler.Spieler1;
+            player2 = spieler.Spieler2;
+            outOfBounds = spielfeld.OutOfBounds;
+            spalteVoll = spielfeld.SpalteVoll;
+            text = spielfeld.Text;
+
+            if (true)
+            {
+
+            }
+        }
+
+        public void Spielfeld()
+        {
+            SpielfeldZeichnen();
+        }
+
+        public void SpalteVollText()
+        {
+            
         }
     }
 

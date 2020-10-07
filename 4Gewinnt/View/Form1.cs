@@ -12,7 +12,7 @@ namespace _4Gewinnt.View
     public partial class Form1 : Form
     {
         int anzZeilen = 0;
-        int anzSpalten = 0;+
+        int anzSpalten = 0;
         GameController Ctr;
 
         public Form1()
@@ -34,8 +34,8 @@ namespace _4Gewinnt.View
                 anzSpalten = Convert.ToInt32(tbSpalten.Text);
                 if (anzZeilen >= 5 && anzSpalten >= 5)
                 {
-                    Ctr = new GameController(anzZeilen, anzSpalten);
                     this.Hide();
+                    Ctr = new GameController(anzZeilen, anzSpalten);
                 }
                 else
                 {

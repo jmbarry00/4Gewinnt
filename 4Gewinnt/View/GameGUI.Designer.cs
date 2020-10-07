@@ -28,36 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.label1.Location = new System.Drawing.Point(12, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(260, 25);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Spieler 1: wähle eine Spalte!";
             // 
             // GameGUI
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(516, 273);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(774, 420);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "GameGUI";
             this.Text = "Vier Gewinnt";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GameClosing);
             this.Load += new System.EventHandler(this.GameGUI_Load);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
     }
 }

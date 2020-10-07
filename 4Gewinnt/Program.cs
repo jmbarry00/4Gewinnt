@@ -14,11 +14,14 @@ namespace _4Gewinnt
 
         public static void Main(string[] args)
         {
+            /*
             Parallel.Invoke(() =>
                 {
+                    */
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);
                     Application.Run(new Form1());
+                    /*
                 },
 
                 () =>
@@ -26,7 +29,7 @@ namespace _4Gewinnt
                     GameController gameTui = new GameController();
                 }
             );
-            
+            */
             
         }
     }

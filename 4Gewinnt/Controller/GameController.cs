@@ -1,18 +1,20 @@
-﻿using System;
-using System.Windows.Forms;
-using _4Gewinnt.Model;
+﻿using _4Gewinnt.Model;
 using _4Gewinnt.View;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace _4Gewinnt.Controller
 {
     public class GameController
     {
-        GameTUI tui;
-        GameGUI gui;
+        public GameTUI tui;
+        public GameGUI gui;
         public Spiel spiel;
         public Spielfeld spielfeld;
         public Spieler spieler;
-        int[,] feld;
+        public int[,] feld;
         public int anzZeilen;
         public int anzSpalten;
         bool spieler1Won;
@@ -23,72 +25,48 @@ namespace _4Gewinnt.Controller
         bool outOfBounds;
         bool spalteVoll;
 
-        private static GameController gcTUI;
-        private static GameController gcGUI;
-
-        public GameController()
-        {
-            this.tui = new GameTUI(this);
-        }
-
-        /*
-         public GameController()
-        {
-        this.tui = new GameTUI(this);
-        }
-
-        public static GameController getGCTUI()
-        {
-            if (gcTUI == null)
-            {
-                gcTUI = new GameController();
-            }
-            return gcTUI;
-        }
-        */
-        /*
         public GameController(int Zeilen, int Spalten)
         {
             anzZeilen = Zeilen;
             anzSpalten = Spalten;
+            spiel = new Spiel(anzZeilen, anzSpalten);
+            spiel.spielStarten();
+            spieler = spiel.spieler;
+            spielfeld = spiel.spielfeld;
+
             this.gui = new GameGUI(this);
-            gui.Show();
-        }
-        */
-        /*
-        public static GameController getGCGUI()
-        {
-            if (gcGUI == null)
-            {
-                gcGUI = new GameController();
+            this.tui = new GameTUI(this);
+
+            spielfeld.add(gui);
+            spielfeld.add(tui);
+            spieler.add(gui);
+            spieler.add(tui);
+            spielfeld.addDisplay(gui);
+            spielfeld.addDisplay(tui);
+
+            feld = spielfeld.Feld;
+            spieler1Won = spielfeld.Spieler1Won;
+            spieler2Won = spielfeld.Spieler2Won;
+            unentschieden = spielfeld.Unentschieden;
+            player1 = spieler.Spieler1;
+            player2 = spieler.Spieler2;
+            outOfBounds = spielfeld.OutOfBounds;
+            spalteVoll = spielfeld.SpalteVoll;
+            spielfeld.zeilenY = Zeilen;
+            spielfeld.spaltenX = Spalten;
+
+            ControllerGetModelData();
+
+            Parallel.Invoke(
+            () => {
+                tui.Playing();
+            },
+            () => {
+                gui.ShowDialog();
             }
-            return gcGUI;
+        );
+
         }
-        */
-        /*
-        public void AnzZeilenSpaltenTUI(int anzZeilen, int anzSpalten)
-        {
-            spiel = new Spiel(anzZeilen, anzSpalten);
-            spiel.spielStarten();
-            spieler = spiel.spieler;
-            spielfeld = spiel.spielfeld;
-            feld = spielfeld.feld;
-            player1 = spieler.player1;
-            player2 = spieler.player2;
-        }
-        */
-        /*
-        public void AnzZeilenSpaltenGUI()
-        {
-            spiel = new Spiel(anzZeilen, anzSpalten);
-            spiel.spielStarten();
-            spieler = spiel.spieler;
-            spielfeld = spiel.spielfeld;
-            feld = spielfeld.feld;
-            player1 = spieler.player1;
-            player2 = spieler.player2;
-        }
-        */
 
 
         private void ControllerGetModelData()
@@ -155,7 +133,7 @@ namespace _4Gewinnt.Controller
             return spieler2Won;
         }
 
-        
+
 
         public void setViewData(int[,] feld, bool spieler1Won, bool spieler2Won, bool unentschieden, bool player1, bool player2, bool outOfBounds, bool spalteVoll)
         {
@@ -170,14 +148,12 @@ namespace _4Gewinnt.Controller
         }
 
 
-
-        
         public void Spielen(int gewSpalte)
         {
             spielfeld.FeldBesetzen(gewSpalte, spieler);
             ControllerGetModelData();
         }
-        
+
 
     }
 }

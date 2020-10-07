@@ -7,13 +7,14 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Text;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _4Gewinnt.View
 {
-    public partial class GameGUI : Form
+    public partial class GameGUI : Form, IObserver, IDisplay
     {
         int Y;
         int X;
@@ -27,35 +28,24 @@ namespace _4Gewinnt.View
         Button[] button;
         int gewSpalte;
 
+        private Label label1;
+
+
         bool spieler1Won;
         bool spieler2Won;
         bool unentschieden;
         bool outOfBounds;
         bool spalteVoll;
 
-        //private static GameGUI gameGUI;
 
         public GameGUI(GameController ctr)
         {
             InitializeComponent();
             this.Ctr = ctr;
-            Ctr.AnzZeilenSpaltenGUI();
-            Y = Ctr.anzZeilen;
-            X = Ctr.anzSpalten;
             spieler = Ctr.spieler;
             spielfeld = Ctr.spielfeld;
+            label1 = new Label();
         }
-
-        /*
-        public static GameGUI getGUI()
-        {
-            if (gameGUI == null)
-            {
-                gameGUI = new GameGUI(Ctr);
-            }
-            return gameGUI;
-        }
-        */
 
         private void GameClosing(object sender, FormClosingEventArgs e)
         {
@@ -84,6 +74,11 @@ namespace _4Gewinnt.View
             panel = new Panel[Y, X];    //Spielfeld besteht aus Panels
             button = new Button[X];     //Buttons über jeder Spalte
 
+            this.Controls.Add(label1);
+            label1.Location = new Point(15, 15);
+            label1.Font = new Font("Arial", 15);
+            label1.Text = spielfeld.Text;
+            label1.Width = 300;
             int bottom = 30;
             int panelHeight = 60;
             int panelWidth = 60;
@@ -123,16 +118,22 @@ namespace _4Gewinnt.View
             }
         }
 
+        public void setLabel1Text(string lb1Text)
+        {
+            label1.Text = lb1Text;
+        }
+
         //Spalte an Programm übergeben
         private void ButtonClick(object sender, EventArgs e)
         {
             Button btn = sender as Button;
-            gewSpalte = Convert.ToInt32(btn.Name);
+            spielfeld.gewSpalte = Convert.ToInt32(btn.Name);
+            Console.WriteLine(btn.Name);
             Playing();
         }
 
         //Spieler 1 => Roter Spielstein, Spieler 2 => Blauer Spielstein
-        private void Spielsteine()
+        public void Spielsteine()
         {
             for (int s = 0; s < X; s++)
             {
@@ -147,26 +148,29 @@ namespace _4Gewinnt.View
                     {
                         panel[z, s].BackColor = Color.Blue;
                     }
-                    else
+                    else 
                     {
                         panel[z, s].BackColor = Color.Transparent;
                     }
                 }
             }
+            
         }
 
         //User-Input: Neustart ja/nein
-        private void Neustart()
+        public void Neustart()
         {
             String endStatus;
-            Spielsteine();
+            spielfeld.notifyDisplays();
             if (spieler1Won)
             {
                 label1.Text = "Spieler 1 hat gewonnen!";
+                Console.WriteLine("Spieler 1 hat gewonnen!");
             }
             else if (spieler2Won)
             {
                 label1.Text = "Spieler 2 hat gewonnen!";
+                Console.WriteLine("Spieler 2 hat gewonnen!");
             }
             else
             {
@@ -214,12 +218,11 @@ namespace _4Gewinnt.View
                 this.Hide();
             }
 
-            //neustart = null;
             Ctr.setViewData(feld, spieler1Won, spieler2Won, unentschieden, player1, player2, outOfBounds, spalteVoll);
             Ctr.updateModelData();
         }
 
-        private void Game()
+        public void Game()
         {
             Ctr.Spielen(gewSpalte);
             getControllerData();
@@ -227,7 +230,8 @@ namespace _4Gewinnt.View
             if (spalteVoll == true)
             {
                 MessageBox.Show("Diese Spalte ist schon voll!");
-                spalteVoll = false;
+                Console.WriteLine("Diese Spalte ist schon voll!");
+                spielfeld.SpalteVoll = false;
             }
 
             Ctr.setViewData(feld, spieler1Won, spieler2Won, unentschieden, player1, player2, outOfBounds, spalteVoll);
@@ -238,17 +242,41 @@ namespace _4Gewinnt.View
                 Neustart();
             }
 
-            Spielsteine();
+            spielfeld.notifyDisplays();
 
             if (player1 == true)
             {
                 label1.Text = "Spieler 1: wähle eine Spalte!";
+                Console.WriteLine("Spieler 1: wähle eine Spalte!");
             }
-            else
+            else 
             {
                 label1.Text = "Spieler 2: wähle eine Spalte!";
+                Console.WriteLine("Spieler 2: wähle eine Spalte!");
             }
         }
 
+        public void update()
+        {
+            X = spielfeld.spaltenX;
+            Y = spielfeld.zeilenY;
+            gewSpalte = spielfeld.gewSpalte;
+            feld = spielfeld.Feld;
+            spieler1Won = spielfeld.Spieler1Won;
+            spieler2Won = spielfeld.Spieler2Won;
+            unentschieden = spielfeld.Unentschieden;
+            player1 = spieler.Spieler1;
+            player2 = spieler.Spieler2;
+            outOfBounds = spielfeld.OutOfBounds;
+            spalteVoll = spielfeld.SpalteVoll;
+            
+        }
+
+        public void Spielfeld()
+        {
+            
+            Spielsteine();
+            this.setLabel1Text("");
+        }
     }
 }
