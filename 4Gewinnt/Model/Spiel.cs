@@ -19,7 +19,7 @@
         public void spielStarten()
         {
             spieler.player1 = true;
-            spielfeld = new Spielfeld(Y, X);
+            spielfeld = new Spielfeld(Y, X);    
         }
     }
 }

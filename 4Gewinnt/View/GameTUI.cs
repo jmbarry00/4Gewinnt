@@ -10,8 +10,6 @@ namespace _4Gewinnt.View
 
         int Y;
         int X;
-        int anzSpalten = 0;
-        int anzZeilen = 0;
         GameController Ctr;
         Spielfeld spielfeld;
         Spieler spieler;
@@ -136,20 +134,20 @@ namespace _4Gewinnt.View
         public void endOutput()
         {
             SpielfeldZeichnen();
-            if (spielfeld.Spieler1Won)
+            if (Ctr.Spieler1Won)
             {
                 Console.WriteLine("Spieler 1 hat gewonnen!");
-                spielfeld.Text = "Spieler 1 hat gewonnen!";
+                Ctr.Text = "Spieler 1 hat gewonnen!";
             }
-            else if (spielfeld.Spieler2Won)
+            else if (Ctr.Spieler2Won)
             {
                 Console.WriteLine("Spieler 2 hat gewonnen!");
-                spielfeld.Text = "Spieler 2 hat gewonnen!";
+                Ctr.Text = "Spieler 2 hat gewonnen!";
             }
             else
             {
                 Console.WriteLine("unentschieden!");
-                spielfeld.Text = "unenschieden!";
+                Ctr.Text = "unenschieden!";
             }
 
             Console.WriteLine("Spiel neustarten? y/n:");
@@ -159,7 +157,7 @@ namespace _4Gewinnt.View
         private void Neustart()
         {
             endOutput();
-            spielfeld.Neustart = true;
+            Ctr.Neustart = true;
             /*
             while (neustart != "y" && neustart != "n")
             {
@@ -205,8 +203,9 @@ namespace _4Gewinnt.View
                     Console.WriteLine("Falscher Wert!");
                 }
             }
-            */
+            
             neustart = null;
+            */
             Ctr.setViewData(feld, spieler1Won, spieler2Won, unentschieden, player1, player2, outOfBounds, spalteVoll);
             Ctr.updateModelData();
         }
@@ -219,12 +218,12 @@ namespace _4Gewinnt.View
                 if (player1 == true)
                 {
                     Console.WriteLine("Spieler 1, wähle eine Spalte: ");
-                    spielfeld.Text = "Spieler 1, wähle eine Spalte: ";
+                    Ctr.Text = "Spieler 1, wähle eine Spalte: ";
                 }
                 else
                 {
                     Console.WriteLine("Spieler 2, wähle eine Spalte: ");
-                    spielfeld.Text = "Spieler 2, wähle eine Spalte: ";
+                    Ctr.Text = "Spieler 2, wähle eine Spalte: ";
                 }
 
                 //User-Input: Spalte wählen
@@ -252,7 +251,7 @@ namespace _4Gewinnt.View
             SpielfeldZeichnen();
             while (true)
             {
-                spielfeld.gewSpalte = SpalteWaehlen();
+                Ctr.gewSpalte = SpalteWaehlen();
 
                 if (gewSpalte >= 0)
                 {
@@ -274,7 +273,7 @@ namespace _4Gewinnt.View
                 if (spalteVoll)
                 {
                     Console.WriteLine("Diese Spalte ist schon voll!");
-                    spielfeld.SpalteVoll = false;
+                    Ctr.SpalteVoll = false;
                 }
 
                 //update Data of GameTui
@@ -289,7 +288,7 @@ namespace _4Gewinnt.View
                 }
                 else
                 {
-                    spielfeld.notifyDisplays();
+                    Ctr.notifyDisplays();
                 }
             }
 
@@ -298,18 +297,18 @@ namespace _4Gewinnt.View
 
         public void update()
         {
-            X = spielfeld.spaltenX;
-            Y = spielfeld.zeilenY;
-            gewSpalte = spielfeld.gewSpalte;
-            feld = spielfeld.Feld;
-            spieler1Won = spielfeld.Spieler1Won;
-            spieler2Won = spielfeld.Spieler2Won;
-            unentschieden = spielfeld.Unentschieden;
-            player1 = spieler.Spieler1;
-            player2 = spieler.Spieler2;
-            outOfBounds = spielfeld.OutOfBounds;
-            spalteVoll = spielfeld.SpalteVoll;
-            text = spielfeld.Text;
+            X = Ctr.spaltenX;
+            Y = Ctr.zeilenY;
+            gewSpalte = Ctr.gewSpalte;
+            feld = Ctr.Feld;
+            spieler1Won = Ctr.Spieler1Won;
+            spieler2Won = Ctr.Spieler2Won;
+            unentschieden = Ctr.Unentschieden;
+            player1 = Ctr.Spieler1;
+            player2 = Ctr.Spieler2;
+            outOfBounds = Ctr.OutOfBounds;
+            spalteVoll = Ctr.SpalteVoll;
+            text = Ctr.Text;
         }
 
         public void Spielfeld()

@@ -4,32 +4,25 @@ using System.Collections.Generic;
 
 namespace _4Gewinnt
 {
-    public class Spielfeld : IObservable
+    public class Spielfeld
     {
         public int ZeilenY;
         public int SpaltenX;
         public int[,] feld;
-        public int posX;
-        public int posY;
         public int gewaehlteSpalte = -1;
         int spalteP1 = 0;
         int zeileP1 = 0;
         int spalteP2 = 0;
         int zeileP2 = 0;
 
-
         public bool spieler1Won = false;
         public bool spieler2Won = false;
         public bool unentschieden = false;
         public bool outOfBounds = false;
         public bool spalteVoll = false;
-        String labelText;
-        bool neustart = false;
+        public bool neustart = false;
         //bool guiNeustart = false;
         //bool tuiNeustart = false;
-
-        List<IObserver> observers = new List<IObserver>();
-        List<IDisplay> displays = new List<IDisplay>();
 
         //Konstruktor für das Spielfeld
         public Spielfeld(int zeilenY, int spaltenX)
@@ -164,9 +157,6 @@ namespace _4Gewinnt
                 }
             }
 
-
-
-
             //Gewinnberechnung waagrecht Spieler 2
             for (int z = 0; z < ZeilenY; z++)
             {
@@ -264,168 +254,5 @@ namespace _4Gewinnt
             }
         }
 
-        public int gewSpalte
-        {
-            get { return gewaehlteSpalte; }
-            set
-            {
-                gewaehlteSpalte = value;
-                notify();
-            }
-        }
-
-        public bool Spieler1Won
-        {
-            get { return spieler1Won; }
-            set
-            {
-                spieler1Won = value;
-                notify();
-            }
-        }
-
-        public bool Spieler2Won
-        {
-            get { return spieler2Won; }
-            set
-            {
-                spieler2Won = value;
-                notify();
-            }
-        }
-
-        public bool Unentschieden
-        {
-            get { return unentschieden; }
-            set
-            {
-                unentschieden = value;
-                notify();
-            }
-        }
-
-        public bool OutOfBounds
-        {
-            get { return outOfBounds; }
-            set
-            {
-                outOfBounds = value;
-                notify();
-            }
-        }
-
-        public bool SpalteVoll
-        {
-            get { return spalteVoll; }
-            set
-            {
-                spalteVoll = value;
-                notify();
-            }
-        }
-
-        public String Text
-        {
-            get { return labelText; }
-            set
-            {
-                labelText = value;
-                notify();
-            }
-        }
-
-        public bool Neustart
-        {
-            get { return neustart; }
-            set
-            {
-                neustart = value;
-                notify();
-            }
-        }
-        /*
-        public bool GUINeustart
-        {
-            get { return guiNeustart; }
-            set
-            {
-                guiNeustart = value;
-                notify();
-            }
-        }
-        
-
-        public bool TUINeustart
-        {
-            get { return tuiNeustart; }
-            set
-            {
-                tuiNeustart = value;
-                notify();
-            }
-        }
-        */
-        public int zeilenY
-        {
-            get { return ZeilenY; }
-            set
-            {
-                ZeilenY = value;
-                notify();
-            }
-        }
-
-        public int spaltenX
-        {
-            get { return SpaltenX; }
-            set
-            {
-                SpaltenX = value;
-                notify();
-            }
-        }
-
-
-        public int[,] Feld
-        {
-            get { return feld; }
-            set
-            {
-                feld = value;
-                notify();
-            }
-        }
-
-        public void add(IObserver observer)
-        {
-            this.observers.Add(observer);
-        }
-
-        public void addDisplay(IDisplay display)
-        {
-            this.displays.Add(display);
-        }
-
-        public void remove(IObserver observer)
-        {
-            this.observers.Remove(observer);
-        }
-
-        public void notify()
-        {
-
-            foreach (IObserver observer in this.observers)
-            {
-                observer.update();
-
-            }
-        }
-        public void notifyDisplays()
-        {
-            foreach (IDisplay display in this.displays)
-            {
-                display.Spielfeld();
-            }
-        }
     }
 }
