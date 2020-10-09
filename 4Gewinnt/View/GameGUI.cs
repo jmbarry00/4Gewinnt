@@ -10,22 +10,22 @@ namespace _4Gewinnt.View
     {
         int Y;
         int X;
-        GameController Ctr;
-        Spielfeld spielfeld;
-        Spieler spieler;
-        bool player1;
-        bool player2;
         int[,] feld;
+        int gewSpalte;
+        readonly GameController Ctr;
+        readonly Spieler spieler;
+        readonly Label label1;
         Panel[,] panel;
         Button[] button;
-        int gewSpalte;
+        DialogResult neustart;
         String labelText;
         String endStatus;
-        private Label label1;
-        DialogResult neustart;
-        bool lastActionAtGUI = false;
+
         public delegate void UpdateTextCallback(string text);
 
+        bool lastActionAtGUI = false;
+        bool player1;
+        bool player2;
         bool spieler1Won;
         bool spieler2Won;
         bool unentschieden;
@@ -38,7 +38,6 @@ namespace _4Gewinnt.View
             InitializeComponent();
             this.Ctr = ctr;
             spieler = Ctr.spieler;
-            spielfeld = Ctr.spielfeld;
             label1 = new Label();
         }
 
@@ -49,19 +48,19 @@ namespace _4Gewinnt.View
 
         public void Playing()
         {
-            getControllerData();
+            GetControllerData();
             Game();
         }
 
-        private void getControllerData()
+        private void GetControllerData()
         {
-            feld = Ctr.getFeld();
-            spieler1Won = Ctr.getSpieler1Won();
-            spieler2Won = Ctr.getSpieler2Won();
-            unentschieden = Ctr.getUnentschieden();
-            player1 = Ctr.getPlayer1();
-            player2 = Ctr.getPlayer2();
-            spalteVoll = Ctr.getSpalteVoll();
+            feld = Ctr.GetFeld();
+            spieler1Won = Ctr.GetSpieler1Won();
+            spieler2Won = Ctr.GetSpieler2Won();
+            unentschieden = Ctr.GetUnentschieden();
+            player1 = Ctr.GetPlayer1();
+            player2 = Ctr.GetPlayer2();
+            spalteVoll = Ctr.GetSpalteVoll();
         }
 
         private void GameGUI_Load(object sender, EventArgs e)
@@ -113,7 +112,7 @@ namespace _4Gewinnt.View
             }
         }
 
-        private void setLabel1Text(string lb1Text)
+        private void SetLabel1Text(string lb1Text)
         {
             label1.Text = lb1Text;
         }
@@ -122,7 +121,7 @@ namespace _4Gewinnt.View
         private void ButtonClick(object sender, EventArgs e)
         {
             Button btn = sender as Button;
-            Ctr.gewSpalte = Convert.ToInt32(btn.Name);
+            Ctr.GewSpalte = Convert.ToInt32(btn.Name);
             Console.WriteLine(btn.Name);
             Playing();
         }
@@ -149,7 +148,6 @@ namespace _4Gewinnt.View
                     }
                 }
             }
-
         }
 
         //User-Input: Neustart ja/nein
@@ -157,21 +155,21 @@ namespace _4Gewinnt.View
         {
             if (lastActionAtGUI)
             {
-                Ctr.tui.endOutput();
+                Ctr.tui.EndOutput();
                 lastActionAtGUI = false;
             }
             Spielsteine();
             if (spieler1Won)
             {
-                label1.Text = "Spieler 1 hat gewonnen!";
+                label1.Text = Ctr.Text;
             }
             else if (spieler2Won)
             {
-                label1.Text = "Spieler 2 hat gewonnen!";
+                label1.Text = Ctr.Text;
             }
             else
             {
-                label1.Text = "unentschieden!";
+                label1.Text = Ctr.Text;
             }
 
             if (label1.Text == "unentschieden!")
@@ -215,25 +213,24 @@ namespace _4Gewinnt.View
                 Environment.Exit(0);
             }
 
-            Ctr.setViewData(feld, spieler1Won, spieler2Won, unentschieden, player1, player2, outOfBounds, spalteVoll);
-            Ctr.updateModelData();
+            Ctr.SetViewData(feld, spieler1Won, spieler2Won, unentschieden, player1, player2, outOfBounds, spalteVoll);
+            Ctr.UpdateModelData();
         }
 
         public void Game()
         {
             Ctr.Spielen(gewSpalte);
-            getControllerData();
+            GetControllerData();
 
             if (spalteVoll)
             {
-
                 Console.WriteLine("Diese Spalte ist schon voll!");
                 MessageBox.Show("Diese Spalte ist schon voll!");
                 Ctr.SpalteVoll = false;
             }
 
-            Ctr.setViewData(feld, spieler1Won, spieler2Won, unentschieden, player1, player2, outOfBounds, spalteVoll);
-            Ctr.updateModelData();
+            Ctr.SetViewData(feld, spieler1Won, spieler2Won, unentschieden, player1, player2, outOfBounds, spalteVoll);
+            Ctr.UpdateModelData();
 
             if (spieler1Won || spieler2Won || unentschieden)
             {
@@ -241,25 +238,27 @@ namespace _4Gewinnt.View
                 Neustart();
             }
 
-            Ctr.notifyDisplays();
+            Ctr.NotifyDisplays();
 
             if (player1)
             {
-                label1.Text = "Spieler 1, wähle eine Spalte:";
-                Console.WriteLine("Spieler 1, wähle eine Spalte:");
+                Ctr.Text = "Spieler 1, wähle eine Spalte:";
+                label1.Text = Ctr.Text;
+                Console.WriteLine(Ctr.Text);
             }
             else
             {
-                label1.Text = "Spieler 2, wähle eine Spalte:";
-                Console.WriteLine("Spieler 2, wähle eine Spalte:");
+                Ctr.Text = "Spieler 2, wähle eine Spalte:";
+                label1.Text = Ctr.Text;
+                Console.WriteLine(Ctr.Text);
             }
         }
 
-        public void update()
+        public new void Update()
         {
             X = Ctr.SpaltenX;
-            Y = spielfeld.ZeilenY;
-            gewSpalte = Ctr.gewSpalte;
+            Y = Ctr.ZeilenY;
+            gewSpalte = Ctr.GewSpalte;
             feld = Ctr.Feld;
             spieler1Won = Ctr.Spieler1Won;
             spieler2Won = Ctr.Spieler2Won;
@@ -270,18 +269,17 @@ namespace _4Gewinnt.View
             spalteVoll = Ctr.SpalteVoll;
             labelText = Ctr.Text;
 
-            if (Ctr.gewSpalte >= 0)
+            if (Ctr.GewSpalte >= 0)
             {
-                Invoke(new UpdateTextCallback(setLabel1Text), labelText);
+                Invoke(new UpdateTextCallback(SetLabel1Text), labelText);
             }
 
             if (Ctr.Neustart == true)
             {
-                Ctr.Neustart = false;   
+                Ctr.Neustart = false;
                 Neustart();
-                Ctr.notifyDisplays();
+                Ctr.NotifyDisplays();
             }
-
         }
 
         public void Spielfeld()

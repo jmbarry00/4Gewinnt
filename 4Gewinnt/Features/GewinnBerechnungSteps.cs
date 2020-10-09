@@ -58,7 +58,7 @@ namespace _4Gewinnt.Features
 
 
         [Given(@"It's Spieler(.*) turn")]
-        public void GivenItSSpielerTurn(int p0)
+        public void GivenItSSpielerTurn()
         {
             _spieler = new Spieler();
             _spielfeld = new Spielfeld(6, 7);
@@ -67,7 +67,7 @@ namespace _4Gewinnt.Features
 
 
         [When(@"(.*) Spielsteine of Spieler (.*) are side by side")]
-        public void WhenSpielsteineOfSpielerAreSideBySide(int p0, int p1)
+        public void WhenSpielsteineOfSpielerAreSideBySide()
         {
             //diagonal
             _spielfeld.feld[0, 0] = 1;

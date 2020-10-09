@@ -2,8 +2,8 @@
 {
     interface IObservable
     {
-        void add(IObserver observer);
-        void remove(IObserver observer);
-        void notify();
+        void Add(IObserver observer);
+        void Remove(IObserver observer);
+        void Notify();
     }
 }

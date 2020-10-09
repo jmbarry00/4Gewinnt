@@ -19,13 +19,13 @@ namespace _4Gewinnt.Features
         }
 
         [Then(@"It's Spieler (.*) turn")]
-        public void ThenItSSpielerTurn(int p0)
+        public void ThenItSSpielerTurn()
         {
             _spieler.player1.Should().BeTrue();
         }
 
-        [When(@"Spieler (.*) chooses the coloumn (.*) on Spielfeld")]
-        public void WhenSpielerChoosesTheColoumnOnSpielfeld(int p0, int p1)
+        [When(@"Spieler chooses the coloumn (.*) on Spielfeld")]
+        public void WhenSpielerChoosesTheColoumnOnSpielfeld(int p1)
         {
             _spielfeld.FeldBesetzen(p1, _spieler);
         }
@@ -38,10 +38,12 @@ namespace _4Gewinnt.Features
         }
 
         [Given(@"Spieler (.*) turn")]
-        public void GivenSpielerTurn(int p0)
+        public void GivenSpielerTurn()
         {
-            _spieler = new Spieler();
-            _spieler.player1 = true;
+            _spieler = new Spieler
+            {
+                player1 = true
+            };
         }
 
 
@@ -53,7 +55,7 @@ namespace _4Gewinnt.Features
         }
 
         [Then(@"It should be Player (.*) turn")]
-        public void ThenItShouldBePlayerTurn(int p0)
+        public void ThenItShouldBePlayerTurn()
         {
             _spieler.player2.Should().BeTrue();
         }

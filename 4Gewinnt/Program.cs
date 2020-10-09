@@ -6,7 +6,7 @@ namespace _4Gewinnt
     class Program
     {
 
-        public static void Main(string[] args)
+        public static void Main()
         {
             /*
             Parallel.Invoke(() =>
@@ -24,7 +24,6 @@ namespace _4Gewinnt
         }
     );
     */
-
         }
     }
 }

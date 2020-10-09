@@ -14,8 +14,8 @@ namespace _4Gewinnt.Controller
         public Spielfeld spielfeld;
         public Spieler spieler;
         public int[,] feld;
-        int anzZeilen;
-        int anzSpalten;
+        readonly int anzZeilen;
+        readonly int anzSpalten;
         bool spieler1Won;
         bool spieler2Won;
         bool unentschieden;
@@ -30,25 +30,25 @@ namespace _4Gewinnt.Controller
         public int spaltenX;
         public int gewaehlteSpalte = -1;
 
-        List<IObserver> observers = new List<IObserver>();
-        List<IDisplay> displays = new List<IDisplay>();
+        readonly List<IObserver> observers = new List<IObserver>();
+        readonly List<IDisplay> displays = new List<IDisplay>();
 
         public GameController(int Zeilen, int Spalten)
         {
             anzZeilen = Zeilen;
             anzSpalten = Spalten;
             spiel = new Spiel(anzZeilen, anzSpalten);
-            spiel.spielStarten();
+            spiel.SpielStarten();
             spieler = spiel.spieler;
             spielfeld = spiel.spielfeld;
 
             this.gui = new GameGUI(this);
             this.tui = new GameTUI(this);
 
-            this.add(gui);
-            this.add(tui);
-            this.addDisplay(gui);
-            this.addDisplay(tui);
+            this.Add(gui);
+            this.Add(tui);
+            this.AddDisplay(gui);
+            this.AddDisplay(tui);
 
             feld = this.Feld;
             spieler1Won = this.Spieler1Won;
@@ -73,7 +73,6 @@ namespace _4Gewinnt.Controller
                 gui.ShowDialog();
             }
         );
-
         }
 
 
@@ -89,7 +88,7 @@ namespace _4Gewinnt.Controller
             spalteVoll = spielfeld.spalteVoll;
         }
 
-        public void updateModelData()
+        public void UpdateModelData()
         {
             spielfeld.feld = feld;
             spielfeld.spieler1Won = spieler1Won;
@@ -101,49 +100,49 @@ namespace _4Gewinnt.Controller
             spielfeld.spalteVoll = spalteVoll;
         }
 
-        public int[,] getFeld()
+        public int[,] GetFeld()
         {
             return feld;
         }
 
-        public bool getPlayer1()
+        public bool GetPlayer1()
         {
             return player1;
         }
 
-        public bool getPlayer2()
+        public bool GetPlayer2()
         {
             return player2;
         }
 
-        public bool getOutOfBounds()
+        public bool GetOutOfBounds()
         {
             return outOfBounds;
         }
 
-        public bool getSpalteVoll()
+        public bool GetSpalteVoll()
         {
             return spalteVoll;
         }
 
-        public bool getUnentschieden()
+        public bool GetUnentschieden()
         {
             return unentschieden;
         }
 
-        public bool getSpieler1Won()
+        public bool GetSpieler1Won()
         {
             return spieler1Won;
         }
 
-        public bool getSpieler2Won()
+        public bool GetSpieler2Won()
         {
             return spieler2Won;
         }
 
 
 
-        public void setViewData(int[,] feld, bool spieler1Won, bool spieler2Won, bool unentschieden, bool player1, bool player2, bool outOfBounds, bool spalteVoll)
+        public void SetViewData(int[,] feld, bool spieler1Won, bool spieler2Won, bool unentschieden, bool player1, bool player2, bool outOfBounds, bool spalteVoll)
         {
             this.feld = feld;
             this.spieler1Won = spieler1Won;
@@ -162,13 +161,13 @@ namespace _4Gewinnt.Controller
             ControllerGetModelData();
         }
 
-        public int gewSpalte
+        public int GewSpalte
         {
             get { return gewaehlteSpalte; }
             set
             {
                 gewaehlteSpalte = value;
-                notify();
+                Notify();
             }
         }
 
@@ -178,7 +177,7 @@ namespace _4Gewinnt.Controller
             set
             {
                 spieler1Won = value;
-                notify();
+                Notify();
             }
         }
 
@@ -188,7 +187,7 @@ namespace _4Gewinnt.Controller
             set
             {
                 spieler2Won = value;
-                notify();
+                Notify();
             }
         }
 
@@ -198,7 +197,7 @@ namespace _4Gewinnt.Controller
             set
             {
                 unentschieden = value;
-                notify();
+                Notify();
             }
         }
 
@@ -208,7 +207,7 @@ namespace _4Gewinnt.Controller
             set
             {
                 outOfBounds = value;
-                notify();
+                Notify();
             }
         }
 
@@ -218,7 +217,7 @@ namespace _4Gewinnt.Controller
             set
             {
                 spalteVoll = value;
-                notify();
+                Notify();
             }
         }
 
@@ -228,7 +227,7 @@ namespace _4Gewinnt.Controller
             set
             {
                 labelText = value;
-                notify();
+                Notify();
             }
         }
 
@@ -238,38 +237,17 @@ namespace _4Gewinnt.Controller
             set
             {
                 neustart = value;
-                notify();
+                Notify();
             }
         }
-        /*
-        public bool GUINeustart
-        {
-            get { return guiNeustart; }
-            set
-            {
-                guiNeustart = value;
-                notify();
-            }
-        }
-        
-
-        public bool TUINeustart
-        {
-            get { return tuiNeustart; }
-            set
-            {
-                tuiNeustart = value;
-                notify();
-            }
-        }
-        */
+       
         public int ZeilenY
         {
             get { return zeilenY; }
             set
             {
                 zeilenY = value;
-                notify();
+                Notify();
             }
         }
 
@@ -279,10 +257,9 @@ namespace _4Gewinnt.Controller
             set
             {
                 spaltenX = value;
-                notify();
+                Notify();
             }
         }
-
 
         public int[,] Feld
         {
@@ -290,7 +267,7 @@ namespace _4Gewinnt.Controller
             set
             {
                 feld = value;
-                notify();
+                Notify();
             }
         }
 
@@ -300,7 +277,7 @@ namespace _4Gewinnt.Controller
             set
             {
                 player1 = value;
-                notify();
+                Notify();
             }
         }
 
@@ -310,33 +287,33 @@ namespace _4Gewinnt.Controller
             set
             {
                 player2 = value;
-                notify();
+                Notify();
             }
         }
 
-        public void add(IObserver observer)
+        public void Add(IObserver observer)
         {
             this.observers.Add(observer);
         }
 
-        public void addDisplay(IDisplay display)
+        public void AddDisplay(IDisplay display)
         {
             this.displays.Add(display);
         }
 
-        public void remove(IObserver observer)
+        public void Remove(IObserver observer)
         {
             this.observers.Remove(observer);
         }
 
-        public void notify()
+        public void Notify()
         {
             foreach (IObserver observer in this.observers)
             {
-                observer.update();
+                observer.Update();
             }
         }
-        public void notifyDisplays()
+        public void NotifyDisplays()
         {
             foreach (IDisplay display in this.displays)
             {

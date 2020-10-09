@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace _4Gewinnt.Model
+﻿namespace _4Gewinnt.Model
 {
     public class Spieler
     {
@@ -12,7 +10,5 @@ namespace _4Gewinnt.Model
             player1 = (player1 == true) ? false : true;
             player2 = (player2 == true) ? false : true;
         }
-
-
     }
 }

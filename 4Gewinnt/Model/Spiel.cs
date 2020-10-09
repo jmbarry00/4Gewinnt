@@ -4,8 +4,8 @@
     {
         public Spieler spieler;
         public Spielfeld spielfeld;
-        int Y;
-        int X;
+        readonly int Y;
+        readonly int X;
 
 
         public Spiel(int y, int x)
@@ -16,10 +16,10 @@
         }
 
         //Beim Start fängt Spieler 1 an und ein Feld wird erstellt
-        public void spielStarten()
+        public void SpielStarten()
         {
             spieler.player1 = true;
-            spielfeld = new Spielfeld(Y, X);    
+            spielfeld = new Spielfeld(Y, X);
         }
     }
 }

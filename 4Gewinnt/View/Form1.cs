@@ -8,7 +8,6 @@ namespace _4Gewinnt.View
     {
         int anzZeilen = 0;
         int anzSpalten = 0;
-        GameController Ctr;
 
         public Form1()
         {
@@ -21,7 +20,7 @@ namespace _4Gewinnt.View
         }
 
         //Anzahl Zeilen und Spalten dem Programm übergeben
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             try
             {
@@ -30,7 +29,7 @@ namespace _4Gewinnt.View
                 if (anzZeilen >= 5 && anzSpalten >= 5)
                 {
                     this.Hide();
-                    Ctr = new GameController(anzZeilen, anzSpalten);
+                    GameController Ctr = new GameController(anzZeilen, anzSpalten);
                 }
                 else
                 {

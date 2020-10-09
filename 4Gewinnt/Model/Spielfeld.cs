@@ -1,6 +1,4 @@
 ﻿using _4Gewinnt.Model;
-using System;
-using System.Collections.Generic;
 
 namespace _4Gewinnt
 {
@@ -21,8 +19,6 @@ namespace _4Gewinnt
         public bool outOfBounds = false;
         public bool spalteVoll = false;
         public bool neustart = false;
-        //bool guiNeustart = false;
-        //bool tuiNeustart = false;
 
         //Konstruktor für das Spielfeld
         public Spielfeld(int zeilenY, int spaltenX)
@@ -53,7 +49,6 @@ namespace _4Gewinnt
                         spalteVoll = true;
                         return;
                     }
-
                 }
             }
             else
@@ -76,10 +71,7 @@ namespace _4Gewinnt
                 feld[y, x] = 2;
                 GewinnBerechnung();
                 spieler.SwitchPlayer();
-
             }
-
-
         }
 
         //Nach jedem Zug wird geprüft, ob ein Sieger vorhanden ist
@@ -253,6 +245,5 @@ namespace _4Gewinnt
                 return false;
             }
         }
-
     }
 }
