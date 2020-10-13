@@ -29,7 +29,7 @@ namespace _4Gewinnt.View
                 if (anzZeilen >= 5 && anzSpalten >= 5)
                 {
                     this.Hide();
-                    GameController Ctr = new GameController(anzZeilen, anzSpalten);
+                    GameController Ctr = GameController.GetInstance(anzZeilen, anzSpalten);
                 }
                 else
                 {

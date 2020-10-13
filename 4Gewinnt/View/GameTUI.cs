@@ -22,11 +22,21 @@ namespace _4Gewinnt.View
         bool outOfBounds;
         bool spalteVoll;
 
+        private static GameTUI _instance;
 
         //Game Konstruktor: User-Input Anzahl Zeilen und Spalten, X und Y setzen und Spiel starten
-        public GameTUI(GameController ctr)
+        private GameTUI(GameController ctr)
         {
             this.Ctr = ctr;
+        }
+
+        public static GameTUI GetInstance(GameController ctr)
+        {
+            if (_instance == null)
+            {
+                _instance = new GameTUI(ctr);
+            }
+            return _instance;
         }
 
         private void GetControllerData()

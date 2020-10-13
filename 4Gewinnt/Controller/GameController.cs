@@ -14,8 +14,6 @@ namespace _4Gewinnt.Controller
         public Spielfeld spielfeld;
         public Spieler spieler;
         public int[,] feld;
-        readonly int anzZeilen;
-        readonly int anzSpalten;
         bool spieler1Won;
         bool spieler2Won;
         bool unentschieden;
@@ -33,23 +31,25 @@ namespace _4Gewinnt.Controller
         readonly List<IObserver> observers = new List<IObserver>();
         readonly List<IDisplay> displays = new List<IDisplay>();
 
-        public GameController(int Zeilen, int Spalten)
+        private static GameController _instance;
+
+        private GameController(int Zeilen, int Spalten)
         {
-            anzZeilen = Zeilen;
-            anzSpalten = Spalten;
+            int anzZeilen = Zeilen;
+            int anzSpalten = Spalten;
             spiel = new Spiel(anzZeilen, anzSpalten);
             spiel.SpielStarten();
             spieler = spiel.spieler;
             spielfeld = spiel.spielfeld;
 
-            this.gui = new GameGUI(this);
-            this.tui = new GameTUI(this);
+            this.gui = GameGUI.GetInstance(this);
+            this.tui = GameTUI.GetInstance(this);
 
             this.Add(gui);
             this.Add(tui);
             this.AddDisplay(gui);
             this.AddDisplay(tui);
-
+                
             feld = this.Feld;
             spieler1Won = this.Spieler1Won;
             spieler2Won = this.Spieler2Won;
@@ -75,6 +75,14 @@ namespace _4Gewinnt.Controller
         );
         }
 
+        public static GameController GetInstance(int anzZeilen, int anzSpalten)
+        {
+            if (_instance == null)
+            {
+                _instance = new GameController(anzZeilen, anzSpalten);
+            }
+            return _instance;
+        }
 
         private void ControllerGetModelData()
         {

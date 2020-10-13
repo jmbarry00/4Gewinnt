@@ -14,7 +14,7 @@ namespace _4Gewinnt.View
         int gewSpalte;
         readonly GameController Ctr;
         readonly Spieler spieler;
-        readonly Label label1;
+        Label label1;
         Panel[,] panel;
         Button[] button;
         DialogResult neustart;
@@ -32,13 +32,22 @@ namespace _4Gewinnt.View
         bool outOfBounds;
         bool spalteVoll;
 
+        private static GameGUI _instance;
 
-        public GameGUI(GameController ctr)
+        private GameGUI(GameController ctr)
         {
             InitializeComponent();
             this.Ctr = ctr;
             spieler = Ctr.spieler;
-            label1 = new Label();
+        }
+
+        public static GameGUI GetInstance(GameController ctr)
+        {
+            if (_instance == null)
+            {
+                _instance = new GameGUI(ctr);
+            }
+            return _instance;
         }
 
         private void GameClosing(object sender, FormClosingEventArgs e)
@@ -67,6 +76,7 @@ namespace _4Gewinnt.View
         {
             panel = new Panel[Y, X];    //Spielfeld besteht aus Panels
             button = new Button[X];     //Buttons über jeder Spalte
+            label1 = new Label();
 
             this.Controls.Add(label1);
             label1.Location = new Point(15, 15);

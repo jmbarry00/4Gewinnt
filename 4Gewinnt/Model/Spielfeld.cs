@@ -1,4 +1,5 @@
 ﻿using _4Gewinnt.Model;
+using System.Globalization;
 
 namespace _4Gewinnt
 {
@@ -7,7 +8,6 @@ namespace _4Gewinnt
         public int ZeilenY;
         public int SpaltenX;
         public int[,] feld;
-        public int gewaehlteSpalte = -1;
         int spalteP1 = 0;
         int zeileP1 = 0;
         int spalteP2 = 0;
@@ -20,6 +20,7 @@ namespace _4Gewinnt
         public bool spalteVoll = false;
         public bool neustart = false;
 
+            
         //Konstruktor für das Spielfeld
         public Spielfeld(int zeilenY, int spaltenX)
         {
@@ -28,7 +29,7 @@ namespace _4Gewinnt
             feld = new int[ZeilenY, SpaltenX];
         }
 
-        //Hier wird in gewählter Spalte x das nächste freie Feld auf 1 gesetzt
+        //Hier wird in gewählter Spalte x das nächste freie Feld auf 1 gesetzt      
         public void FeldBesetzen(int x, Spieler spieler)
         {
             int y = 0;
