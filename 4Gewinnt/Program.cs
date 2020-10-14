@@ -8,22 +8,9 @@ namespace _4Gewinnt
 
         public static void Main()
         {
-            /*
-            Parallel.Invoke(() =>
-                {
-                    */
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
-            /*
-        },
-
-        () =>
-        {
-            GameController gameTui = new GameController();
-        }
-    );
-    */
         }
     }
 }
