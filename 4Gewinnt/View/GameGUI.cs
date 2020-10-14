@@ -52,7 +52,7 @@ namespace _4Gewinnt.View
 
         private void GameClosing(object sender, FormClosingEventArgs e)
         {
-            Application.Exit();
+            Environment.Exit(0);
         }
 
         public void Playing()
@@ -63,7 +63,6 @@ namespace _4Gewinnt.View
 
         private void GetControllerData()
         {
-            feld = Ctr.GetFeld();
             spieler1Won = Ctr.GetSpieler1Won();
             spieler2Won = Ctr.GetSpieler2Won();
             unentschieden = Ctr.GetUnentschieden();
@@ -143,7 +142,6 @@ namespace _4Gewinnt.View
             {
                 for (int z = 0; z < Y; z++)
                 {
-                    //lb[z, s].Text = Convert.ToString(feld[z, s]);
                     if (feld[z, s] == 1)
                     {
                         panel[z, s].BackColor = Color.Red;
@@ -169,28 +167,9 @@ namespace _4Gewinnt.View
                 lastActionAtGUI = false;
             }
             Spielsteine();
-            if (spieler1Won)
-            {
-                label1.Text = Ctr.Text;
-            }
-            else if (spieler2Won)
-            {
-                label1.Text = Ctr.Text;
-            }
-            else
-            {
-                label1.Text = Ctr.Text;
-            }
-
-            if (label1.Text == "unentschieden!")
-            {
-                endStatus = "Draw!";
-            }
-            else
-            {
-                endStatus = "Victory!";
-            }
-
+            
+            label1.Text = Ctr.Text;
+            endStatus = (label1.Text == "unentschieden!") ? "Draw!" : "Victory!";
             neustart = MessageBox.Show("Neustart?", endStatus, MessageBoxButtons.YesNo);
 
             if (neustart == DialogResult.Yes)
@@ -202,21 +181,9 @@ namespace _4Gewinnt.View
                         feld[row, col] = 0;
                     }
                 }
-                if (spieler1Won)
-                {
-                    spieler1Won = false;
-                }
-                else if (spieler2Won)
-                {
-                    spieler2Won = false;
-                }
-                else
-                {
-                    unentschieden = false;
-                }
 
+                spieler1Won = spieler1Won ? false : spieler2Won ? spieler2Won = false : unentschieden = false;
                 spieler.SwitchPlayer();
-
             }
             else if (neustart == DialogResult.No)
             {
@@ -229,7 +196,7 @@ namespace _4Gewinnt.View
 
         public void Game()
         {
-            Ctr.Spielen(gewSpalte);
+            Ctr.Spielzug(gewSpalte);
             GetControllerData();
 
             if (spalteVoll)
@@ -250,18 +217,9 @@ namespace _4Gewinnt.View
 
             Ctr.NotifyDisplays();
 
-            if (player1)
-            {
-                Ctr.Text = "Spieler 1, wähle eine Spalte:";
-                label1.Text = Ctr.Text;
-                Console.WriteLine(Ctr.Text);
-            }
-            else
-            {
-                Ctr.Text = "Spieler 2, wähle eine Spalte:";
-                label1.Text = Ctr.Text;
-                Console.WriteLine(Ctr.Text);
-            }
+            Ctr.Text = player1 ? "Spieler 1, wähle eine Spalte:" : "Spieler 2, wähle eine Spalte:";
+            label1.Text = Ctr.Text;
+            Console.WriteLine(Ctr.Text);
         }
 
         public new void Update()
@@ -292,7 +250,7 @@ namespace _4Gewinnt.View
             }
         }
 
-        public void Spielfeld()
+        public void SpielfeldUpdate()
         {
             Spielsteine();
         }

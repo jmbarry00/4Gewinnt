@@ -1,4 +1,5 @@
 ﻿using _4Gewinnt.Controller;
+using FluentAssertions;
 using System;
 
 namespace _4Gewinnt.View
@@ -84,7 +85,6 @@ namespace _4Gewinnt.View
                         }
                         Console.Write("| " + value + " ");
                     }
-
                 }
                 Console.Write("|");
                 Console.Write("\n");
@@ -99,22 +99,12 @@ namespace _4Gewinnt.View
 
         public void EndOutput()
         {
+            String endOutput;
             SpielfeldZeichnen();
-            if (Ctr.Spieler1Won)
-            {
-                Console.WriteLine("Spieler 1 hat gewonnen!");
-                Ctr.Text = "Spieler 1 hat gewonnen!";
-            }
-            else if (Ctr.Spieler2Won)
-            {
-                Console.WriteLine("Spieler 2 hat gewonnen!");
-                Ctr.Text = "Spieler 2 hat gewonnen!";
-            }
-            else if (Ctr.Unentschieden)
-            {
-                Console.WriteLine("unentschieden!");
-                Ctr.Text = "unentschieden!";
-            }
+
+            endOutput = Ctr.Spieler1Won ? "Spieler 1 hat gewonnen!" : Ctr.Spieler2Won ? "Spieler 2 hat gewonnen!" : "unentschieden!";
+            Console.WriteLine(endOutput);
+            Ctr.Text = endOutput;
 
             Console.WriteLine("Spiel neustarten? y/n:");
         }
@@ -132,19 +122,12 @@ namespace _4Gewinnt.View
 
         public int SpalteWaehlen()
         {
-
             while (true)
             {
-                if (player1 == true)
-                {
-                    Console.WriteLine("Spieler 1, wähle eine Spalte: ");
-                    Ctr.Text = "Spieler 1, wähle eine Spalte: ";
-                }
-                else
-                {
-                    Console.WriteLine("Spieler 2, wähle eine Spalte: ");
-                    Ctr.Text = "Spieler 2, wähle eine Spalte: ";
-                }
+                String gameOutput;
+                gameOutput = player1 ? "Spieler 1, wähle eine Spalte: " : "Spieler 2, wähle eine Spalte: ";
+                Console.WriteLine(gameOutput);
+                Ctr.Text = gameOutput;
 
                 //User-Input: Spalte wählen
                 gewaehlteSpalte = Console.ReadLine();
@@ -170,7 +153,7 @@ namespace _4Gewinnt.View
 
                 if (gewSpalte >= 0)
                 {
-                    Ctr.Spielen(gewSpalte);
+                    Ctr.Spielzug(gewSpalte);
                     GetControllerData();
                 }
                 else
@@ -222,7 +205,7 @@ namespace _4Gewinnt.View
             spalteVoll = Ctr.SpalteVoll;
         }
 
-        public void Spielfeld()
+        public void SpielfeldUpdate()
         {
             SpielfeldZeichnen();
         }

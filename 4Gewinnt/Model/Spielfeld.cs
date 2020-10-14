@@ -132,7 +132,6 @@ namespace _4Gewinnt
                         spieler1Won = true;
                         return;
                     }
-
                 }
             }
 
@@ -146,7 +145,6 @@ namespace _4Gewinnt
                         spieler1Won = true;
                         return;
                     }
-
                 }
             }
 
@@ -204,7 +202,6 @@ namespace _4Gewinnt
                         spieler2Won = true;
                         return;
                     }
-
                 }
             }
 

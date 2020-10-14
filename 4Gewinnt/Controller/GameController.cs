@@ -14,6 +14,9 @@ namespace _4Gewinnt.Controller
         public Spielfeld spielfeld;
         public Spieler spieler;
         public int[,] feld;
+        readonly int anzZeilen;
+        readonly int anzSpalten;
+
         bool spieler1Won;
         bool spieler2Won;
         bool unentschieden;
@@ -22,6 +25,7 @@ namespace _4Gewinnt.Controller
         bool outOfBounds;
         bool spalteVoll;
         public bool neustart = false;
+
         String labelText;
 
         public int zeilenY;
@@ -35,8 +39,8 @@ namespace _4Gewinnt.Controller
 
         private GameController(int Zeilen, int Spalten)
         {
-            int anzZeilen = Zeilen;
-            int anzSpalten = Spalten;
+            anzZeilen = Zeilen;
+            anzSpalten = Spalten;
             spiel = new Spiel(anzZeilen, anzSpalten);
             spiel.SpielStarten();
             spieler = spiel.spieler;
@@ -49,17 +53,6 @@ namespace _4Gewinnt.Controller
             this.Add(tui);
             this.AddDisplay(gui);
             this.AddDisplay(tui);
-                
-            feld = this.Feld;
-            spieler1Won = this.Spieler1Won;
-            spieler2Won = this.Spieler2Won;
-            unentschieden = this.Unentschieden;
-            player1 = this.Spieler1;
-            player2 = this.Spieler2;
-            outOfBounds = this.OutOfBounds;
-            spalteVoll = this.SpalteVoll;
-            this.ZeilenY = Zeilen;
-            this.SpaltenX = Spalten;
 
             ControllerGetModelData();
 
@@ -86,6 +79,8 @@ namespace _4Gewinnt.Controller
 
         private void ControllerGetModelData()
         {
+            this.ZeilenY = anzZeilen;
+            this.SpaltenX = anzSpalten;
             feld = spielfeld.feld;
             spieler1Won = spielfeld.spieler1Won;
             spieler2Won = spielfeld.spieler2Won;
@@ -98,7 +93,6 @@ namespace _4Gewinnt.Controller
 
         public void UpdateModelData()
         {
-            spielfeld.feld = feld;
             spielfeld.spieler1Won = spieler1Won;
             spielfeld.spieler2Won = spieler2Won;
             spielfeld.unentschieden = unentschieden;
@@ -163,7 +157,7 @@ namespace _4Gewinnt.Controller
         }
 
 
-        public void Spielen(int gewSpalte)
+        public void Spielzug(int gewSpalte)
         {
             spielfeld.FeldBesetzen(gewSpalte, spieler);
             ControllerGetModelData();
@@ -325,7 +319,7 @@ namespace _4Gewinnt.Controller
         {
             foreach (IDisplay display in this.displays)
             {
-                display.Spielfeld();
+                display.SpielfeldUpdate();
             }
         }
     }

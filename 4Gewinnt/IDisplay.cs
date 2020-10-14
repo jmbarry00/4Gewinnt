@@ -2,6 +2,6 @@
 {
     public interface IDisplay
     {
-        void Spielfeld();
+        void SpielfeldUpdate();
     }
 }
