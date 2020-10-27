@@ -5,6 +5,8 @@ namespace _4Gewinnt
 {
     public class Spielfeld
     {
+        State state;
+
         public int ZeilenY;
         public int SpaltenX;
         public int[,] feld;
@@ -27,6 +29,7 @@ namespace _4Gewinnt
             ZeilenY = zeilenY;
             SpaltenX = spaltenX;
             feld = new int[ZeilenY, SpaltenX];
+            this.state = new Player1State(this);
         }
 
         //Hier wird in gewählter Spalte x das nächste freie Feld auf 1 gesetzt      
@@ -59,20 +62,17 @@ namespace _4Gewinnt
             }
 
             //wenn Spieler 1 an der Reihe, dann Feld auf 1 setzen, schauen ob es Gewinner gibt und Spieler wechseln
-            if (spieler.player1 == true)
-            {
-                feld[y, x] = 1;
-                GewinnBerechnung();
-                spieler.SwitchPlayer();
-            }
+            
+            feld[y, x] = this.state.SpielerNummer();
+            GewinnBerechnung();
+            spieler.SwitchPlayer();
+            
 
-            //wenn Spieler 2 an der Reihe, dann Feld auf 2 setzen, schauen ob es Gewinner gibt und Spieler wechseln
-            else if (spieler.player2 == true)
-            {
-                feld[y, x] = 2;
-                GewinnBerechnung();
-                spieler.SwitchPlayer();
-            }
+        }
+
+        public void ChangeState(State state)
+        {
+            this.state = state;
         }
 
         //Nach jedem Zug wird geprüft, ob ein Sieger vorhanden ist
