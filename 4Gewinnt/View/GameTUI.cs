@@ -99,7 +99,7 @@ namespace _4Gewinnt.View
 
         public void EndOutput()
         {
-            String endOutput;
+            string endOutput;
             SpielfeldZeichnen();
 
             endOutput = Ctr.Spieler1Won ? "Spieler 1 hat gewonnen!" : Ctr.Spieler2Won ? "Spieler 2 hat gewonnen!" : "unentschieden!";
@@ -124,7 +124,7 @@ namespace _4Gewinnt.View
         {
             while (true)
             {
-                String gameOutput;
+                string gameOutput;
                 gameOutput = player1 ? "Spieler 1, wähle eine Spalte: " : "Spieler 2, wähle eine Spalte: ";
                 Console.WriteLine(gameOutput);
                 Ctr.Text = gameOutput;

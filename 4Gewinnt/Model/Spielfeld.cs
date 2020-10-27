@@ -5,7 +5,7 @@ namespace _4Gewinnt
 {
     public class Spielfeld
     {
-        State state;
+        IState state;
 
         public int ZeilenY;
         public int SpaltenX;
@@ -70,7 +70,7 @@ namespace _4Gewinnt
 
         }
 
-        public void ChangeState(State state)
+        public void ChangeState(IState state)
         {
             this.state = state;
         }

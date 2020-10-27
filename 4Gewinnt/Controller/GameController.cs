@@ -26,7 +26,7 @@ namespace _4Gewinnt.Controller
         bool spalteVoll;
         public bool neustart = false;
 
-        String labelText;
+        string labelText;
 
         public int zeilenY;
         public int spaltenX;
@@ -223,7 +223,7 @@ namespace _4Gewinnt.Controller
             }
         }
 
-        public String Text
+        public string Text
         {
             get { return labelText; }
             set

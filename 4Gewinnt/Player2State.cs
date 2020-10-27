@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace _4Gewinnt
 {
-    class Player2State : State
+    class Player2State : IState
     {
-        Spielfeld state;
+        readonly Spielfeld state;
 
         public Player2State(Spielfeld state)
         {

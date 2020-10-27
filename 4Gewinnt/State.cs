@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _4Gewinnt
 {
-    public interface State
+    public interface IState
     {
         int SpielerNummer();
     }
